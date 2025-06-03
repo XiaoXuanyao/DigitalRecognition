@@ -1,0 +1,931 @@
+[00:00:05] (Main) Server start.
+[00:00:05] (DRModel) New model initialized, model name: DRModel_default
+[00:00:05] (Train) Start training.
+[00:00:05] (DataLoader) Load dataset initialized, dataset path: ../datasets/mnist
+[00:03:28] (Debug) DataLoader 3 min 22.894 s
+[00:03:31] (DataLoader) Load finished.
+[00:14:50] (Train) Start finished.
+[00:14:50] (SocketServer) start on 0.0.0.0:25565
+[00:25:13] (Main) Server start.
+[00:25:13] (DRModel) New model initialized, model name: DRModel_default
+[00:25:13] (SocketServer) start on 0.0.0.0:25565
+[09:15:12] (Main) Server start.
+[09:15:13] (DRModel) New model initialized, model name: DRModel_default
+[09:15:13] (SocketServer) start on 0.0.0.0:25565
+[09:32:03] (Main) Server start.
+[09:32:03] (DRModel) New model initialized, model name: DRModel_default
+[09:32:03] (SocketServer) start on 0.0.0.0:25565
+[09:32:05] (SocketServer) New connection accepted: ('127.0.0.1', 51170)
+[09:32:05] (SocketServer) Receive: GET / HTTP/1.1
+[09:32:05] (SocketServer) New connection accepted: ('127.0.0.1', 51171)
+[09:32:06] (SocketServer) Send to ('127.0.0.1', 51170): --bytes--, len: 8621
+[09:32:06] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[09:32:06] (SocketServer) Send to ('127.0.0.1', 51171): --bytes--, len: 7380
+[09:32:08] (SocketServer) New connection accepted: ('127.0.0.1', 51173)
+[09:32:13] (SocketServer) New connection accepted: ('127.0.0.1', 51174)
+[09:32:13] (SocketServer) Receive: GET /login.html HTTP/1.1
+[09:32:13] (SocketServer) Send to ('127.0.0.1', 51173): --bytes--, len: 5598
+[09:32:16] (SocketServer) Receive: GET /index.html HTTP/1.1
+[09:32:16] (SocketServer) New connection accepted: ('127.0.0.1', 51175)
+[09:32:16] (SocketServer) Send to ('127.0.0.1', 51174): --bytes--, len: 8621
+[09:32:30] (SocketServer) Receive: GET /test HTTP/1.1
+[09:32:30] (SocketServer) New connection accepted: ('127.0.0.1', 51205)
+[09:32:30] (Respond) Resources could not found: /test
+[09:32:30] (SocketServer) Send to ('127.0.0.1', 51175): --bytes--, len: 97
+[09:32:34] (SocketServer) Receive: GET /test.html HTTP/1.1
+[09:32:34] (SocketServer) New connection accepted: ('127.0.0.1', 51206)
+[09:32:34] (Respond) Resources could not found: /test.html
+[09:32:34] (SocketServer) Send to ('127.0.0.1', 51205): --bytes--, len: 9458
+[09:34:07] (Main) Server start.
+[09:34:07] (DRModel) New model initialized, model name: DRModel_default
+[09:34:07] (SocketServer) start on 0.0.0.0:25565
+[10:04:39] (Main) Server start.
+[10:04:39] (DRModel) New model initialized, model name: DRModel_default
+[10:04:39] (SocketServer) start on 0.0.0.0:25565
+[10:04:39] (SocketServer) New connection accepted: ('127.0.0.1', 51238)
+[10:04:39] (SocketServer) Receive: GET / HTTP/1.1
+[10:04:39] (SocketServer) Send to ('127.0.0.1', 51238): --bytes--, len: 8621
+[10:04:39] (SocketServer) New connection accepted: ('127.0.0.1', 51236)
+[10:04:39] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[10:04:39] (SocketServer) New connection accepted: ('127.0.0.1', 51237)
+[10:04:39] (SocketServer) Send to ('127.0.0.1', 51237): --bytes--, len: 7380
+[10:04:43] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:04:43] (SocketServer) Send to ('127.0.0.1', 51236): --bytes--, len: 5967
+[10:04:43] (SocketServer) New connection accepted: ('127.0.0.1', 51241)
+[10:04:50] (SocketServer) New connection accepted: ('127.0.0.1', 51244)
+[10:04:50] (SocketServer) New connection accepted: ('127.0.0.1', 51245)
+[10:06:13] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:06:13] (SocketServer) New connection accepted: ('127.0.0.1', 51287)
+[10:06:13] (SocketServer) New connection accepted: ('127.0.0.1', 51288)
+[10:06:13] (SocketServer) Send to ('127.0.0.1', 51287): --bytes--, len: 5972
+[10:06:13] (SocketServer) New connection accepted: ('127.0.0.1', 51289)
+[10:06:19] (SocketServer) New connection accepted: ('127.0.0.1', 51292)
+[10:06:19] (SocketServer) New connection accepted: ('127.0.0.1', 51293)
+[10:06:34] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[10:06:35] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[10:06:35] (SocketServer) Send to ('127.0.0.1', 51288): --bytes--, len: 97
+[10:07:14] (SocketServer) New connection accepted: ('127.0.0.1', 51348)
+[10:07:14] (SocketServer) New connection accepted: ('127.0.0.1', 51349)
+[10:07:15] (SocketServer) New connection accepted: ('127.0.0.1', 51350)
+[10:07:28] (SocketServer) New connection accepted: ('127.0.0.1', 51380)
+[10:07:28] (SocketServer) New connection accepted: ('127.0.0.1', 51381)
+[10:07:52] (SocketServer) New connection accepted: ('127.0.0.1', 51401)
+[10:07:52] (SocketServer) New connection accepted: ('127.0.0.1', 51402)
+[10:07:52] (SocketServer) Send to ('127.0.0.1', 51401): --bytes--, len: 5972
+[10:07:52] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[10:07:52] (SocketServer) Send to ('127.0.0.1', 51402): --bytes--, len: 7380
+[10:07:52] (SocketServer) New connection accepted: ('127.0.0.1', 51404)
+[10:07:52] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[10:07:52] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[10:07:52] (SocketServer) Send to ('127.0.0.1', 51404): --bytes--, len: 97
+[10:08:17] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:08:17] (SocketServer) New connection accepted: ('127.0.0.1', 51431)
+[10:08:17] (SocketServer) New connection accepted: ('127.0.0.1', 51432)
+[10:08:17] (SocketServer) Send to ('127.0.0.1', 51431): --bytes--, len: 5978
+[10:08:17] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[10:08:17] (SocketServer) Send to ('127.0.0.1', 51432): --bytes--, len: 7380
+[10:08:17] (SocketServer) New connection accepted: ('127.0.0.1', 51434)
+[10:08:17] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[10:08:17] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[10:08:17] (SocketServer) Send to ('127.0.0.1', 51434): --bytes--, len: 97
+[10:08:26] (SocketServer) New connection accepted: ('127.0.0.1', 51451)
+[10:08:27] (SocketServer) New connection accepted: ('127.0.0.1', 51452)
+[10:10:57] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:10:57] (SocketServer) New connection accepted: ('127.0.0.1', 51639)
+[10:10:57] (SocketServer) New connection accepted: ('127.0.0.1', 51640)
+[10:10:58] (SocketServer) Send to ('127.0.0.1', 51639): --bytes--, len: 6234
+[10:10:58] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[10:10:58] (SocketServer) Send to ('127.0.0.1', 51640): --bytes--, len: 7380
+[10:10:58] (SocketServer) New connection accepted: ('127.0.0.1', 51642)
+[10:10:58] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[10:10:58] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[10:10:58] (SocketServer) Send to ('127.0.0.1', 51642): --bytes--, len: 97
+[10:12:11] (SocketServer) New connection accepted: ('127.0.0.1', 51710)
+[10:12:11] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:12:11] (SocketServer) New connection accepted: ('127.0.0.1', 51711)
+[10:12:11] (SocketServer) Send to ('127.0.0.1', 51710): --bytes--, len: 6234
+[10:12:11] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[10:12:11] (SocketServer) Send to ('127.0.0.1', 51711): --bytes--, len: 7380
+[10:12:12] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[10:12:12] (SocketServer) New connection accepted: ('127.0.0.1', 51712)
+[10:12:12] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[10:12:12] (SocketServer) Send to ('127.0.0.1', 51712): --bytes--, len: 97
+[10:14:02] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:14:02] (SocketServer) New connection accepted: ('127.0.0.1', 51823)
+[10:14:02] (SocketServer) New connection accepted: ('127.0.0.1', 51824)
+[10:14:02] (SocketServer) Send to ('127.0.0.1', 51823): --bytes--, len: 6235
+[10:14:02] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[10:14:02] (SocketServer) Send to ('127.0.0.1', 51824): --bytes--, len: 7380
+[10:14:02] (SocketServer) New connection accepted: ('127.0.0.1', 51826)
+[10:14:21] (SocketServer) New connection accepted: ('127.0.0.1', 51838)
+[10:14:21] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:14:21] (SocketServer) Send to ('127.0.0.1', 51838): --bytes--, len: 6235
+[10:14:30] (SocketServer) New connection accepted: ('127.0.0.1', 51853)
+[10:14:31] (SocketServer) New connection accepted: ('127.0.0.1', 51854)
+[10:15:28] (SocketServer) New connection accepted: ('127.0.0.1', 51880)
+[10:15:28] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:15:29] (SocketServer) Send to ('127.0.0.1', 51880): --bytes--, len: 6264
+[10:15:45] (SocketServer) New connection accepted: ('127.0.0.1', 51885)
+[10:15:46] (SocketServer) New connection accepted: ('127.0.0.1', 51886)
+[10:16:26] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:16:26] (SocketServer) Send to ('127.0.0.1', 51886): --bytes--, len: 6264
+[10:16:32] (SocketServer) New connection accepted: ('127.0.0.1', 51914)
+[10:16:33] (SocketServer) New connection accepted: ('127.0.0.1', 51915)
+[10:18:44] (SocketServer) New connection accepted: ('127.0.0.1', 51965)
+[10:18:44] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:18:45] (SocketServer) Send to ('127.0.0.1', 51965): --bytes--, len: 6264
+[10:18:49] (SocketServer) New connection accepted: ('127.0.0.1', 51968)
+[10:18:49] (SocketServer) New connection accepted: ('127.0.0.1', 51969)
+[10:19:23] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:19:23] (SocketServer) Send to ('127.0.0.1', 51969): --bytes--, len: 6298
+[10:19:28] (SocketServer) New connection accepted: ('127.0.0.1', 51995)
+[10:19:28] (SocketServer) New connection accepted: ('127.0.0.1', 51996)
+[10:19:30] (SocketServer) New connection accepted: ('127.0.0.1', 51999)
+[10:19:30] (SocketServer) New connection accepted: ('127.0.0.1', 52001)
+[10:19:30] (SocketServer) New connection accepted: ('127.0.0.1', 52003)
+[10:19:30] (SocketServer) New connection accepted: ('127.0.0.1', 52004)
+[10:22:15] (SocketServer) New connection accepted: ('127.0.0.1', 52079)
+[10:22:15] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:22:15] (SocketServer) New connection accepted: ('127.0.0.1', 52080)
+[10:22:15] (SocketServer) Send to ('127.0.0.1', 52079): --bytes--, len: 6300
+[10:22:15] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[10:22:15] (SocketServer) New connection accepted: ('127.0.0.1', 52081)
+[10:22:15] (SocketServer) Send to ('127.0.0.1', 52080): --bytes--, len: 7380
+[10:22:34] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:22:34] (SocketServer) New connection accepted: ('127.0.0.1', 52099)
+[10:22:34] (SocketServer) Send to ('127.0.0.1', 52099): --bytes--, len: 6300
+[10:22:35] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:22:35] (SocketServer) New connection accepted: ('127.0.0.1', 52103)
+[10:22:35] (SocketServer) New connection accepted: ('127.0.0.1', 52104)
+[10:22:35] (SocketServer) Send to ('127.0.0.1', 52103): --bytes--, len: 6300
+[10:22:36] (SocketServer) New connection accepted: ('127.0.0.1', 52105)
+[10:22:41] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:22:41] (SocketServer) Send to ('127.0.0.1', 52104): --bytes--, len: 6300
+[10:22:49] (SocketServer) Receive: GET / HTTP/1.1
+[10:22:50] (SocketServer) Send to ('127.0.0.1', 52105): --bytes--, len: 8621
+[10:22:50] (SocketServer) New connection accepted: ('127.0.0.1', 52123)
+[10:22:53] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:22:53] (SocketServer) Send to ('127.0.0.1', 52123): --bytes--, len: 6300
+[10:22:53] (SocketServer) New connection accepted: ('127.0.0.1', 52125)
+[10:23:01] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[10:23:01] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[10:23:01] (SocketServer) Send to ('127.0.0.1', 52125): --bytes--, len: 97
+[10:23:04] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:23:04] (SocketServer) New connection accepted: ('127.0.0.1', 52142)
+[10:23:04] (SocketServer) New connection accepted: ('127.0.0.1', 52143)
+[10:23:04] (SocketServer) Send to ('127.0.0.1', 52142): --bytes--, len: 6300
+[10:23:04] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[10:23:04] (SocketServer) Send to ('127.0.0.1', 52143): --bytes--, len: 7380
+[10:23:04] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[10:23:04] (SocketServer) New connection accepted: ('127.0.0.1', 52144)
+[10:23:04] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[10:23:04] (SocketServer) Send to ('127.0.0.1', 52144): --bytes--, len: 97
+[10:23:10] (SocketServer) New connection accepted: ('127.0.0.1', 52150)
+[10:23:10] (SocketServer) New connection accepted: ('127.0.0.1', 52151)
+[10:25:56] (SocketServer) New connection accepted: ('127.0.0.1', 52314)
+[10:25:56] (SocketServer) Receive: GET /?login HTTP/1.1
+[10:25:56] (Respond) Resources could not found: /?login
+[10:25:56] (SocketServer) Send to ('127.0.0.1', 52314): --bytes--, len: 97
+[10:26:19] (Main) Server start.
+[10:26:19] (DRModel) New model initialized, model name: DRModel_default
+[10:26:19] (SocketServer) start on 0.0.0.0:25565
+[10:26:22] (SocketServer) New connection accepted: ('127.0.0.1', 52335)
+[10:26:22] (SocketServer) New connection accepted: ('127.0.0.1', 52336)
+[10:46:01] (Main) Server start.
+[10:46:01] (DRModel) New model initialized, model name: DRModel_default
+[10:46:01] (SocketServer) start on 0.0.0.0:25565
+[10:46:05] (SocketServer) New connection accepted: ('127.0.0.1', 55083)
+[10:46:07] (SocketServer) New connection accepted: ('127.0.0.1', 55084)
+[10:46:07] (SocketServer) New connection accepted: ('127.0.0.1', 55086)
+[10:46:07] (SocketServer) Send to ('127.0.0.1', 55083): --bytes--, len: 6300
+[10:46:08] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[10:46:08] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[10:46:08] (SocketServer) Send to ('127.0.0.1', 55084): --bytes--, len: 97
+[10:53:02] (Main) Server start.
+[10:53:03] (DRModel) New model initialized, model name: DRModel_default
+[10:53:03] (SocketServer) start on 0.0.0.0:25565
+[10:53:07] (SocketServer) New connection accepted: ('127.0.0.1', 55760)
+[10:53:07] (SocketServer) Receive: GET /login.html HTTP/1.1
+[10:53:07] (SocketServer) New connection accepted: ('127.0.0.1', 55761)
+[10:53:07] (SocketServer) Send to ('127.0.0.1', 55760): --bytes--, len: 6300
+[10:53:07] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[10:53:07] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[10:53:07] (SocketServer) Send to ('127.0.0.1', 55761): --bytes--, len: 97
+[10:53:07] (SocketServer) New connection accepted: ('127.0.0.1', 55765)
+[10:53:16] (SocketServer) Receive: POST /?login HTTP/1.1
+[10:53:16] (Respond) Resources could not found: /?login
+[10:53:16] (SocketServer) Send to ('127.0.0.1', 55765): --bytes--, len: 97
+[11:02:23] (Main) Server start.
+[11:02:23] (DRModel) New model initialized, model name: DRModel_default
+[11:02:23] (SocketServer) start on 0.0.0.0:25565
+[11:02:30] (SocketServer) New connection accepted: ('127.0.0.1', 56714)
+[11:02:30] (SocketServer) Receive: POST /?login HTTP/1.1
+[11:04:10] (Main) Server start.
+[11:04:10] (DRModel) New model initialized, model name: DRModel_default
+[11:04:10] (SocketServer) start on 0.0.0.0:25565
+[11:04:10] (SocketServer) New connection accepted: ('127.0.0.1', 56887)
+[11:04:10] (SocketServer) Receive: GET /login.html HTTP/1.1
+[11:04:11] (SocketServer) Send to ('127.0.0.1', 56887): --bytes--, len: 6288
+[11:04:11] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[11:04:11] (SocketServer) New connection accepted: ('127.0.0.1', 56886)
+[11:04:11] (SocketServer) New connection accepted: ('127.0.0.1', 56885)
+[11:04:11] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[11:04:11] (SocketServer) Send to ('127.0.0.1', 56886): --bytes--, len: 7380
+[11:04:11] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[11:04:11] (SocketServer) Send to ('127.0.0.1', 56885): --bytes--, len: 97
+[11:04:11] (SocketServer) New connection accepted: ('127.0.0.1', 56892)
+[11:04:29] (SocketServer) Receive: POST /?login HTTP/1.1
+[11:14:20] (Main) Server start.
+[11:14:21] (DRModel) New model initialized, model name: DRModel_default
+[11:14:21] (SocketServer) start on 0.0.0.0:25565
+[11:14:35] (SocketServer) New connection accepted: ('127.0.0.1', 57796)
+[11:14:35] (SocketServer) Receive: POST /?login HTTP/1.1
+[11:58:01] (Main) Server start.
+[11:58:01] (DRModel) New model initialized, model name: DRModel_default
+[11:58:01] (SocketServer) start on 0.0.0.0:25565
+[11:58:05] (SocketServer) New connection accepted: ('127.0.0.1', 62407)
+[11:58:05] (SocketServer) Receive: GET /login.html HTTP/1.1
+[11:58:05] (SocketServer) New connection accepted: ('127.0.0.1', 62408)
+[11:58:05] (SocketServer) Send to ('127.0.0.1', 62407): --bytes--, len: 5781
+[11:58:05] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[11:58:06] (SocketServer) Send to ('127.0.0.1', 62408): --bytes--, len: 1039
+[11:58:06] (SocketServer) New connection accepted: ('127.0.0.1', 62410)
+[11:58:06] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[11:58:06] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[11:58:06] (SocketServer) Send to ('127.0.0.1', 62410): --bytes--, len: 97
+[11:58:06] (SocketServer) New connection accepted: ('127.0.0.1', 62412)
+[11:58:06] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[11:58:06] (SocketServer) Send to ('127.0.0.1', 62412): --bytes--, len: 7380
+[11:59:41] (SocketServer) New connection accepted: ('127.0.0.1', 62590)
+[11:59:41] (SocketServer) Receive: GET /login.html HTTP/1.1
+[11:59:41] (SocketServer) New connection accepted: ('127.0.0.1', 62591)
+[11:59:41] (SocketServer) Send to ('127.0.0.1', 62590): --bytes--, len: 5779
+[11:59:41] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[11:59:41] (SocketServer) Send to ('127.0.0.1', 62591): --bytes--, len: 1039
+[11:59:41] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[11:59:41] (SocketServer) New connection accepted: ('127.0.0.1', 62595)
+[11:59:42] (SocketServer) Send to ('127.0.0.1', 62595): --bytes--, len: 7380
+[11:59:42] (SocketServer) New connection accepted: ('127.0.0.1', 62601)
+[11:59:42] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[11:59:42] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[11:59:42] (SocketServer) Send to ('127.0.0.1', 62601): --bytes--, len: 97
+[11:59:44] (SocketServer) New connection accepted: ('127.0.0.1', 62607)
+[11:59:44] (SocketServer) Receive: POST /?login HTTP/1.1
+[12:00:28] (Main) Server start.
+[12:00:28] (DRModel) New model initialized, model name: DRModel_default
+[12:00:28] (SocketServer) start on 0.0.0.0:25565
+[12:00:32] (SocketServer) New connection accepted: ('127.0.0.1', 62691)
+[12:00:32] (SocketServer) Receive: POST /?login HTTP/1.1
+[12:01:01] (Main) Server start.
+[12:01:02] (DRModel) New model initialized, model name: DRModel_default
+[12:01:02] (SocketServer) start on 0.0.0.0:25565
+[12:01:04] (SocketServer) New connection accepted: ('127.0.0.1', 62756)
+[12:01:04] (SocketServer) Receive: POST /?login HTTP/1.1
+[15:29:39] (Main) Server start.
+[15:29:40] (DRModel) New model initialized, model name: DRModel_default
+[15:29:40] (SocketServer) start on 0.0.0.0:25565
+[15:29:42] (SocketServer) New connection accepted: ('127.0.0.1', 51342)
+[15:29:42] (SocketServer) Receive: GET /login.html HTTP/1.1
+[15:29:42] (SocketServer) New connection accepted: ('127.0.0.1', 51343)
+[15:29:42] (SocketServer) Send to ('127.0.0.1', 51342): --bytes--, len: 5797
+[15:29:43] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[15:29:43] (SocketServer) New connection accepted: ('127.0.0.1', 51344)
+[15:29:43] (SocketServer) Send to ('127.0.0.1', 51343): --bytes--, len: 967
+[15:29:50] (SocketServer) Receive: GET /login.html? HTTP/1.1
+[15:29:50] (Respond) Resources could not found: /login.html?
+[15:29:50] (SocketServer) Send to ('127.0.0.1', 51344): --bytes--, len: 97
+[15:29:51] (SocketServer) New connection accepted: ('127.0.0.1', 51371)
+[15:31:16] (SocketServer) New connection accepted: ('127.0.0.1', 51514)
+[15:31:18] (SocketServer) Receive: GET /login.html? HTTP/1.1
+[15:31:18] (Respond) Resources could not found: /login.html?
+[15:31:18] (SocketServer) Send to ('127.0.0.1', 51514): --bytes--, len: 97
+[15:31:18] (SocketServer) New connection accepted: ('127.0.0.1', 51520)
+[15:31:56] (SocketServer) Receive: GET /login.html? HTTP/1.1
+[15:31:56] (Respond) Resources could not found: /login.html?
+[15:31:56] (SocketServer) Send to ('127.0.0.1', 51520): --bytes--, len: 97
+[15:31:56] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[15:31:56] (SocketServer) New connection accepted: ('127.0.0.1', 51573)
+[15:31:56] (SocketServer) Send to ('127.0.0.1', 51573): --bytes--, len: 7380
+[15:31:58] (SocketServer) New connection accepted: ('127.0.0.1', 51586)
+[15:32:03] (SocketServer) Receive: GET / HTTP/1.1
+[15:32:03] (SocketServer) Send to ('127.0.0.1', 51586): --bytes--, len: 8621
+[15:32:03] (SocketServer) New connection accepted: ('127.0.0.1', 51595)
+[15:32:06] (SocketServer) Receive: GET /login.html HTTP/1.1
+[15:32:06] (SocketServer) Send to ('127.0.0.1', 51595): --bytes--, len: 5682
+[15:32:06] (SocketServer) New connection accepted: ('127.0.0.1', 51601)
+[15:32:06] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[15:32:06] (SocketServer) Send to ('127.0.0.1', 51601): --bytes--, len: 968
+[15:32:10] (SocketServer) Receive: POST /?login HTTP/1.1
+[15:32:10] (SocketServer) New connection accepted: ('127.0.0.1', 51613)
+[15:32:44] (SocketServer) New connection accepted: ('127.0.0.1', 51614)
+[15:32:44] (SocketServer) Receive: GET /login.html HTTP/1.1
+[15:32:44] (SocketServer) Send to ('127.0.0.1', 51614): --bytes--, len: 5704
+[15:32:56] (Main) Server start.
+[15:32:56] (DRModel) New model initialized, model name: DRModel_default
+[15:32:56] (SocketServer) start on 0.0.0.0:25565
+[15:34:14] (SocketServer) New connection accepted: ('127.0.0.1', 51747)
+[15:34:15] (SocketServer) Receive: GET /login.html HTTP/1.1
+[15:34:15] (SocketServer) Send to ('127.0.0.1', 51747): --bytes--, len: 5704
+[15:34:15] (SocketServer) New connection accepted: ('127.0.0.1', 51751)
+[15:34:15] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[15:34:16] (SocketServer) Send to ('127.0.0.1', 51751): --bytes--, len: 968
+[15:34:22] (SocketServer) Receive: GET /login.html? HTTP/1.1
+[15:34:22] (SocketServer) New connection accepted: ('127.0.0.1', 51763)
+[15:34:22] (SocketServer) New connection accepted: ('127.0.0.1', 51764)
+[15:34:22] (Respond) Resources could not found: /login.html?
+[15:34:22] (SocketServer) Send to ('127.0.0.1', 51763): --bytes--, len: 97
+[15:34:23] (SocketServer) New connection accepted: ('127.0.0.1', 51765)
+[15:38:30] (SocketServer) New connection accepted: ('127.0.0.1', 64957)
+[15:38:31] (SocketServer) Receive: GET /login.html? HTTP/1.1
+[15:38:31] (Respond) Resources could not found: /login.html?
+[15:38:31] (SocketServer) Send to ('127.0.0.1', 64957): --bytes--, len: 97
+[15:38:32] (SocketServer) New connection accepted: ('127.0.0.1', 64959)
+[15:38:36] (SocketServer) Receive: GET /login.html HTTP/1.1
+[15:38:36] (SocketServer) Send to ('127.0.0.1', 64959): --bytes--, len: 5744
+[15:38:36] (SocketServer) New connection accepted: ('127.0.0.1', 64966)
+[15:38:36] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[15:38:36] (SocketServer) Send to ('127.0.0.1', 64966): --bytes--, len: 968
+[15:38:42] (SocketServer) New connection accepted: ('127.0.0.1', 64979)
+[15:38:42] (SocketServer) Receive: POST /?login HTTP/1.1
+[15:42:58] (Main) Server start.
+[15:42:58] (DRModel) New model initialized, model name: DRModel_default
+[15:42:58] (SocketServer) start on 0.0.0.0:25565
+[15:43:02] (SocketServer) New connection accepted: ('127.0.0.1', 52458)
+[15:43:02] (SocketServer) Receive: GET /login.html HTTP/1.1
+[15:43:02] (SocketServer) New connection accepted: ('127.0.0.1', 52459)
+[15:43:02] (SocketServer) Send to ('127.0.0.1', 52458): --bytes--, len: 5756
+[15:43:02] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[15:43:02] (SocketServer) Send to ('127.0.0.1', 52459): --bytes--, len: 968
+[15:43:02] (SocketServer) New connection accepted: ('127.0.0.1', 52460)
+[15:43:02] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[15:43:02] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[15:43:02] (SocketServer) Send to ('127.0.0.1', 52460): --bytes--, len: 97
+[15:43:02] (SocketServer) New connection accepted: ('127.0.0.1', 52462)
+[15:43:02] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[15:43:02] (SocketServer) Send to ('127.0.0.1', 52462): --bytes--, len: 7380
+[15:43:42] (SocketServer) Receive: POST /?login HTTP/1.1
+[15:43:42] (SocketServer) New connection accepted: ('127.0.0.1', 52523)
+[15:45:06] (Main) Server start.
+[15:45:06] (DRModel) New model initialized, model name: DRModel_default
+[15:45:06] (SocketServer) start on 0.0.0.0:25565
+[15:45:12] (SocketServer) New connection accepted: ('127.0.0.1', 52668)
+[15:45:12] (SocketServer) Receive: GET /login.html HTTP/1.1
+[15:45:12] (SocketServer) New connection accepted: ('127.0.0.1', 52669)
+[15:45:12] (SocketServer) Send to ('127.0.0.1', 52668): --bytes--, len: 5756
+[15:45:12] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[15:45:12] (SocketServer) Send to ('127.0.0.1', 52669): --bytes--, len: 968
+[15:45:12] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[15:45:12] (SocketServer) New connection accepted: ('127.0.0.1', 52674)
+[15:45:12] (SocketServer) Send to ('127.0.0.1', 52674): --bytes--, len: 7380
+[15:45:12] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[15:45:12] (SocketServer) New connection accepted: ('127.0.0.1', 52677)
+[15:45:12] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[15:45:12] (SocketServer) Send to ('127.0.0.1', 52677): --bytes--, len: 97
+[15:45:18] (SocketServer) Receive: POST /?login HTTP/1.1
+[15:45:18] (SocketServer) New connection accepted: ('127.0.0.1', 52687)
+[15:46:09] (Main) Server start.
+[15:46:09] (DRModel) New model initialized, model name: DRModel_default
+[15:46:09] (SocketServer) start on 0.0.0.0:25565
+[15:46:18] (SocketServer) New connection accepted: ('127.0.0.1', 52799)
+[15:46:18] (SocketServer) Receive: GET /login.html HTTP/1.1
+[15:46:19] (SocketServer) New connection accepted: ('127.0.0.1', 52800)
+[15:46:19] (SocketServer) Send to ('127.0.0.1', 52799): --bytes--, len: 5704
+[15:46:19] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[15:46:19] (SocketServer) Send to ('127.0.0.1', 52800): --bytes--, len: 968
+[15:46:19] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[15:46:19] (SocketServer) New connection accepted: ('127.0.0.1', 52801)
+[15:46:19] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[15:46:19] (SocketServer) Send to ('127.0.0.1', 52801): --bytes--, len: 97
+[15:46:26] (SocketServer) New connection accepted: ('127.0.0.1', 52811)
+[15:46:26] (SocketServer) Receive: POST /?login HTTP/1.1
+[15:46:27] (SocketServer) Send to ('127.0.0.1', 52811): --bytes--, len: 127
+[15:46:27] (SocketServer) New connection accepted: ('127.0.0.1', 52812)
+[16:38:54] (Main) Server start.
+[16:38:54] (DRModel) New model initialized, model name: DRModel_default
+[16:38:54] (SocketServer) start on 0.0.0.0:25565
+[16:38:56] (SocketServer) New connection accepted: ('127.0.0.1', 55597)
+[16:38:56] (SocketServer) Receive: GET /register.html HTTP/1.1
+[16:38:56] (SocketServer) New connection accepted: ('127.0.0.1', 55598)
+[16:38:56] (SocketServer) Send to ('127.0.0.1', 55597): --bytes--, len: 8656
+[16:38:56] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[16:38:56] (SocketServer) Send to ('127.0.0.1', 55598): --bytes--, len: 974
+[16:38:57] (SocketServer) New connection accepted: ('127.0.0.1', 55602)
+[16:38:57] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[16:38:57] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[16:38:57] (SocketServer) Send to ('127.0.0.1', 55602): --bytes--, len: 97
+[16:48:50] (Main) Server start.
+[16:48:50] (DRModel) New model initialized, model name: DRModel_default
+[16:48:50] (SocketServer) start on 0.0.0.0:25565
+[16:50:14] (SocketServer) Receive: GET /login.html HTTP/1.1
+1', 56273)
+[16:50:14] (SocketServer) New connection accepted: ('127.0.0.1', 56274)
+[16:50:14] (SocketServer) Send to ('127.0.0.1', 56273): --bytes--, len: 5541
+[16:50:14] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[16:50:15] (SocketServer) Send to ('127.0.0.1', 56274): --bytes--, len: 974
+[16:50:15] (SocketServer) New connection accepted: ('127.0.0.1', 56276)
+[16:50:15] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[16:50:15] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[16:50:15] (SocketServer) Send to ('127.0.0.1', 56276): --bytes--, len: 97
+[16:50:16] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[16:50:16] (SocketServer) New connection accepted: ('127.0.0.1', 56280)
+[16:50:16] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[16:50:16] (SocketServer) Send to ('127.0.0.1', 56280): --bytes--, len: 97
+[16:50:16] (SocketServer) New connection accepted: ('127.0.0.1', 56282)
+[16:50:16] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[16:50:16] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[16:50:16] (SocketServer) Send to ('127.0.0.1', 56282): --bytes--, len: 97
+[16:50:16] (SocketServer) New connection accepted: ('127.0.0.1', 56283)
+[16:51:42] (SocketServer) New connection accepted: ('127.0.0.1', 56376)
+[16:51:42] (SocketServer) Receive: GET /register.html HTTP/1.1
+[16:51:42] (SocketServer) New connection accepted: ('127.0.0.1', 56377)
+[16:51:42] (SocketServer) Send to ('127.0.0.1', 56376): --bytes--, len: 8748
+[16:51:42] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[16:51:42] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[16:51:42] (SocketServer) New connection accepted: ('127.0.0.1', 56378)
+[16:51:42] (SocketServer) Send to ('127.0.0.1', 56377): --bytes--, len: 974
+[16:51:42] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[16:51:42] (SocketServer) Send to ('127.0.0.1', 56378): --bytes--, len: 97
+[16:52:33] (SocketServer) New connection accepted: ('127.0.0.1', 56431)
+[16:52:33] (SocketServer) Receive: GET /register.html HTTP/1.1
+[16:52:33] (SocketServer) New connection accepted: ('127.0.0.1', 56432)
+[16:52:33] (SocketServer) Send to ('127.0.0.1', 56431): --bytes--, len: 8748
+[16:52:33] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[16:52:33] (SocketServer) Send to ('127.0.0.1', 56432): --bytes--, len: 974
+[16:52:33] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[16:52:33] (SocketServer) New connection accepted: ('127.0.0.1', 56434)
+[16:52:33] (SocketServer) Send to ('127.0.0.1', 56434): --bytes--, len: 7380
+[16:52:33] (SocketServer) New connection accepted: ('127.0.0.1', 56435)
+[16:52:33] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[16:52:34] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[16:52:34] (SocketServer) Send to ('127.0.0.1', 56435): --bytes--, len: 97
+[16:55:56] (SocketServer) New connection accepted: ('127.0.0.1', 56630)
+[16:55:56] (SocketServer) Receive: GET /register.html HTTP/1.1
+[16:55:56] (SocketServer) New connection accepted: ('127.0.0.1', 56631)
+[16:55:56] (SocketServer) Send to ('127.0.0.1', 56630): --bytes--, len: 8748
+[16:55:56] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[16:55:56] (SocketServer) Send to ('127.0.0.1', 56631): --bytes--, len: 974
+[16:55:56] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[16:55:56] (SocketServer) New connection accepted: ('127.0.0.1', 56633)
+[16:55:56] (SocketServer) Send to ('127.0.0.1', 56633): --bytes--, len: 7380
+[16:55:56] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[16:55:56] (SocketServer) New connection accepted: ('127.0.0.1', 56635)
+[16:55:56] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[16:55:56] (SocketServer) Send to ('127.0.0.1', 56635): --bytes--, len: 97
+[17:03:10] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:03:10] (SocketServer) New connection accepted: ('127.0.0.1', 57197)
+[17:03:10] (SocketServer) New connection accepted: ('127.0.0.1', 57198)
+[17:03:11] (SocketServer) Send to ('127.0.0.1', 57197): --bytes--, len: 10569
+[17:03:11] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:03:11] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:03:11] (SocketServer) New connection accepted: ('127.0.0.1', 57199)
+[17:03:11] (SocketServer) Send to ('127.0.0.1', 57198): --bytes--, len: 974
+[17:03:11] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:03:11] (SocketServer) Send to ('127.0.0.1', 57199): --bytes--, len: 97
+[17:03:11] (SocketServer) New connection accepted: ('127.0.0.1', 57203)
+[17:03:11] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:03:11] (SocketServer) Send to ('127.0.0.1', 57203): --bytes--, len: 7380
+[17:04:10] (SocketServer) New connection accepted: ('127.0.0.1', 57268)
+[17:04:10] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:04:10] (SocketServer) New connection accepted: ('127.0.0.1', 57269)
+[17:04:10] (SocketServer) Send to ('127.0.0.1', 57268): --bytes--, len: 9724
+[17:04:10] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:04:10] (SocketServer) Send to ('127.0.0.1', 57269): --bytes--, len: 974
+[17:04:10] (SocketServer) New connection accepted: ('127.0.0.1', 57271)
+[17:04:10] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:04:10] (SocketServer) Send to ('127.0.0.1', 57271): --bytes--, len: 7380
+[17:04:10] (SocketServer) New connection accepted: ('127.0.0.1', 57273)
+[17:04:10] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:04:10] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:04:10] (SocketServer) Send to ('127.0.0.1', 57273): --bytes--, len: 97
+[17:04:55] (SocketServer) New connection accepted: ('127.0.0.1', 57307)
+[17:04:55] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:04:55] (SocketServer) New connection accepted: ('127.0.0.1', 57308)
+[17:04:55] (SocketServer) Send to ('127.0.0.1', 57307): --bytes--, len: 9723
+[17:04:55] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:04:55] (SocketServer) Send to ('127.0.0.1', 57308): --bytes--, len: 974
+[17:04:55] (SocketServer) New connection accepted: ('127.0.0.1', 57310)
+[17:04:55] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:04:55] (SocketServer) Send to ('127.0.0.1', 57310): --bytes--, len: 7380
+[17:04:55] (SocketServer) New connection accepted: ('127.0.0.1', 57311)
+[17:04:55] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:04:55] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:04:55] (SocketServer) Send to ('127.0.0.1', 57311): --bytes--, len: 97
+[17:06:22] (SocketServer) New connection accepted: ('127.0.0.1', 57394)
+[17:06:22] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:06:22] (SocketServer) New connection accepted: ('127.0.0.1', 57395)
+[17:06:22] (SocketServer) Send to ('127.0.0.1', 57394): --bytes--, len: 9684
+[17:06:22] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:06:23] (SocketServer) Send to ('127.0.0.1', 57395): --bytes--, len: 974
+[17:06:23] (SocketServer) New connection accepted: ('127.0.0.1', 57397)
+[17:06:23] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:06:23] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:06:23] (SocketServer) Send to ('127.0.0.1', 57397): --bytes--, len: 97
+[17:06:23] (SocketServer) New connection accepted: ('127.0.0.1', 57399)
+[17:06:23] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:06:23] (SocketServer) Send to ('127.0.0.1', 57399): --bytes--, len: 7380
+[17:10:04] (SocketServer) New connection accepted: ('127.0.0.1', 57605)
+[17:10:04] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:10:04] (SocketServer) New connection accepted: ('127.0.0.1', 57606)
+[17:10:04] (SocketServer) Send to ('127.0.0.1', 57605): --bytes--, len: 9302
+[17:10:04] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:10:04] (SocketServer) Send to ('127.0.0.1', 57606): --bytes--, len: 974
+[17:10:04] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:10:04] (SocketServer) New connection accepted: ('127.0.0.1', 57607)
+[17:10:04] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:10:04] (SocketServer) Send to ('127.0.0.1', 57607): --bytes--, len: 97
+[17:10:04] (SocketServer) New connection accepted: ('127.0.0.1', 57610)
+[17:10:04] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:10:04] (SocketServer) Send to ('127.0.0.1', 57610): --bytes--, len: 7380
+[17:10:46] (SocketServer) New connection accepted: ('127.0.0.1', 57648)
+[17:10:46] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:10:46] (SocketServer) New connection accepted: ('127.0.0.1', 57649)
+[17:10:46] (SocketServer) Send to ('127.0.0.1', 57648): --bytes--, len: 9734
+[17:10:46] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:10:46] (SocketServer) Send to ('127.0.0.1', 57649): --bytes--, len: 974
+[17:10:46] (SocketServer) New connection accepted: ('127.0.0.1', 57651)
+[17:10:46] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:10:46] (SocketServer) Send to ('127.0.0.1', 57651): --bytes--, len: 7380
+[17:10:47] (SocketServer) New connection accepted: ('127.0.0.1', 57652)
+[17:10:47] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:10:47] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:10:47] (SocketServer) Send to ('127.0.0.1', 57652): --bytes--, len: 97
+[17:11:28] (SocketServer) New connection accepted: ('127.0.0.1', 57687)
+[17:11:28] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:11:28] (SocketServer) New connection accepted: ('127.0.0.1', 57688)
+[17:11:28] (SocketServer) Send to ('127.0.0.1', 57687): --bytes--, len: 9740
+[17:11:28] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:11:28] (SocketServer) Send to ('127.0.0.1', 57688): --bytes--, len: 974
+[17:11:28] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:11:28] (SocketServer) New connection accepted: ('127.0.0.1', 57689)
+[17:11:29] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:11:29] (SocketServer) Send to ('127.0.0.1', 57689): --bytes--, len: 97
+[17:11:29] (SocketServer) New connection accepted: ('127.0.0.1', 57691)
+[17:11:29] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:11:29] (SocketServer) Send to ('127.0.0.1', 57691): --bytes--, len: 7380
+[17:12:05] (SocketServer) New connection accepted: ('127.0.0.1', 57743)
+[17:12:05] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:12:05] (SocketServer) New connection accepted: ('127.0.0.1', 57744)
+[17:12:05] (SocketServer) Send to ('127.0.0.1', 57743): --bytes--, len: 9741
+[17:12:05] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:12:05] (SocketServer) Send to ('127.0.0.1', 57744): --bytes--, len: 974
+[17:12:05] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:12:05] (SocketServer) New connection accepted: ('127.0.0.1', 57746)
+[17:12:06] (SocketServer) Send to ('127.0.0.1', 57746): --bytes--, len: 7380
+[17:12:06] (SocketServer) New connection accepted: ('127.0.0.1', 57747)
+[17:12:06] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:12:06] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:12:06] (SocketServer) Send to ('127.0.0.1', 57747): --bytes--, len: 97
+[17:13:38] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:13:38] (SocketServer) New connection accepted: ('127.0.0.1', 57839)
+[17:13:38] (SocketServer) New connection accepted: ('127.0.0.1', 57840)
+[17:13:38] (SocketServer) Send to ('127.0.0.1', 57839): --bytes--, len: 9741
+[17:13:38] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:13:39] (SocketServer) New connection accepted: ('127.0.0.1', 57841)
+[17:13:39] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:13:39] (SocketServer) Send to ('127.0.0.1', 57840): --bytes--, len: 974
+[17:13:39] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:13:39] (SocketServer) Send to ('127.0.0.1', 57841): --bytes--, len: 97
+[17:13:39] (SocketServer) New connection accepted: ('127.0.0.1', 57844)
+[17:13:39] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:13:39] (SocketServer) Send to ('127.0.0.1', 57844): --bytes--, len: 7380
+[17:14:03] (SocketServer) Receive: POST /?login HTTP/1.1
+[17:14:03] (SocketServer) New connection accepted: ('127.0.0.1', 57871)
+[17:14:03] (SocketServer) Send to ('127.0.0.1', 57871): --bytes--, len: 122
+[17:14:03] (SocketServer) New connection accepted: ('127.0.0.1', 57872)
+[17:14:14] (SocketServer) Receive: POST /?login HTTP/1.1
+[17:14:14] (SocketServer) Send to ('127.0.0.1', 57872): --bytes--, len: 122
+[17:19:40] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:19:40] (SocketServer) New connection accepted: ('127.0.0.1', 58242)
+[17:19:40] (SocketServer) New connection accepted: ('127.0.0.1', 58243)
+[17:19:40] (SocketServer) Send to ('127.0.0.1', 58242): --bytes--, len: 9752
+[17:19:40] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:19:40] (SocketServer) Send to ('127.0.0.1', 58243): --bytes--, len: 974
+[17:19:40] (SocketServer) New connection accepted: ('127.0.0.1', 58244)
+[17:19:40] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:19:40] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:19:40] (SocketServer) Send to ('127.0.0.1', 58244): --bytes--, len: 97
+[17:19:40] (SocketServer) New connection accepted: ('127.0.0.1', 58247)
+[17:19:40] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:19:41] (SocketServer) Send to ('127.0.0.1', 58247): --bytes--, len: 7380
+[17:19:43] (SocketServer) New connection accepted: ('127.0.0.1', 58254)
+[17:19:43] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:19:43] (SocketServer) New connection accepted: ('127.0.0.1', 58255)
+[17:19:43] (SocketServer) Send to ('127.0.0.1', 58254): --bytes--, len: 9752
+[17:19:43] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:19:43] (SocketServer) Send to ('127.0.0.1', 58255): --bytes--, len: 974
+[17:19:43] (SocketServer) New connection accepted: ('127.0.0.1', 58256)
+[17:19:43] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:19:43] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:19:43] (SocketServer) Send to ('127.0.0.1', 58256): --bytes--, len: 97
+[17:19:43] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:19:43] (SocketServer) New connection accepted: ('127.0.0.1', 58259)
+[17:19:43] (SocketServer) Send to ('127.0.0.1', 58259): --bytes--, len: 7380
+[17:20:51] (SocketServer) New connection accepted: ('127.0.0.1', 58347)
+[17:20:51] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:20:51] (SocketServer) New connection accepted: ('127.0.0.1', 58348)
+[17:20:51] (SocketServer) Send to ('127.0.0.1', 58347): --bytes--, len: 9752
+[17:20:51] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:20:51] (SocketServer) Send to ('127.0.0.1', 58348): --bytes--, len: 974
+[17:20:51] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:20:51] (SocketServer) New connection accepted: ('127.0.0.1', 58349)
+[17:20:51] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:20:51] (SocketServer) Send to ('127.0.0.1', 58349): --bytes--, len: 97
+[17:20:52] (SocketServer) New connection accepted: ('127.0.0.1', 58352)
+[17:20:52] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:20:52] (SocketServer) Send to ('127.0.0.1', 58352): --bytes--, len: 7380
+[17:21:44] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:21:44] (SocketServer) New connection accepted: ('127.0.0.1', 58422)
+[17:21:44] (SocketServer) New connection accepted: ('127.0.0.1', 58423)
+[17:21:45] (SocketServer) Send to ('127.0.0.1', 58422): --bytes--, len: 9741
+[17:21:45] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:21:45] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:21:45] (SocketServer) New connection accepted: ('127.0.0.1', 58424)
+[17:21:45] (SocketServer) Send to ('127.0.0.1', 58423): --bytes--, len: 974
+[17:21:45] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:21:45] (SocketServer) Send to ('127.0.0.1', 58424): --bytes--, len: 97
+[17:21:45] (SocketServer) New connection accepted: ('127.0.0.1', 58426)
+[17:21:45] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:21:45] (SocketServer) Send to ('127.0.0.1', 58426): --bytes--, len: 7380
+[17:24:43] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:24:43] (SocketServer) New connection accepted: ('127.0.0.1', 58597)
+[17:24:43] (SocketServer) New connection accepted: ('127.0.0.1', 58598)
+[17:24:43] (SocketServer) Send to ('127.0.0.1', 58597): --bytes--, len: 9304
+[17:24:43] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:24:44] (SocketServer) Send to ('127.0.0.1', 58598): --bytes--, len: 977
+[17:24:44] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:24:44] (SocketServer) New connection accepted: ('127.0.0.1', 58600)
+[17:24:44] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:24:44] (SocketServer) Send to ('127.0.0.1', 58600): --bytes--, len: 97
+[17:24:44] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:24:44] (SocketServer) New connection accepted: ('127.0.0.1', 58603)
+[17:24:44] (SocketServer) Send to ('127.0.0.1', 58603): --bytes--, len: 7380
+[17:24:57] (SocketServer) New connection accepted: ('127.0.0.1', 58611)
+[17:24:57] (SocketServer) Receive: POST /?login HTTP/1.1
+[17:24:58] (SocketServer) Send to ('127.0.0.1', 58611): --bytes--, len: 122
+[17:24:58] (SocketServer) New connection accepted: ('127.0.0.1', 58613)
+[17:25:01] (SocketServer) Receive: POST /?login HTTP/1.1
+[17:25:01] (SocketServer) Send to ('127.0.0.1', 58613): --bytes--, len: 122
+[17:25:07] (SocketServer) Receive: POST /?login HTTP/1.1
+[17:25:07] (SocketServer) New connection accepted: ('127.0.0.1', 58631)
+[17:25:07] (SocketServer) Send to ('127.0.0.1', 58631): --bytes--, len: 122
+[17:25:07] (SocketServer) New connection accepted: ('127.0.0.1', 58632)
+[17:25:11] (SocketServer) Receive: POST /?login HTTP/1.1
+[17:25:11] (SocketServer) Send to ('127.0.0.1', 58632): --bytes--, len: 122
+[17:25:45] (Main) Server start.
+[17:25:46] (DRModel) New model initialized, model name: DRModel_default
+[17:25:46] (SocketServer) start on 0.0.0.0:25565
+[17:25:47] (SocketServer) New connection accepted: ('127.0.0.1', 58671)
+[17:25:47] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:25:47] (SocketServer) New connection accepted: ('127.0.0.1', 58672)
+[17:25:47] (SocketServer) Send to ('127.0.0.1', 58671): --bytes--, len: 9307
+[17:25:47] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:25:47] (SocketServer) Send to ('127.0.0.1', 58672): --bytes--, len: 977
+[17:25:47] (SocketServer) New connection accepted: ('127.0.0.1', 58674)
+[17:25:47] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:25:47] (SocketServer) Send to ('127.0.0.1', 58674): --bytes--, len: 7380
+[17:25:47] (SocketServer) New connection accepted: ('127.0.0.1', 58675)
+[17:25:47] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:25:47] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:25:47] (SocketServer) Send to ('127.0.0.1', 58675): --bytes--, len: 97
+[17:26:00] (SocketServer) New connection accepted: ('127.0.0.1', 58694)
+[17:26:00] (SocketServer) Receive: POST /?register HTTP/1.1
+[17:26:00] (SocketServer) Send to ('127.0.0.1', 58694): --bytes--, len: 106
+[17:26:00] (SocketServer) New connection accepted: ('127.0.0.1', 58695)
+[17:28:12] (Main) Server start.
+[17:28:12] (DRModel) New model initialized, model name: DRModel_default
+[17:28:12] (SocketServer) start on 0.0.0.0:25565
+[17:28:18] (SocketServer) New connection accepted: ('127.0.0.1', 58821)
+[17:28:18] (SocketServer) Receive: POST /?register HTTP/1.1
+[17:28:18] (SocketServer) Send to ('127.0.0.1', 58821): --bytes--, len: 106
+[17:28:18] (SocketServer) New connection accepted: ('127.0.0.1', 58822)
+[17:29:38] (SocketServer) Receive: POST /?register HTTP/1.1
+[17:29:38] (SocketServer) New connection accepted: ('127.0.0.1', 58921)
+[17:29:39] (SocketServer) Send to ('127.0.0.1', 58921): --bytes--, len: 106
+[17:29:39] (SocketServer) New connection accepted: ('127.0.0.1', 58922)
+[17:29:44] (SocketServer) Receive: POST /?register HTTP/1.1
+[17:29:44] (SocketServer) Send to ('127.0.0.1', 58922): --bytes--, len: 106
+[17:29:48] (SocketServer) Receive: GET /register.html HTTP/1.1
+[17:29:48] (SocketServer) New connection accepted: ('127.0.0.1', 58930)
+[17:29:48] (SocketServer) New connection accepted: ('127.0.0.1', 58931)
+[17:29:49] (SocketServer) Send to ('127.0.0.1', 58930): --bytes--, len: 9302
+[17:29:49] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:29:49] (SocketServer) Send to ('127.0.0.1', 58931): --bytes--, len: 977
+[17:29:49] (SocketServer) New connection accepted: ('127.0.0.1', 58933)
+[17:29:49] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[17:29:49] (SocketServer) Send to ('127.0.0.1', 58933): --bytes--, len: 7380
+[17:29:49] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:29:49] (SocketServer) New connection accepted: ('127.0.0.1', 58935)
+[17:29:49] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:29:49] (SocketServer) Send to ('127.0.0.1', 58935): --bytes--, len: 97
+[17:30:04] (SocketServer) Receive: POST /?register HTTP/1.1
+[17:30:04] (SocketServer) New connection accepted: ('127.0.0.1', 58955)
+[17:30:04] (SocketServer) Send to ('127.0.0.1', 58955): --bytes--, len: 106
+[17:30:05] (SocketServer) New connection accepted: ('127.0.0.1', 58956)
+[17:30:14] (SocketServer) Receive: GET /index.html HTTP/1.1
+[17:30:15] (SocketServer) Send to ('127.0.0.1', 58956): --bytes--, len: 8621
+[17:30:15] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:30:15] (SocketServer) New connection accepted: ('127.0.0.1', 58966)
+[17:30:15] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:30:15] (SocketServer) Send to ('127.0.0.1', 58966): --bytes--, len: 97
+[17:30:17] (SocketServer) New connection accepted: ('127.0.0.1', 58971)
+[17:30:17] (SocketServer) Receive: GET /login.html HTTP/1.1
+[17:30:17] (SocketServer) New connection accepted: ('127.0.0.1', 58972)
+[17:30:17] (SocketServer) Send to ('127.0.0.1', 58971): --bytes--, len: 5536
+[17:30:17] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[17:30:17] (SocketServer) Send to ('127.0.0.1', 58972): --bytes--, len: 977
+[17:30:18] (SocketServer) New connection accepted: ('127.0.0.1', 58973)
+[17:30:18] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:30:18] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:30:18] (SocketServer) Send to ('127.0.0.1', 58973): --bytes--, len: 97
+[17:55:47] (Main) Server start.
+[17:55:47] (DRModel) New model initialized, model name: DRModel_default
+[17:55:47] (SocketServer) start on 0.0.0.0:25565
+[17:55:52] (SocketServer) New connection accepted: ('127.0.0.1', 51518)
+[17:55:52] (SocketServer) Receive: GET / HTTP/1.1
+[17:55:52] (SocketServer) New connection accepted: ('127.0.0.1', 51519)
+[17:55:52] (SocketServer) Send to ('127.0.0.1', 51518): --bytes--, len: 8621
+[17:55:52] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:55:52] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:55:52] (SocketServer) Send to ('127.0.0.1', 51519): --bytes--, len: 97
+[17:55:52] (SocketServer) New connection accepted: ('127.0.0.1', 51523)
+[17:55:54] (SocketServer) Receive: GET /predict.html HTTP/1.1
+[17:55:54] (SocketServer) Send to ('127.0.0.1', 51523): --bytes--, len: 9529
+[17:55:54] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[17:55:54] (SocketServer) New connection accepted: ('127.0.0.1', 51528)
+[17:55:54] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[17:55:54] (SocketServer) Send to ('127.0.0.1', 51528): --bytes--, len: 97
+[18:53:03] (Main) Server start.
+[18:53:03] (DRModel) New model initialized, model name: DRModel_default
+[18:53:03] (SocketServer) start on 0.0.0.0:25565
+[18:53:09] (SocketServer) Receive: GET /predict.html HTTP/1.1
+, 57376)
+[18:53:09] (SocketServer) New connection accepted: ('127.0.0.1', 57377)
+[18:53:09] (SocketServer) Send to ('127.0.0.1', 57376): --bytes--, len: 9968
+[18:53:09] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[18:53:10] (SocketServer) Send to ('127.0.0.1', 57377): --bytes--, len: 977
+[18:53:10] (SocketServer) New connection accepted: ('127.0.0.1', 57381)
+[18:53:10] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[18:53:10] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[18:53:10] (SocketServer) Send to ('127.0.0.1', 57381): --bytes--, len: 97
+[18:53:15] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[18:53:15] (SocketServer) New connection accepted: ('127.0.0.1', 57392)
+[18:53:47] (Main) Server start.
+[18:53:47] (DRModel) New model initialized, model name: DRModel_default
+[18:53:47] (SocketServer) start on 0.0.0.0:25565
+[18:53:50] (SocketServer) New connection accepted: ('127.0.0.1', 57457)
+[18:53:50] (SocketServer) Receive: GET /predict.html HTTP/1.1
+[18:53:50] (SocketServer) New connection accepted: ('127.0.0.1', 57458)
+[18:53:50] (SocketServer) Send to ('127.0.0.1', 57457): --bytes--, len: 9968
+[18:53:50] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[18:53:50] (SocketServer) Send to ('127.0.0.1', 57458): --bytes--, len: 977
+[18:53:50] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[18:53:50] (SocketServer) New connection accepted: ('127.0.0.1', 57460)
+[18:53:50] (SocketServer) Send to ('127.0.0.1', 57460): --bytes--, len: 7380
+[18:53:51] (SocketServer) New connection accepted: ('127.0.0.1', 57461)
+[18:53:51] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[18:53:51] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[18:53:51] (SocketServer) Send to ('127.0.0.1', 57461): --bytes--, len: 97
+[18:53:54] (SocketServer) New connection accepted: ('127.0.0.1', 57475)
+[18:53:54] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[18:54:36] (Main) Server start.
+[18:54:36] (DRModel) New model initialized, model name: DRModel_default
+[18:54:36] (SocketServer) start on 0.0.0.0:25565
+[18:54:39] (SocketServer) New connection accepted: ('127.0.0.1', 57560)
+[18:54:39] (SocketServer) Receive: GET /predict.html HTTP/1.1
+[18:54:39] (SocketServer) New connection accepted: ('127.0.0.1', 57561)
+[18:54:39] (SocketServer) Send to ('127.0.0.1', 57560): --bytes--, len: 9968
+[18:54:39] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[18:54:39] (SocketServer) Send to ('127.0.0.1', 57561): --bytes--, len: 977
+[18:54:39] (SocketServer) New connection accepted: ('127.0.0.1', 57564)
+[18:54:39] (SocketServer) Receive: GET /favicon.ico HTTP/1.1
+[18:54:39] (SocketServer) Send to ('127.0.0.1', 57564): --bytes--, len: 7380
+[18:54:39] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[18:54:39] (SocketServer) New connection accepted: ('127.0.0.1', 57565)
+[18:54:39] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[18:54:39] (SocketServer) Send to ('127.0.0.1', 57565): --bytes--, len: 97
+[18:54:42] (SocketServer) New connection accepted: ('127.0.0.1', 57572)
+[18:54:42] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[18:54:43] (SocketServer) Send to ('127.0.0.1', 57572): --bytes--, len: 106
+[18:54:43] (SocketServer) New connection accepted: ('127.0.0.1', 57574)
+[19:08:09] (SocketServer) New connection accepted: ('127.0.0.1', 58958)
+[19:08:09] (SocketServer) Receive: GET /predict.html HTTP/1.1
+[19:08:09] (SocketServer) New connection accepted: ('127.0.0.1', 58959)
+[19:08:09] (SocketServer) Send to ('127.0.0.1', 58958): --bytes--, len: 10113
+[19:08:09] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[19:08:09] (SocketServer) Send to ('127.0.0.1', 58959): --bytes--, len: 977
+[19:08:09] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[19:08:09] (SocketServer) New connection accepted: ('127.0.0.1', 58961)
+[19:08:09] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[19:08:09] (SocketServer) Send to ('127.0.0.1', 58961): --bytes--, len: 97
+[19:08:20] (SocketServer) New connection accepted: ('127.0.0.1', 58981)
+[19:08:20] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[19:08:40] (Main) Server start.
+[19:08:40] (DRModel) New model initialized, model name: DRModel_default
+[19:08:40] (SocketServer) start on 0.0.0.0:25565
+[19:08:59] (SocketServer) New connection accepted: ('127.0.0.1', 59053)
+[19:08:59] (SocketServer) Receive: GET /predict.html HTTP/1.1
+[19:08:59] (SocketServer) New connection accepted: ('127.0.0.1', 59054)
+[19:08:59] (SocketServer) Send to ('127.0.0.1', 59053): --bytes--, len: 10113
+[19:08:59] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[19:08:59] (SocketServer) Send to ('127.0.0.1', 59054): --bytes--, len: 977
+[19:08:59] (SocketServer) New connection accepted: ('127.0.0.1', 59055)
+[19:08:59] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[19:08:59] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[19:08:59] (SocketServer) Send to ('127.0.0.1', 59055): --bytes--, len: 97
+[19:09:03] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[19:09:03] (SocketServer) New connection accepted: ('127.0.0.1', 59082)
+[19:09:03] (SocketServer) Send to ('127.0.0.1', 59082): --bytes--, len: 106
+[19:09:03] (SocketServer) New connection accepted: ('127.0.0.1', 59083)
+[19:09:05] (SocketServer) Receive: POST /?test HTTP/1.1
+[19:09:28] (Main) Server start.
+[19:09:28] (DRModel) New model initialized, model name: DRModel_default
+[19:09:28] (SocketServer) start on 0.0.0.0:25565
+[19:09:28] (SocketServer) New connection accepted: ('127.0.0.1', 59137)
+[19:09:28] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[19:09:29] (SocketServer) Send to ('127.0.0.1', 59137): --bytes--, len: 106
+[19:09:29] (SocketServer) New connection accepted: ('127.0.0.1', 59138)
+[19:09:31] (SocketServer) Receive: POST /?test HTTP/1.1
+[19:11:30] (Main) Server start.
+[19:11:30] (DRModel) New model initialized, model name: DRModel_default
+[19:11:30] (SocketServer) start on 0.0.0.0:25565
+[19:11:34] (SocketServer) New connection accepted: ('127.0.0.1', 59367)
+[19:11:34] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[19:11:34] (SocketServer) Send to ('127.0.0.1', 59367): --bytes--, len: 106
+[19:11:34] (SocketServer) New connection accepted: ('127.0.0.1', 59369)
+[19:11:35] (SocketServer) Receive: POST /?test HTTP/1.1
+[19:12:09] (Main) Server start.
+[19:12:09] (DRModel) New model initialized, model name: DRModel_default
+[19:12:09] (SocketServer) start on 0.0.0.0:25565
+[19:12:17] (SocketServer) New connection accepted: ('127.0.0.1', 59445)
+[19:12:17] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[19:12:17] (SocketServer) Send to ('127.0.0.1', 59445): --bytes--, len: 106
+[19:12:17] (SocketServer) New connection accepted: ('127.0.0.1', 59447)
+[19:12:18] (SocketServer) Receive: POST /?test HTTP/1.1
+[19:13:51] (Main) Server start.
+[19:13:51] (DRModel) New model initialized, model name: DRModel_default
+[19:13:51] (SocketServer) start on 0.0.0.0:25565
+[19:13:54] (SocketServer) New connection accepted: ('127.0.0.1', 59613)
+[19:13:54] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[19:13:54] (SocketServer) Send to ('127.0.0.1', 59613): --bytes--, len: 106
+[19:13:54] (SocketServer) New connection accepted: ('127.0.0.1', 59614)
+[19:13:55] (SocketServer) Receive: POST /?test HTTP/1.1
+[19:14:22] (Main) Server start.
+[19:14:23] (DRModel) New model initialized, model name: DRModel_default
+[19:14:23] (SocketServer) start on 0.0.0.0:25565
+[19:14:23] (SocketServer) New connection accepted: ('127.0.0.1', 59676)
+[19:14:26] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[19:14:26] (SocketServer) Send to ('127.0.0.1', 59676): --bytes--, len: 106
+[19:14:28] (SocketServer) Receive: POST /?test HTTP/1.1
+[19:14:28] (SocketServer) New connection accepted: ('127.0.0.1', 59686)
+[19:14:28] (SocketServer) New connection accepted: ('127.0.0.1', 59687)
+[19:18:24] (Main) Server start.
+[19:18:24] (DRModel) New model initialized, model name: DRModel_default
+[19:18:24] (SocketServer) start on 0.0.0.0:25565
+[19:18:26] (SocketServer) New connection accepted: ('127.0.0.1', 60084)
+[19:18:26] (SocketServer) Receive: GET /predict.html HTTP/1.1
+[19:18:26] (SocketServer) New connection accepted: ('127.0.0.1', 60085)
+[19:18:26] (SocketServer) Send to ('127.0.0.1', 60084): --bytes--, len: 10113
+[19:18:26] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[19:18:27] (SocketServer) Send to ('127.0.0.1', 60085): --bytes--, len: 977
+[19:18:27] (SocketServer) New connection accepted: ('127.0.0.1', 60086)
+[19:18:27] (SocketServer) Receive: GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1
+[19:18:27] (Respond) Resources could not found: /.well-known/appspecific/com.chrome.devtools.json
+[19:18:27] (SocketServer) Send to ('127.0.0.1', 60086): --bytes--, len: 97
+[19:18:31] (SocketServer) New connection accepted: ('127.0.0.1', 60102)
+[19:18:31] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[19:18:31] (SocketServer) Send to ('127.0.0.1', 60102): --bytes--, len: 106
+[19:18:31] (SocketServer) New connection accepted: ('127.0.0.1', 60103)
+[19:18:32] (SocketServer) Receive: POST /?test HTTP/1.1
+[19:19:31] (Main) Server start.
+[19:19:31] (DRModel) New model initialized, model name: DRModel_default
+[19:19:32] (SocketServer) start on 0.0.0.0:25565
+[19:19:36] (SocketServer) New connection accepted: ('127.0.0.1', 60232)
+[19:19:36] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[19:19:36] (SocketServer) Send to ('127.0.0.1', 60232): --bytes--, len: 106
+[19:19:37] (SocketServer) New connection accepted: ('127.0.0.1', 60233)
+[19:19:37] (SocketServer) Receive: POST /?test HTTP/1.1
+[19:19:38] (SocketServer) Send to ('127.0.0.1', 60233): --bytes--, len: 354
+[19:19:44] (SocketServer) New connection accepted: ('127.0.0.1', 60248)
+[19:19:44] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[19:19:44] (SocketServer) Send to ('127.0.0.1', 60248): --bytes--, len: 106
+[19:19:45] (SocketServer) New connection accepted: ('127.0.0.1', 60249)
+[19:19:45] (SocketServer) Receive: POST /?test HTTP/1.1
+[19:19:45] (SocketServer) Send to ('127.0.0.1', 60249): --bytes--, len: 353
+[19:19:55] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[19:19:55] (SocketServer) New connection accepted: ('127.0.0.1', 60264)
+[19:19:56] (SocketServer) Send to ('127.0.0.1', 60264): --bytes--, len: 106
+[19:19:56] (SocketServer) New connection accepted: ('127.0.0.1', 60265)
+[19:19:56] (SocketServer) Receive: POST /?test HTTP/1.1
+[19:19:56] (SocketServer) Send to ('127.0.0.1', 60265): --bytes--, len: 355
+[19:20:05] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[19:20:05] (SocketServer) New connection accepted: ('127.0.0.1', 60288)
+[19:20:05] (SocketServer) Send to ('127.0.0.1', 60288): --bytes--, len: 106
+[19:20:05] (SocketServer) New connection accepted: ('127.0.0.1', 60289)
+[19:20:06] (SocketServer) Receive: POST /?test HTTP/1.1
+[19:20:06] (SocketServer) Send to ('127.0.0.1', 60289): --bytes--, len: 352
+[19:20:15] (SocketServer) New connection accepted: ('127.0.0.1', 60302)
+[19:20:15] (SocketServer) Receive: POST /?uploadimg/test HTTP/1.1
+[19:20:15] (SocketServer) Send to ('127.0.0.1', 60302): --bytes--, len: 106
+[19:20:15] (SocketServer) New connection accepted: ('127.0.0.1', 60303)
+[19:20:15] (SocketServer) Receive: POST /?test HTTP/1.1
+[19:20:16] (SocketServer) Send to ('127.0.0.1', 60303): --bytes--, len: 356

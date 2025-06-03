@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模型训练 - AI平台</title>
+    <style>
+      :root {
+        --primary-color: #006666;
+        --secondary-color: #004d4d;
+        --text-light: #ffffff;
+        --border-color: #e0e0e0;
+        --chart-line-color: #4caf50;
+        --chart-bg-color: #f9f9f9;
+        --spacing-base: 1rem;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--spacing-base);
+      }
+
+      .page-header {
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .training-container {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: var(--spacing-base);
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: var(--spacing-base);
+      }
+
+      .file-section {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-base);
+      }
+
+      .file-list {
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 0.5rem;
+        height: 300px;
+        overflow-y: auto;
+      }
+
+      .file-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .file-item:last-child {
+        border-bottom: none;
+      }
+
+      .delete-btn {
+        color: #dc3545;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 0.875rem;
+      }
+
+      .upload-section {
+        border: 1px dashed var(--border-color);
+        border-radius: 4px;
+        padding: var(--spacing-base);
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .upload-section:hover {
+        border-color: var(--primary-color);
+        background-color: rgba(0, 102, 102, 0.05);
+      }
+
+      .chart-container {
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: var(--spacing-base);
+        background-color: var(--chart-bg-color);
+        height: 250px;
+        position: relative;
+      }
+
+      .chart-placeholder {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #999;
+        text-align: center;
+      }
+
+      .progress-section {
+        margin-top: var(--spacing-base);
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+      }
+
+      .progress-bar {
+        height: 10px;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background-color: var(--primary-color);
+        width: 0%;
+        transition: width 0.3s;
+      }
+
+      .params-section {
+        margin-top: var(--spacing-base);
+        border-top: 1px solid var(--border-color);
+        padding-top: var(--spacing-base);
+      }
+
+      .params-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-base);
+      }
+
+      .param-group {
+        margin-bottom: 1rem;
+      }
+
+      .param-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+
+      .param-input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+      }
+
+      .start-btn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.3s;
+        margin-top: var(--spacing-base);
+      }
+
+      .start-btn:hover {
+        background-color: var(--secondary-color);
+      }
+
+      @media (max-width: 768px) {
+        .training-container {
+          grid-template-columns: 1fr;
+        }
+
+        .params-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="page-header">模型训练</h1>
+
+      <div class="training-container">
+        <!-- 左侧文件区域 -->
+        <div class="file-section">
+          <div class="file-list" id="fileList">
+            <div class="file-item">
+              <span>image_001.jpg</span>
+              <button class="delete-btn">删除</button>
+            </div>
+            <div class="file-item">
+              <span>image_002.jpg</span>
+              <button class="delete-btn">删除</button>
+            </div>
+            <div class="file-item">
+              <span>image_003.jpg</span>
+              <button class="delete-btn">删除</button>
+            </div>
+            <div class="file-item">
+              <span>image_004.jpg</span>
+              <button class="delete-btn">删除</button>
+            </div>
+          </div>
+
+          <div class="upload-section" id="uploadArea">
+            <p>点击或拖拽文件到此处上传</p>
+            <input type="file" id="fileInput" style="display: none" multiple />
+          </div>
+        </div>
+
+        <!-- 右侧训练区域 -->
+        <div>
+          <div class="chart-container">
+            <div class="chart-placeholder" id="chartPlaceholder">
+              <p>训练开始后将显示准确率变化曲线</p>
+            </div>
+            <canvas id="accuracyChart" style="display: none"></canvas>
+          </div>
+
+          <div class="progress-section">
+            <div class="progress-info">
+              <span>进度: <span id="progressPercent">0</span>%</span>
+              <span>batches: <span id="batchCount">0</span></span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+
+          <div class="params-section">
+            <h3>参数设置</h3>
+            <div class="params-grid">
+              <div class="param-group">
+                <label class="param-label">epochs</label>
+                <input
+                  type="number"
+                  class="param-input"
+                  id="epochs"
+                  value="10"
+                  min="1"
+                />
+              </div>
+              <div class="param-group">
+                <label class="param-label">learning-rate</label>
+                <input
+                  type="number"
+                  class="param-input"
+                  id="learningRate"
+                  value="0.001"
+                  step="0.0001"
+                  min="0.0001"
+                />
+              </div>
+              <div class="param-group">
+                <label class="param-label">batch size</label>
+                <input
+                  type="number"
+                  class="param-input"
+                  id="batchSize"
+                  value="32"
+                  min="1"
+                />
+              </div>
+            </div>
+
+            <button class="start-btn" id="startTraining">开始训练</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      // 文件上传功能
+      const uploadArea = document.getElementById("uploadArea");
+      const fileInput = document.getElementById("fileInput");
+      const fileList = document.getElementById("fileList");
+
+      uploadArea.addEventListener("click", () => fileInput.click());
+
+      uploadArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        uploadArea.style.borderColor = "var(--primary-color)";
+        uploadArea.style.backgroundColor = "rgba(0, 102, 102, 0.1)";
+      });
+
+      uploadArea.addEventListener("dragleave", () => {
+        uploadArea.style.borderColor = "var(--border-color)";
+        uploadArea.style.backgroundColor = "";
+      });
+
+      uploadArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        uploadArea.style.borderColor = "var(--border-color)";
+        uploadArea.style.backgroundColor = "";
+
+        if (e.dataTransfer.files.length > 0) {
+          handleFiles(e.dataTransfer.files);
+        }
+      });
+
+      fileInput.addEventListener("change", () => {
+        if (fileInput.files.length > 0) {
+          handleFiles(fileInput.files);
+        }
+      });
+
+      function handleFiles(files) {
+        for (let i = 0; i < files.length; i++) {
+          const fileItem = document.createElement("div");
+          fileItem.className = "file-item";
+          fileItem.innerHTML = `
+                    <span>${files[i].name}</span>
+                    <button class="delete-btn">删除</button>
+                `;
+          fileList.appendChild(fileItem);
+
+          // 添加删除功能
+          fileItem
+            .querySelector(".delete-btn")
+            .addEventListener("click", () => {
+              fileList.removeChild(fileItem);
+            });
+        }
+      }
+
+      // 初始化图表
+      const chartCtx = document
+        .getElementById("accuracyChart")
+        .getContext("2d");
+      let accuracyChart;
+
+      // 训练模拟功能
+      const startBtn = document.getElementById("startTraining");
+      const progressFill = document.getElementById("progressFill");
+      const progressPercent = document.getElementById("progressPercent");
+      const batchCount = document.getElementById("batchCount");
+      const chartPlaceholder = document.getElementById("chartPlaceholder");
+
+      startBtn.addEventListener("click", () => {
+        const epochs = parseInt(document.getElementById("epochs").value);
+        const learningRate = parseFloat(
+          document.getElementById("learningRate").value
+        );
+        const batchSize = parseInt(document.getElementById("batchSize").value);
+
+        // 验证输入
+        if (fileList.children.length === 0) {
+          alert("请先上传训练文件");
+          return;
+        }
+
+        // 隐藏占位符，显示图表
+        chartPlaceholder.style.display = "none";
+        document.getElementById("accuracyChart").style.display = "block";
+
+        // 初始化图表
+        if (accuracyChart) {
+          accuracyChart.destroy();
+        }
+
+        accuracyChart = new Chart(chartCtx, {
+          type: "line",
+          data: {
+            labels: Array.from({ length: epochs }, (_, i) => i + 1),
+            datasets: [
+              {
+                label: "准确率",
+                data: [],
+                borderColor: "var(--chart-line-color)",
+                backgroundColor: "rgba(76, 175, 80, 0.1)",
+                tension: 0.1,
+                fill: true,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 1,
+                ticks: {
+                  callback: function (value) {
+                    return (value * 100).toFixed(0) + "%";
+                  },
+                },
+              },
+            },
+          },
+        });
+
+        // 模拟训练过程
+        let currentEpoch = 0;
+        const totalBatches = Math.ceil(fileList.children.length / batchSize);
+        let progress = 0;
+
+        const trainingInterval = setInterval(() => {
+          // 更新epoch
+          if (progress >= 100) {
+            currentEpoch++;
+            progress = 0;
+
+            if (currentEpoch >= epochs) {
+              clearInterval(trainingInterval);
+              startBtn.textContent = "训练完成";
+              startBtn.disabled = false;
+              return;
+            }
+          }
+
+          // 更新进度
+          progress += 100 / totalBatches;
+          if (progress > 100) progress = 100;
+
+          // 更新UI
+          progressFill.style.width = `${progress}%`;
+          progressPercent.textContent = progress.toFixed(1);
+          batchCount.textContent = totalBatches;
+
+          // 模拟准确率变化
+          if (progress >= 100) {
+            const accuracy =
+              0.1 +
+              (currentEpoch / epochs) * 0.8 +
+              (Math.random() * 0.1 - 0.05);
+            accuracyChart.data.datasets[0].data.push(Math.min(1, accuracy));
+            accuracyChart.update();
+          }
+        }, 200);
+
+        startBtn.textContent = "训练中...";
+        startBtn.disabled = true;
+      });
+    </script>
+  </body>
+</html>

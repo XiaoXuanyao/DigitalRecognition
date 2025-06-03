@@ -1,0 +1,46 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>dc5410a3-888b-4e9e-b42e-46b2d5d96259</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>DigitalRecognition.py</StartupFile>
+    <SearchPath>..\DigitalRecognition</SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>DigitalRecognition</Name>
+    <RootNamespace>DigitalRecognition</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="blocks\conv.py" />
+    <Compile Include="blocks\model.py" />
+    <Compile Include="Debug.py" />
+    <Compile Include="DigitalRecognition.py" />
+    <Compile Include="DRModel.py" />
+    <Compile Include="Encryption.py" />
+    <Compile Include="Respond.py" />
+    <Compile Include="Service.py" />
+    <Compile Include="Socket.py" />
+    <Compile Include="Train.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="blocks\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

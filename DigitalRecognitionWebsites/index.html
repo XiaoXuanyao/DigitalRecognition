@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>综合展示平台</title>
+    <style>
+      /* 全局样式 */
+      :root {
+        --primary-color: #006666;
+        --secondary-color: #004d4d;
+        --text-light: #ffffff;
+        --error-color: #dc3545;
+        --spacing-base: 1rem;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      /* 导航栏样式 */
+      .nav-bar {
+        background-color: var(--primary-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem var(--spacing-base);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        color: var(--text-light);
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+      }
+
+      .tree-icon {
+        width: 24px;
+        height: 24px;
+        background-color: var(--text-light);
+        border-radius: 50%;
+        margin-right: 15px;
+      }
+
+      .nav-left {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .nav-left a {
+        color: var(--text-light);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: opacity 0.3s;
+        padding: 0.5rem 0;
+      }
+
+      .nav-left a:hover {
+        opacity: 0.8;
+      }
+
+      .nav-right {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .nav-btn {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+
+      .contact-btn {
+        background-color: transparent;
+        border: 1px solid var(--text-light);
+        color: var(--text-light);
+      }
+
+      .contact-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .login-btn {
+        background-color: var(--text-light);
+        border: none;
+        color: var(--primary-color);
+      }
+
+      .login-btn:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      .admin-only {
+        display: none;
+        color: var(--text-light);
+        font-size: 0.875rem;
+        text-decoration: none;
+      }
+
+      .is-admin .admin-only {
+        display: block;
+      }
+
+      /* 时间显示部分 - 在"联系我们"按钮左侧 */
+      .time-display {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin-right: 1rem;
+      }
+
+      .time-display .time-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .time-display .text {
+        font-weight: bold;
+      }
+
+      .time-display .time-temp {
+        margin: 0 0.1rem;
+      }
+
+      .time-display .date-container {
+        display: flex;
+        align-items: center;
+        margin-left: 0.5rem;
+      }
+
+      .time-display .time-ltemp {
+        margin: 0 0.1rem;
+      }
+
+      /* 主内容区域样式 */
+      .main-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* AI模型平台部分 */
+      .ai-platform {
+        background-color: white;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        color: #333;
+      }
+
+      .ai-platform h1 {
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+      }
+
+      .ai-platform p {
+        color: #555;
+        line-height: 1.6;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+
+      @media (max-width: 768px) {
+        .nav-left {
+          gap: 1rem;
+        }
+
+        .nav-right {
+          gap: 0.75rem;
+        }
+
+        .nav-btn {
+          padding: 0.4rem 0.8rem;
+          font-size: 0.8125rem;
+        }
+
+        .onepiece-container {
+          height: 500px;
+        }
+
+        .onepiece-container ul .big-img {
+          height: 350px;
+        }
+
+        .time-display {
+          font-size: 0.8rem;
+          margin-right: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav-bar">
+      <div class="logo-section">
+        <div class="tree-icon"></div>
+        <div class="nav-left">
+          <a href="train.html">模型训练</a>
+          <a href="predict.html">模型预测</a>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <!-- 时间显示部分 - 现在在"联系我们"按钮左侧 -->
+        <div class="time-display">
+          <div class="time-container">
+            <div id="time-hour" class="text">00</div>
+            <div class="time-temp">:</div>
+            <div id="time-minutes" class="text">00</div>
+            <div class="time-temp">:</div>
+            <div id="time-seconds" class="text">00</div>
+          </div>
+          <div class="date-container">
+            <div id="time-year" class="text">2023</div>
+            <div class="time-ltemp">-</div>
+            <div id="time-month" class="text">01</div>
+            <div class="time-ltemp">-</div>
+            <div id="time-day" class="text">01</div>
+          </div>
+        </div>
+
+        <a href="#" class="nav-btn contact-btn">联系我们</a>
+        <a href="login.html" class="nav-btn login-btn">登录</a>
+        <a href="#" class="admin-only">后台用户管理</a>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <!-- AI模型平台部分 -->
+      <section class="ai-platform">
+        <h1>AI模型管理平台</h1>
+        <p>
+          欢迎使用我们的AI模型管理平台，这里提供从模型训练到预测的全流程服务。我们的平台支持多种机器学习框架，提供可视化操作界面，让AI开发变得更加简单高效。
+        </p>
+        <p>
+          采用先进的算法和安全的用户管理系统，确保您的数据和模型安全无忧。管理员用户登录后可进入后台管理界面，进行用户权限管理、系统监控等高级操作。
+        </p>
+        <p>
+          如果您是新用户，请<a
+            href="register.html"
+            style="color: var(--primary-color)"
+            >点击这里注册</a
+          >开始使用我们的服务。
+        </p>
+      </section>
+
+
+    <script>
+      // 模拟管理员登录状态切换
+      document
+        .querySelector(".login-btn")
+        .addEventListener("click", function (e) {
+          if (this.getAttribute("href") === "login.html") return;
+
+          e.preventDefault();
+          document.body.classList.toggle("is-admin");
+          this.textContent = document.body.classList.contains("is-admin")
+            ? "退出"
+            : "登录";
+        });
+
+      // 时间显示功能
+      function updateTime() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+
+        // 更新时间
+        document.getElementById("time-hour").textContent = hours
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("time-minutes").textContent = minutes
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("time-seconds").textContent = seconds
+          .toString()
+          .padStart(2, "0");
+
+        // 更新日期
+        document.getElementById("time-year").textContent = year;
+        document.getElementById("time-month").textContent = month
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("time-day").textContent = day
+          .toString()
+          .padStart(2, "0");
+      }
+
+      // 初始化时间并设置定时器
+      updateTime();
+      setInterval(updateTime, 1000);
+    </script>
+  </body>
+</html>
