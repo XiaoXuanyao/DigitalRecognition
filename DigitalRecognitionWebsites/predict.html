@@ -1,297 +1,597 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>模型预测 - AI平台</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
     <style>
-        :root {
-            --primary-color: #006666;
-            --secondary-color: #004d4d;
-            --text-light: #ffffff;
-            --border-color: #e0e0e0;
-            --result-bg: #f9f9f9;
-            --spacing-base: 1rem;
-        }
+      :root {
+        --primary-color: #006666;
+        --secondary-color: #004d4d;
+        --text-light: #ffffff;
+        --error-color: #dc3545;
+        --border-color: #e0e0e0;
+        --result-bg: #f9f9f9;
+        --spacing-base: 1rem;
+      }
 
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-        }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: var(--spacing-base);
-        }
+      /* 导航栏样式 */
+      .nav-bar {
+        background-color: var(--primary-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem var(--spacing-base);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        color: var(--text-light);
+      }
 
-        .page-header {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border-color);
-        }
+      .logo-section {
+        display: flex;
+        align-items: center;
+      }
 
+      .tree-icon {
+        width: 24px;
+        height: 24px;
+        background-color: var(--text-light);
+        border-radius: 50%;
+        margin-right: 15px;
+      }
+
+      .nav-left {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .nav-left a {
+        color: var(--text-light);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: opacity 0.3s;
+        padding: 0.5rem 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .nav-left a:hover {
+        opacity: 0.8;
+      }
+
+      .nav-right {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .nav-btn {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .contact-btn {
+        background-color: transparent;
+        border: 1px solid var(--text-light);
+        color: var(--text-light);
+      }
+
+      .contact-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .login-btn {
+        background-color: var(--text-light);
+        border: none;
+        color: var(--primary-color);
+      }
+
+      .login-btn:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      /* 主内容区样式 */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--spacing-base);
+        flex: 1;
+      }
+
+      .page-header {
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .prediction-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-base);
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: var(--spacing-base);
+        min-height: 500px;
+      }
+
+      .image-section {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-base);
+      }
+
+      .image-preview {
+        flex: 1;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fafafa;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .image-preview img {
+        max-width: 100%;
+        max-height: 100%;
+        display: none;
+      }
+
+      .image-placeholder {
+        text-align: center;
+        color: #999;
+        padding: 1rem;
+      }
+
+      .upload-btn {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        border: none;
+        padding: 0.75rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        text-align: center;
+        transition: background-color 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .upload-btn:hover {
+        background-color: var(--secondary-color);
+      }
+
+      .result-section {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-base);
+      }
+
+      .prediction-result {
+        flex: 1;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: var(--spacing-base);
+        background-color: var(--result-bg);
+        overflow-y: auto;
+      }
+
+      .result-placeholder {
+        color: #999;
+        text-align: center;
+        margin-top: 50%;
+      }
+
+      .result-item {
+        margin-bottom: 0.5rem;
+        padding: 0.75rem;
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: transform 0.2s;
+      }
+
+      .result-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .result-label {
+        font-weight: 500;
+        color: var(--primary-color);
+        font-size: 1.1rem;
+      }
+
+      .result-confidence {
+        color: #666;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .predict-btn {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        border: none;
+        padding: 0.75rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        font-size: 1rem;
+      }
+
+      .predict-btn:hover {
+        background-color: var(--secondary-color);
+      }
+
+      .predict-btn:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .confidence-bar {
+        height: 8px;
+        background-color: #e0e0e0;
+        border-radius: 4px;
+        margin-top: 8px;
+        overflow: hidden;
+      }
+
+      .confidence-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary-color), #00a3a3);
+        width: 0%;
+        transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+
+      .top-result {
+        background-color: rgba(0, 102, 102, 0.05);
+        border-left: 3px solid var(--primary-color);
+        position: relative;
+      }
+
+      .top-result::after {
+        content: "✓";
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary-color);
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      /* 页脚样式 */
+      .footer {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        padding: 2rem;
+        text-align: center;
+        margin-top: auto;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: var(--text-light);
+        text-decoration: none;
+        transition: opacity 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .footer-links a:hover {
+        opacity: 0.8;
+      }
+
+      .copyright {
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
         .prediction-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-base);
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            padding: var(--spacing-base);
-            min-height: 500px;
+          grid-template-columns: 1fr;
         }
 
-        .image-section {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-base);
+        .nav-left {
+          gap: 1rem;
         }
 
-        .image-preview {
-            flex: 1;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #fafafa;
-            position: relative;
-            overflow: hidden;
+        .nav-right {
+          gap: 0.75rem;
         }
 
-        .image-preview img {
-            max-width: 100%;
-            max-height: 100%;
-            display: none; /* 初始隐藏 */
+        .nav-btn {
+          padding: 0.4rem 0.8rem;
+          font-size: 0.8125rem;
         }
 
-        .image-placeholder {
-            text-align: center;
-            color: #999;
-            padding: 1rem;
+        .footer-links {
+          gap: 1.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-left {
+          flex-direction: column;
+          gap: 0.5rem;
         }
 
-        .upload-btn {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            border: none;
-            padding: 0.75rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            text-align: center;
-            transition: background-color 0.3s;
+        .nav-right {
+          flex-direction: column;
+          gap: 0.5rem;
         }
 
-        .upload-btn:hover {
-            background-color: var(--secondary-color);
+        .footer-links {
+          flex-direction: column;
+          gap: 1rem;
         }
-
-        .result-section {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-base);
-        }
-
-        .prediction-result {
-            flex: 1;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            padding: var(--spacing-base);
-            background-color: var(--result-bg);
-            overflow-y: auto;
-        }
-
-        .result-placeholder {
-            color: #999;
-            text-align: center;
-            margin-top: 50%;
-        }
-
-        .result-item {
-            margin-bottom: 0.5rem;
-            padding: 0.5rem;
-            background-color: white;
-            border-radius: 4px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .result-label {
-            font-weight: 500;
-            color: var(--primary-color);
-        }
-
-        .result-confidence {
-            color: #666;
-            font-size: 0.875rem;
-        }
-
-        .predict-btn {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            border: none;
-            padding: 0.75rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
-
-        .predict-btn:hover {
-            background-color: var(--secondary-color);
-        }
-
-        .predict-btn:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-
-        input[type="file"] {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .prediction-container {
-                grid-template-columns: 1fr;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1 class="page-header">模型预测</h1>
-        
-        <div class="prediction-container">
-            <!-- 左侧图像区域 -->
-            <div class="image-section">
-                <div class="image-preview" id="imagePreview">
-                    <div class="image-placeholder">
-                        <p>图像预览区域</p>
-                        <p>上传的图片将显示在这里</p>
-                    </div>
-                    <img id="previewImage" alt="上传的图片预览">
-                </div>
-                
-                <label for="fileUpload" class="upload-btn">上传图像</label>
-                <input type="file" id="fileUpload" accept="image/*">
-            </div>
-            
-            <!-- 右侧结果区域 -->
-            <div class="result-section">
-                <div class="prediction-result" id="predictionResult">
-                    <div class="result-placeholder">
-                        <p>预测结果将显示在这里</p>
-                        <p>请先上传图像并点击"开始预测"</p>
-                    </div>
-                    <div id="resultContent" style="display: none;"></div>
-                </div>
-                
-                <button class="predict-btn" id="predictBtn" disabled>开始预测</button>
-            </div>
+  </head>
+  <body>
+    <!-- 导航栏 -->
+    <nav class="nav-bar">
+      <div class="logo-section">
+        <div class="tree-icon"></div>
+        <div class="nav-left">
+          <a href="train.html"><i class="fas fa-cogs"></i> 模型训练</a>
+          <a href="predict.html" class="active"
+            ><i class="fas fa-chart-line"></i> 模型预测</a
+          >
         </div>
+      </div>
+
+      <div class="nav-right">
+        <a href="#" class="nav-btn contact-btn"
+          ><i class="fas fa-envelope"></i> 联系我们</a
+        >
+        <a href="login.html" class="nav-btn login-btn"
+          ><i class="fas fa-sign-in-alt"></i> 登录</a
+        >
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1 class="page-header"><i class="fas fa-chart-line"></i> 模型预测</h1>
+
+      <div class="prediction-container">
+        <!-- 左侧图像区域 -->
+        <div class="image-section">
+          <div class="image-preview" id="imagePreview">
+            <div class="image-placeholder">
+              <p><i class="fas fa-cloud-upload-alt fa-2x"></i></p>
+              <p>图像预览区域</p>
+              <p>上传的图片将显示在这里</p>
+            </div>
+          </div>
+
+          <label for="fileUpload" class="upload-btn"
+            ><i class="fas fa-upload"></i> 上传图像</label
+          >
+          <input type="file" id="fileUpload" accept="image/*" />
+        </div>
+
+        <!-- 右侧结果区域 -->
+        <div class="result-section">
+          <div class="prediction-result" id="predictionResult">
+            <div class="result-placeholder">
+              <p><i class="fas fa-chart-bar fa-2x"></i></p>
+              <p>预测结果将显示在这里</p>
+              <p>请先上传图像并点击"开始预测"</p>
+            </div>
+            <div id="resultContent" style="display: none"></div>
+          </div>
+
+          <button class="predict-btn" id="predictBtn" disabled>
+            <i class="fas fa-play"></i> 开始预测
+          </button>
+        </div>
+      </div>
     </div>
 
-    <script src="lib.js"></script>
-    <script>
-        // 获取DOM元素
-        const fileUpload = document.getElementById('fileUpload');
-        const previewImage = document.getElementById('previewImage');
-        const imagePreview = document.getElementById('imagePreview');
-        const imagePlaceholder = imagePreview.querySelector('.image-placeholder');
-        const predictBtn = document.getElementById('predictBtn');
-        const resultContent = document.getElementById('resultContent');
-        const resultPlaceholder = document.querySelector('.result-placeholder');
-        
-        // 文件上传处理
-        fileUpload.addEventListener('change', function(e) {
-            if (e.target.files.length > 0) {
-                const file = e.target.files[0];
-                const fileName = file.name;
-                const reader = new FileReader();
-                
-                reader.onload = function(event) {
-                    // 显示上传的图片
-                    previewImage.src = event.target.result;
-                    previewImage.style.display = 'block';
-                    imagePlaceholder.style.display = 'none';
-                    
-                    // 启用预测按钮
-                    predictBtn.disabled = false;
-                    
-                    // 清空之前的预测结果
-                    resultContent.style.display = 'none';
-                    resultContent.innerHTML = '';
-                    resultPlaceholder.style.display = 'block';
+    <!-- 页脚 -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#"><i class="fas fa-info-circle"></i> 关于我们</a>
+          <a href="#"><i class="fas fa-file-contract"></i> 服务条款</a>
+          <a href="#"><i class="fas fa-lock"></i> 隐私政策</a>
+          <a href="#"><i class="fas fa-question-circle"></i> 帮助中心</a>
+          <a href="#"><i class="fas fa-envelope"></i> 联系我们</a>
+        </div>
+        <div class="copyright">© 2026 AI模型管理平台 版权所有</div>
+      </div>
+    </footer>
 
-                    const content = event.target.result;
-                    requireService("uploadimg/test", {
-                        filename: fileName,
-                        imgdata: content.split(',')[1]
-                    }, function(respMes) {
-                        if (respMes == "Result: OK") {
-                            window.fileName = fileName;
-                            console.log("OK");
-                        }
-                    })
-                };
-                
-                reader.readAsDataURL(file);
-            }
-        });
-        
-        // 预测按钮点击事件
-        predictBtn.addEventListener('click', function() {
-            if (fileUpload.files.length === 0) return;
-            
-            // 预测
-            predictBtn.disabled = true;
-            predictBtn.textContent = '预测中...';
-            requireService("test", {
-                filename: window.fileName
-            }, function(respMes) {
-                mes = JSON.parse(respMes);
-                if (mes["Result"] == "OK") {
-                    // 生成模拟预测结果
-                    const res = [ ];
-                    for (let i = 0; i < 10; i++) {
-                        res.push({
-                            label: String(i),
-                            confidence: mes["Cfds"][i]
-                        });
-                    }
-                    postprocess(res);
-                } else {
-                    console.error("test failed:", mes["Result"]);
-                }
-            })
-            
-            function postprocess(result) {
-                // 按置信度排序
-                result.sort((a, b) => b.confidence - a.confidence);
-                
-                // 显示预测结果
-                resultContent.innerHTML = '';
-                result.forEach(result => {
-                    const item = document.createElement('div');
-                    item.className = 'result-item';
-                    item.innerHTML = `
-                        <div class="result-label">${result.label}</div>
-                        <div class="result-confidence">置信度: ${(result.confidence * 100).toFixed(2)}%</div>
+    <script>
+      // 获取DOM元素
+      const fileUpload = document.getElementById("fileUpload");
+      const previewImage = document.getElementById("previewImage");
+      const imagePreview = document.getElementById("imagePreview");
+      const imagePlaceholder = imagePreview.querySelector(".image-placeholder");
+      const predictBtn = document.getElementById("predictBtn");
+      const resultContent = document.getElementById("resultContent");
+      const resultPlaceholder = document.querySelector(".result-placeholder");
+
+      // 文件上传处理
+      fileUpload.addEventListener("change", function (e) {
+        if (e.target.files.length > 0) {
+          const file = e.target.files[0];
+          const fileName = file.name;
+          const reader = new FileReader();
+
+          reader.onload = function (event) {
+            // 显示上传的图片
+            previewImage.src = event.target.result;
+            previewImage.style.display = "block";
+            imagePlaceholder.style.display = "none";
+
+            // 启用预测按钮
+            predictBtn.disabled = false;
+
+            // 清空之前的预测结果
+            resultContent.style.display = "none";
+            resultContent.innerHTML = "";
+            resultPlaceholder.style.display = "block";
+
+            // 模拟上传到服务器
+            console.log(`模拟上传文件: ${fileName}`);
+          };
+
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // 预测按钮点击事件
+      predictBtn.addEventListener("click", function () {
+        if (fileUpload.files.length === 0) return;
+
+        // 预测
+        predictBtn.disabled = true;
+        predictBtn.innerHTML = '<i class="fas fa-sync fa-spin"></i> 预测中...';
+
+        // 模拟API请求延迟
+        setTimeout(() => {
+          // 生成预测结果 (10个数字类别)
+          const mockResults = [];
+          for (let i = 0; i < 10; i++) {
+            // 生成随机置信度，但确保总和接近1
+            const confidence =
+              i === 0 ? Math.random() * 0.3 + 0.5 : (Math.random() * 0.5) / 9;
+            mockResults.push({
+              label: String(i),
+              confidence: confidence,
+            });
+          }
+
+          // 调整置信度使总和为1
+          const total = mockResults.reduce(
+            (sum, item) => sum + item.confidence,
+            0
+          );
+          mockResults.forEach((item) => {
+            item.confidence = (item.confidence / total).toFixed(4);
+          });
+
+          // 按置信度排序
+          mockResults.sort((a, b) => b.confidence - a.confidence);
+
+          // 显示预测结果
+          resultContent.innerHTML = "";
+          mockResults.forEach((result, index) => {
+            const item = document.createElement("div");
+            item.className =
+              index === 0 ? "result-item top-result" : "result-item";
+            item.innerHTML = `
+                        <div style="flex: 1;">
+                            <div class="result-label">数字 ${result.label}</div>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" data-confidence="${
+                                  result.confidence
+                                }"></div>
+                            </div>
+                        </div>
+                        <div class="result-confidence">${(
+                          result.confidence * 100
+                        ).toFixed(2)}%</div>
                     `;
-                    resultContent.appendChild(item);
-                });
-                
-                // 更新UI
-                resultContent.style.display = 'block';
-                resultPlaceholder.style.display = 'none';
-                predictBtn.textContent = '开始预测';
-                predictBtn.disabled = false;
-            }
+            resultContent.appendChild(item);
+          });
+
+          // 更新UI
+          resultContent.style.display = "block";
+          resultPlaceholder.style.display = "none";
+          predictBtn.innerHTML = '<i class="fas fa-play"></i> 开始预测';
+          predictBtn.disabled = false;
+
+          // 动画显示置信度条
+          setTimeout(() => {
+            document.querySelectorAll(".confidence-fill").forEach((bar) => {
+              const confidence = parseFloat(
+                bar.getAttribute("data-confidence")
+              );
+              bar.style.width = `${confidence * 100}%`;
+            });
+          }, 100);
+        }, 1500);
+      });
+
+      // 导航栏按钮交互效果
+      document.querySelectorAll(".nav-btn").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          // 添加点击效果
+          this.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            this.style.transform = "";
+          }, 200);
+
+          // 如果是联系支持按钮，阻止默认行为并显示消息
+          if (this.querySelector(".fa-envelope")) {
+            e.preventDefault();
+            alert("请联系我们的支持团队: support@aimodelplatform.com");
+          }
         });
+      });
     </script>
-</body>
+  </body>
 </html>

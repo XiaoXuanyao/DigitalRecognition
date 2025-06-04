@@ -3,6 +3,8 @@ import time
 import os
 import threading
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+
 from Debug import *
 from Socket import *
 from DRModel import DRModel
@@ -19,9 +21,9 @@ try:
     model.readmodel()
 except:
     TrainModel.train(model, "../datasets/mnist", {
-                    "epochs": 100,
-                    "batch_size": 128
-                    })
+        "epochs": 100,
+        "batch_size": 32
+        })
 Service.model = model
 
 def serverfunc():

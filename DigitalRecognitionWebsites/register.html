@@ -1,302 +1,336 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>用户注册 - 网站名称</title>
-    <style>
-      :root {
-        --primary-color: #006666;
-        --secondary-color: #004d4d;
-        --text-light: #ffffff;
-        --error-color: #dc3545;
-        --spacing-base: 1rem;
-      }
-
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        min-height: 100vh;
-        background: var(--primary-color);
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          sans-serif;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .container {
-        width: 90%;
-        max-width: 500px;
-        margin: 2rem auto;
-        padding: 0 var(--spacing-base);
-      }
-
-      .page-header {
-        color: var(--text-light);
-        text-align: center;
-        margin-bottom: 2rem;
-      }
-
-      .auth-form {
-        background: var(--text-light);
-        padding: 2rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        position: relative;
-      }
-
-      .form-group {
-        margin-bottom: 1.5rem;
-        position: relative;
-      }
-
-      .form-label {
-        display: block;
-        margin-bottom: 0.5rem;
-        color: var(--secondary-color);
-        font-weight: 600;
-      }
-
-      .required-marker {
-        color: var(--error-color);
-        margin-right: 0.3rem;
-      }
-
-      .form-control {
-        width: 100%;
-        padding: 0.75rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 1rem;
-        transition: border-color 0.3s ease;
-      }
-
-      .form-control:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 2px rgba(0, 102, 102, 0.1);
-      }
-
-      .agreement {
-        display: flex;
-        align-items: center;
-        margin: 1.5rem 0;
-      }
-
-      .agreement input {
-        margin-right: 0.5rem;
-      }
-
-      .submit-btn {
-        width: 100%;
-        padding: 0.75rem;
-        background-color: var(--primary-color);
-        color: var(--text-light);
-        border: none;
-        border-radius: 4px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      .submit-btn:hover {
-        background-color: var(--secondary-color);
-      }
-
-      .form-footer {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 1.5rem;
-      }
-
-      .form-link {
-        color: var(--primary-color);
-        font-weight: 500;
-        transition: color 0.3s ease;
-      }
-
-      .form-link:hover {
-        color: var(--secondary-color);
-      }
-
-      @media (max-width: 480px) {
-        .container {
-          width: 95%;
-          padding: 0;
-        }
-
-        .auth-form {
-          padding: 1.5rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main class="container">
-      <h1 class="page-header">新用户注册</h1>
-      <form class="auth-form" id="registerForm">
-        <div class="form-group">
-          <label class="form-label" for="username">
-            <span class="required-marker">*</span>用户名
-          </label>
-          <input
-            type="text"
-            id="username"
-            class="form-control"
-            placeholder="请输入用户名"
-            required
-            autocomplete="username"
-          />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="phone">
-            <span class="required-marker">*</span>手机号
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            class="form-control"
-            placeholder="请输入手机号"
-            required
-            autocomplete="tel"
-          />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="password">
-            <span class="required-marker">*</span>登录密码
-          </label>
-          <input
-            type="password"
-            id="password"
-            class="form-control"
-            placeholder="请输入密码"
-            required
-            autocomplete="new-password"
-          />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="confirmPassword">
-            <span class="required-marker">*</span>确认密码
-          </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            class="form-control"
-            placeholder="请再次输入密码"
-            required
-            autocomplete="new-password"
-          />
-        </div>
-
-        <div class="agreement">
-          <input type="checkbox" id="agreement" required />
-          <label for="agreement"
-            >我已阅读并同意<a href="#" style="color: var(--primary-color)"
-              >《用户注册协议》</a
-            ></label
-          >
-        </div>
-
-        <button type="submit" class="submit-btn">同意协议并注册</button>
-
-        <div class="form-footer">
-          <a href="index.html" class="form-link">返回首页</a>
-          <a href="login.html" class="form-link">已有账号？立即登录</a>
-        </div>
-      </form>
-    </main>
-
-    <script src="lib.js"></script>
-    <script>
-      (function () {
-        const form = document.getElementById("registerForm");
-        const usernameInput = document.getElementById("username");
-        const phoneInput = document.getElementById("phone");
-        const passwordInput = document.getElementById("password");
-        const confirmPasswordInput = document.getElementById("confirmPassword");
-        const agreementInput = document.getElementById("agreement");
-
-        // 实时校验函数
-        function validateField(fieldId) {
-          clearError(fieldId);
-          let value = document.getElementById(fieldId).value.trim();
-          if (fieldId === "username") {
-            if (!value) showError(fieldId, "请输入用户名");
-          }
-          if (fieldId === "phone") {
-            if (!value) showError(fieldId, "请输入手机号");
-            else if (!/^1[3-9]\d{9}$/.test(value)) showError(fieldId, "请输入正确的手机号");
-          }
-          if (fieldId === "password") {
-            if (!value) showError(fieldId, "请输入密码");
-            else if (value.length < 6) showError(fieldId, "密码长度不能少于6位");
-          }
-          if (fieldId === "confirmPassword" && confirmPasswordInput.value.trim()) {
-            if (!value) {
-              showError(fieldId, "请再次输入密码");
-            } else if (value !== passwordInput.value.trim()) {
-              showError(fieldId, "两次输入的密码不一致");
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>用户注册 - 网站名称</title>
+        <style>
+            :root {
+                --primary-color: #006666;
+                --secondary-color: #004d4d;
+                --text-light: #ffffff;
+                --error-color: #dc3545;
+                --spacing-base: 1rem;
             }
-          }
-        }
 
-        // 绑定 input 事件
-        usernameInput.addEventListener("input", () => validateField("username"));
-        phoneInput.addEventListener("input", () => validateField("phone"));
-        passwordInput.addEventListener("input", () => {
-          validateField("password");
-          validateField("confirmPassword"); // 密码变动时也校验确认密码
-        });
-        confirmPasswordInput.addEventListener("input", () => validateField("confirmPassword"));
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
 
-        form.addEventListener("submit", async function (event) {
-          event.preventDefault();
+            body {
+                min-height: 100vh;
+                background: var(--primary-color);
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
 
-          const username = await sha256(document.getElementById("username").value.trim());
-          const phone = await sha256(document.getElementById("phone").value.trim());
-          const password = await sha256(document.getElementById("password").value.trim());
+            .container {
+                width: 90%;
+                max-width: 500px;
+                margin: 2rem auto;
+                padding: 0 var(--spacing-base);
+            }
 
-          requireService("register", {
-            "username": username,
-            "password": password,
-            "phone": phone
-          }, function (respMes) {
-            if (respMes == "Result: OK") console.log("OK");
-          });
-        });
+            .page-header {
+                color: var(--text-light);
+                text-align: center;
+                margin-bottom: 2rem;
+            }
 
-        function showError(fieldId, message) {
-          const field = document.getElementById(fieldId);
-          const errorEl = document.createElement("div");
-          errorEl.className = "error-message";
-          errorEl.textContent = message;
-          errorEl.style.color = "var(--error-color)";
-          errorEl.style.fontSize = "0.875rem";
-          errorEl.style.marginTop = "0.25rem";
+            .auth-form {
+                background: var(--text-light);
+                padding: 2rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                position: relative;
+            }
 
-          field.parentNode.appendChild(errorEl);
-          field.style.borderColor = "var(--error-color)";
-        }
+            .form-group {
+                margin-bottom: 0.25rem;
+                position: relative;
+            }
 
-        function clearError() {
-          const errorMessages = document.querySelectorAll(".error-message");
-          errorMessages.forEach((el) => el.remove());
+            .form-label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: var(--secondary-color);
+                font-weight: 600;
+            }
 
-          const inputs = document.querySelectorAll(".form-control");
-          inputs.forEach((input) => {
-            input.style.borderColor = "#ddd";
-          });
-        }
-      })();
-    </script>
-  </body>
+            .required-marker {
+                color: var(--error-color);
+                margin-right: 0.3rem;
+            }
+
+            .form-control {
+                width: 100%;
+                padding: 0.75rem;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 1rem;
+                transition: border-color 0.3s ease;
+            }
+
+            .form-control:focus {
+                outline: none;
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 2px rgba(0, 102, 102, 0.1);
+            }
+
+            .agreement {
+                display: flex;
+                align-items: center;
+                margin: 1.5rem 0;
+            }
+
+            .agreement input {
+                margin-right: 0.5rem;
+            }
+
+            .submit-btn {
+                width: 100%;
+                padding: 0.75rem;
+                background-color: var(--primary-color);
+                color: var(--text-light);
+                border: none;
+                border-radius: 4px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .submit-btn:hover {
+                background-color: var(--secondary-color);
+            }
+
+            .submit-btn:disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
+
+            .form-footer {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 1.5rem;
+            }
+
+            .form-link {
+                color: var(--primary-color);
+                font-weight: 500;
+                transition: color 0.3s ease;
+            }
+
+            .form-link:hover {
+                color: var(--secondary-color);
+            }
+
+            .error-message {
+                color: var(--error-color);
+                font-size: 0.875rem;
+                margin-top: 0.5rem;
+                visibility: hidden;
+            }
+
+            @media (max-width: 480px) {
+                .container {
+                    width: 95%;
+                    padding: 0;
+                }
+
+                .auth-form {
+                    padding: 1.5rem;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <main class="container">
+            <h1 class="page-header">新用户注册</h1>
+            <form class="auth-form" id="registerForm">
+                <div class="form-group">
+                    <label class="form-label" for="username"> <span class="required-marker">*</span>用户名 </label>
+                    <input
+                        type="text"
+                        id="username"
+                        class="form-control"
+                        placeholder="请输入用户名"
+                        required
+                        autocomplete="username"
+                    />
+                    <div class="error-message" id="username-error">错误</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="phone"> <span class="required-marker">*</span>手机号 </label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        class="form-control"
+                        placeholder="请输入手机号"
+                        required
+                        autocomplete="tel"
+                    />
+                    <div class="error-message" id="phone-error">错误</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password"> <span class="required-marker">*</span>登录密码 </label>
+                    <input
+                        type="password"
+                        id="password"
+                        class="form-control"
+                        placeholder="请输入密码"
+                        required
+                        autocomplete="new-password"
+                    />
+                    <div class="error-message" id="password-error">错误</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="confirmPassword">
+                        <span class="required-marker">*</span>确认密码
+                    </label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        class="form-control"
+                        placeholder="请再次输入密码"
+                        required
+                        autocomplete="new-password"
+                    />
+                    <div class="error-message" id="confirmPassword-error">错误</div>
+                </div>
+
+                <div class="agreement">
+                    <input type="checkbox" id="agreement" required />
+                    <label for="agreement"
+                        >我已阅读并同意<a href="#" style="color: var(--primary-color)">《用户注册协议》</a></label
+                    >
+                    <div class="error-message" id="agreement-error">错误</div>
+                </div>
+
+                <button type="submit" class="submit-btn" disabled="true">同意协议并注册</button>
+
+                <div class="form-footer">
+                    <a href="index.html" class="form-link">返回首页</a>
+                    <a href="login.html" class="form-link">已有账号？立即登录</a>
+                </div>
+            </form>
+        </main>
+
+        <script src="lib.js"></script>
+        <script>
+            (function () {
+                const form = document.getElementById("registerForm");
+                const usernameInput = document.getElementById("username");
+                const phoneInput = document.getElementById("phone");
+                const passwordInput = document.getElementById("password");
+                const confirmPasswordInput = document.getElementById("confirmPassword");
+                const agreementInput = document.getElementById("agreement");
+                window.checkOK = { };
+                window.checkOK["username"] = false;
+                window.checkOK["phone"] = false;
+                window.checkOK["password"] = false;
+                window.checkOK["confirmPassword"] = false;
+
+                // 实时校验函数
+                function validateField(fieldId) {
+                    clearError(fieldId);
+                    let value = document.getElementById(fieldId).value.trim();
+                    if (fieldId === "username") {
+                        if (!value) showError(fieldId, "请输入用户名");
+                    }
+                    if (fieldId === "phone") {
+                        if (!value) showError(fieldId, "请输入手机号");
+                        else if (!/^1[3-9]\d{9}$/.test(value)) showError(fieldId, "请输入正确的手机号");
+                    }
+                    if (fieldId === "password") {
+                        if (!value) showError(fieldId, "请输入密码");
+                        else if (value.length < 6) showError(fieldId, "密码长度不能少于6位");
+                    }
+                    if (fieldId === "confirmPassword") {
+                        if (!value) {
+                            showError(fieldId, "请再次输入密码");
+                        } else if (value !== passwordInput.value.trim()) {
+                            showError(fieldId, "两次输入的密码不一致");
+                        }
+                    }
+                }
+
+                // 绑定 input 事件
+                usernameInput.addEventListener("input", () => validateField("username"));
+                phoneInput.addEventListener("input", () => validateField("phone"));
+                passwordInput.addEventListener("input", () => {
+                    validateField("password");
+                    validateField("confirmPassword"); // 密码变动时也校验确认密码
+                });
+                confirmPasswordInput.addEventListener("input", () => validateField("confirmPassword"));
+                agreementInput.addEventListener("input", () => validateField("agreement"));
+
+                form.addEventListener("submit", async function (event) {
+                    event.preventDefault();
+
+                    const username = await sha256(document.getElementById("username").value.trim());
+                    const phone = await sha256(document.getElementById("phone").value.trim());
+                    const password = await sha256(document.getElementById("password").value.trim());
+
+                    requireService(
+                        "register",
+                        {
+                            username: username,
+                            password: password,
+                            phone: phone,
+                        },
+                        function (respMes) {
+                            console.log(respMes);
+                            if (respMes == "Result: OK") {
+                                sessionStorage.setItem("username", username);
+                                sessionStorage.setItem("logintTime", Date.now());
+                                location.href = "index.html";
+                            }
+                            else if (respMes == "Result: User already exist"){
+                                alert("用户已存在，请更换用户名")
+                            }
+                            else {
+                                alert("服务器错误，请稍后再试");
+                            }
+                        }
+                    );
+                });
+
+                function showError(fieldId, message) {
+                    window.checkOK[fieldId] = false;
+                    document.querySelector('.submit-btn').disabled = true; // 禁用表单提交按钮
+                    const field = document.getElementById(fieldId);
+                    const errorEl = document.getElementById(fieldId + "-error");
+                    errorEl.textContent = message;
+                    errorEl.style.visibility = "visible";
+                    field.style.borderColor = "var(--error-color)";
+                }
+
+                function clearError(fieldId) {
+                    window.checkOK[fieldId] = true;
+                    if (window.checkOK["username"] && window.checkOK["phone"] &&
+                        window.checkOK["password"] && window.checkOK["confirmPassword"] &&
+                        agreementInput.checked
+                    ) {
+                        document.querySelector('.submit-btn').disabled = false; // 启用表单提交按钮
+                    }
+                    else{
+                        document.querySelector('.submit-btn').disabled = true;
+                    }
+                    const field = document.getElementById(fieldId);
+                    const errorEl = document.getElementById(fieldId + "-error");
+                    errorEl.style.visibility = "hidden";
+                    field.style.borderColor = "#ddd";
+                }
+            })();
+        </script>
+    </body>
 </html>

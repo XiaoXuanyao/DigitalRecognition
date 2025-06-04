@@ -71,6 +71,9 @@
         font-size: 1rem;
         transition: opacity 0.3s;
         padding: 0.5rem 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
       }
 
       .nav-left a:hover {
@@ -91,6 +94,9 @@
         cursor: pointer;
         transition: all 0.3s;
         text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
       }
 
       .contact-btn {
@@ -305,19 +311,23 @@
     </style>
   </head>
   <body>
-    <!-- 导航栏 -->
+    <!-- 导航栏 - 已修改为与训练页面相同的导航栏 -->
     <nav class="nav-bar">
       <div class="logo-section">
         <div class="tree-icon"></div>
         <div class="nav-left">
-          <a href="train.html">模型训练</a>
-          <a href="predict.html">模型预测</a>
+          <a href="train.html"><i class="fas fa-cogs"></i> 模型训练</a>
+          <a href="predict.html"><i class="fas fa-chart-line"></i> 模型预测</a>
         </div>
       </div>
 
       <div class="nav-right">
-        <a href="#" class="nav-btn contact-btn">联系我们</a>
-        <a href="login.html" class="nav-btn login-btn">登录</a>
+        <a href="#" class="nav-btn contact-btn"
+          ><i class="fas fa-envelope"></i> 联系我们</a
+        >
+        <a href="login.html" class="nav-btn login-btn"
+          ><i class="fas fa-sign-in-alt"></i> 登录</a
+        >
       </div>
     </nav>
 
@@ -337,7 +347,7 @@
       </p>
 
       <div class="action-buttons">
-        <a href="main.html" class="btn btn-primary">
+        <a href="index.html" class="btn btn-primary">
           <i class="fas fa-home"></i> 返回首页
         </a>
         <a href="train.html" class="btn btn-secondary">
@@ -362,7 +372,7 @@
           <a href="#">帮助中心</a>
           <a href="#">联系我们</a>
         </div>
-        <div class="copyright">© 2023 AI模型管理平台 版权所有</div>
+        <div class="copyright">© 2026 AI模型管理平台 版权所有</div>
       </div>
     </footer>
 

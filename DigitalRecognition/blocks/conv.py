@@ -24,8 +24,7 @@ class Conv2D(models.Model):
             'c': self.c,
             'k': self.k,
             's': self.s,
-            'p': self.p,
-            'g': self.g
+            'p': self.p
         })
         return config
 

@@ -1,316 +1,661 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>综合展示平台</title>
-    <style>
-      /* 全局样式 */
-      :root {
-        --primary-color: #006666;
-        --secondary-color: #004d4d;
-        --text-light: #ffffff;
-        --error-color: #dc3545;
-        --spacing-base: 1rem;
-      }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AI模型管理平台</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <style>
+            /* 全局样式 */
+            :root {
+                --primary-color: #006666;
+                --secondary-color: #004d4d;
+                --text-light: #ffffff;
+                --error-color: #dc3545;
+                --spacing-base: 1rem;
+                --border-color: #e0e0e0;
+            }
 
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          sans-serif;
-        background-color: #f5f5f5;
-      }
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
 
-      /* 导航栏样式 */
-      .nav-bar {
-        background-color: var(--primary-color);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.75rem var(--spacing-base);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        color: var(--text-light);
-      }
+            body {
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                color: #333;
+                line-height: 1.6;
+            }
 
-      .logo-section {
-        display: flex;
-        align-items: center;
-      }
+            /* 导航栏样式 */
+            .nav-bar {
+                background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.75rem var(--spacing-base);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                color: var(--text-light);
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
 
-      .tree-icon {
-        width: 24px;
-        height: 24px;
-        background-color: var(--text-light);
-        border-radius: 50%;
-        margin-right: 15px;
-      }
+            .logo-section {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
 
-      .nav-left {
-        display: flex;
-        gap: 1.5rem;
-      }
+            .tree-icon {
+                width: 40px;
+                height: 40px;
+                background-color: var(--text-light);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--primary-color);
+                font-size: 18px;
+                font-weight: bold;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
 
-      .nav-left a {
-        color: var(--text-light);
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 1rem;
-        transition: opacity 0.3s;
-        padding: 0.5rem 0;
-      }
+            .nav-left {
+                display: flex;
+                gap: 1.5rem;
+            }
 
-      .nav-left a:hover {
-        opacity: 0.8;
-      }
+            .nav-left a {
+                color: var(--text-light);
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 1.05rem;
+                transition: all 0.3s;
+                padding: 0.6rem 1rem;
+                border-radius: 30px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
 
-      .nav-right {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-      }
+            .nav-left a:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
+            }
 
-      .nav-btn {
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        font-size: 0.875rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s;
-        text-decoration: none;
-      }
+            .nav-right {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+            }
 
-      .contact-btn {
-        background-color: transparent;
-        border: 1px solid var(--text-light);
-        color: var(--text-light);
-      }
+            .nav-btn {
+                padding: 0.6rem 1.2rem;
+                border-radius: 30px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
 
-      .contact-btn:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-      }
+            .contact-btn {
+                background-color: transparent;
+                border: 2px solid var(--text-light);
+                color: var(--text-light);
+            }
 
-      .login-btn {
-        background-color: var(--text-light);
-        border: none;
-        color: var(--primary-color);
-      }
+            .contact-btn:hover {
+                background-color: rgba(255, 255, 255, 0.15);
+                transform: translateY(-2px);
+            }
 
-      .login-btn:hover {
-        background-color: rgba(255, 255, 255, 0.9);
-      }
+            .login-btn {
+                background-color: var(--text-light);
+                border: 2px solid var(--text-light);
+                color: var(--primary-color);
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
 
-      .admin-only {
-        display: none;
-        color: var(--text-light);
-        font-size: 0.875rem;
-        text-decoration: none;
-      }
+            .login-btn:hover {
+                background-color: rgba(255, 255, 255, 0.9);
+                transform: translateY(-2px);
+            }
 
-      .is-admin .admin-only {
-        display: block;
-      }
+            .admin-only {
+                display: none;
+                color: var(--text-light);
+                font-size: 0.9rem;
+                text-decoration: none;
+                padding: 0.6rem 1.2rem;
+                border-radius: 30px;
+                transition: all 0.3s;
+                background: rgba(255, 255, 255, 0.15);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
 
-      /* 时间显示部分 - 在"联系我们"按钮左侧 */
-      .time-display {
-        color: var(--text-light);
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
-        margin-right: 1rem;
-      }
+            .admin-only:hover {
+                background-color: rgba(255, 255, 255, 0.25);
+                transform: translateY(-2px);
+            }
 
-      .time-display .time-container {
-        display: flex;
-        align-items: center;
-      }
+            .is-admin .admin-only {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
 
-      .time-display .text {
-        font-weight: bold;
-      }
+            /* 时间显示部分 */
+            .time-display {
+                color: var(--text-light);
+                font-size: 0.95rem;
+                display: flex;
+                align-items: center;
+                gap: 0.3rem;
+                margin-right: 1rem;
+                background: rgba(255, 255, 255, 0.15);
+                padding: 0.5rem 1rem;
+                border-radius: 30px;
+                font-weight: 500;
+            }
 
-      .time-display .time-temp {
-        margin: 0 0.1rem;
-      }
+            .time-display .time-container {
+                display: flex;
+                align-items: center;
+            }
 
-      .time-display .date-container {
-        display: flex;
-        align-items: center;
-        margin-left: 0.5rem;
-      }
+            .time-display .text {
+                font-weight: bold;
+                min-width: 22px;
+                text-align: center;
+            }
 
-      .time-display .time-ltemp {
-        margin: 0 0.1rem;
-      }
+            .time-display .time-temp {
+                margin: 0 0.1rem;
+            }
 
-      /* 主内容区域样式 */
-      .main-content {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        padding: 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
+            .time-display .date-container {
+                display: flex;
+                align-items: center;
+                margin-left: 0.8rem;
+            }
 
-      /* AI模型平台部分 */
-      .ai-platform {
-        background-color: white;
-        border-radius: 8px;
-        padding: 2rem;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        color: #333;
-      }
+            .time-display .time-ltemp {
+                margin: 0 0.1rem;
+            }
 
-      .ai-platform h1 {
-        color: var(--primary-color);
-        margin-bottom: 1.5rem;
-      }
+            /* 主内容区域样式 */
+            .main-content {
+                display: flex;
+                flex-direction: column;
+                gap: 2.5rem;
+                padding: 3rem 2rem;
+                max-width: 1200px;
+                margin: 0 auto;
+                flex: 1;
+                width: 100%;
+            }
 
-      .ai-platform p {
-        color: #555;
-        line-height: 1.6;
-        font-size: 1.1rem;
-        margin-bottom: 1rem;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-      }
+            /* AI模型平台部分 */
+            .ai-platform {
+                background: linear-gradient(135deg, #ffffff 0%, #f8fbfd 100%);
+                border-radius: 16px;
+                padding: 3rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+                text-align: center;
+                color: #333;
+                position: relative;
+                overflow: hidden;
+            }
 
+            .ai-platform::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 5px;
+                background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            }
 
-      @media (max-width: 768px) {
-        .nav-left {
-          gap: 1rem;
-        }
+            .ai-platform h1 {
+                color: var(--primary-color);
+                margin-bottom: 1.8rem;
+                font-size: 2.5rem;
+                position: relative;
+                display: inline-block;
+            }
 
-        .nav-right {
-          gap: 0.75rem;
-        }
+            .ai-platform h1::after {
+                content: "";
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80px;
+                height: 4px;
+                background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                border-radius: 2px;
+            }
 
-        .nav-btn {
-          padding: 0.4rem 0.8rem;
-          font-size: 0.8125rem;
-        }
+            .ai-platform p {
+                color: #555;
+                line-height: 1.8;
+                font-size: 1.15rem;
+                margin-bottom: 1.5rem;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+            }
 
-        .onepiece-container {
-          height: 500px;
-        }
+            .register-link {
+                color: var(--primary-color);
+                font-weight: 700;
+                text-decoration: none;
+                position: relative;
+                transition: all 0.3s;
+            }
 
-        .onepiece-container ul .big-img {
-          height: 350px;
-        }
+            .register-link:hover {
+                color: var(--secondary-color);
+                text-decoration: underline;
+            }
 
-        .time-display {
-          font-size: 0.8rem;
-          margin-right: 0.5rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="nav-bar">
-      <div class="logo-section">
-        <div class="tree-icon"></div>
-        <div class="nav-left">
-          <a href="train.html">模型训练</a>
-          <a href="predict.html">模型预测</a>
-        </div>
-      </div>
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+                margin-top: 3rem;
+            }
 
-      <div class="nav-right">
-        <!-- 时间显示部分 - 现在在"联系我们"按钮左侧 -->
-        <div class="time-display">
-          <div class="time-container">
-            <div id="time-hour" class="text">00</div>
-            <div class="time-temp">:</div>
-            <div id="time-minutes" class="text">00</div>
-            <div class="time-temp">:</div>
-            <div id="time-seconds" class="text">00</div>
-          </div>
-          <div class="date-container">
-            <div id="time-year" class="text">2023</div>
-            <div class="time-ltemp">-</div>
-            <div id="time-month" class="text">01</div>
-            <div class="time-ltemp">-</div>
-            <div id="time-day" class="text">01</div>
-          </div>
-        </div>
+            .feature-card {
+                background: #ffffff;
+                border-radius: 12px;
+                padding: 2rem;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+                text-align: center;
+                transition: all 0.4s ease;
+                border: 1px solid #eef2f6;
+                position: relative;
+                overflow: hidden;
+            }
 
-        <a href="#" class="nav-btn contact-btn">联系我们</a>
-        <a href="login.html" class="nav-btn login-btn">登录</a>
-        <a href="#" class="admin-only">后台用户管理</a>
-      </div>
-    </nav>
+            .feature-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.4s ease;
+            }
 
-    <main class="main-content">
-      <!-- AI模型平台部分 -->
-      <section class="ai-platform">
-        <h1>AI模型管理平台</h1>
-        <p>
-          欢迎使用我们的AI模型管理平台，这里提供从模型训练到预测的全流程服务。我们的平台支持多种机器学习框架，提供可视化操作界面，让AI开发变得更加简单高效。
-        </p>
-        <p>
-          采用先进的算法和安全的用户管理系统，确保您的数据和模型安全无忧。管理员用户登录后可进入后台管理界面，进行用户权限管理、系统监控等高级操作。
-        </p>
-        <p>
-          如果您是新用户，请<a
-            href="register.html"
-            style="color: var(--primary-color)"
-            >点击这里注册</a
-          >开始使用我们的服务。
-        </p>
-      </section>
+            .feature-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+            }
 
+            .feature-card:hover::before {
+                transform: scaleX(1);
+            }
 
-    <script>
-      // 模拟管理员登录状态切换
-      document
-        .querySelector(".login-btn")
-        .addEventListener("click", function (e) {
-          if (this.getAttribute("href") === "login.html") return;
+            .feature-card i {
+                font-size: 3.5rem;
+                color: var(--primary-color);
+                margin-bottom: 1.5rem;
+                background: rgba(0, 102, 102, 0.08);
+                width: 90px;
+                height: 90px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                margin-left: auto;
+                margin-right: auto;
+                transition: all 0.4s;
+            }
 
-          e.preventDefault();
-          document.body.classList.toggle("is-admin");
-          this.textContent = document.body.classList.contains("is-admin")
-            ? "退出"
-            : "登录";
-        });
+            .feature-card:hover i {
+                background: rgba(0, 102, 102, 0.15);
+                transform: scale(1.1);
+            }
 
-      // 时间显示功能
-      function updateTime() {
-        const now = new Date();
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
-        const seconds = now.getSeconds();
-        const year = now.getFullYear();
-        const month = now.getMonth() + 1;
-        const day = now.getDate();
+            .feature-card h3 {
+                color: var(--primary-color);
+                margin-bottom: 1rem;
+                font-size: 1.5rem;
+            }
 
-        // 更新时间
-        document.getElementById("time-hour").textContent = hours
-          .toString()
-          .padStart(2, "0");
-        document.getElementById("time-minutes").textContent = minutes
-          .toString()
-          .padStart(2, "0");
-        document.getElementById("time-seconds").textContent = seconds
-          .toString()
-          .padStart(2, "0");
+            .feature-card p {
+                color: #666;
+                font-size: 1rem;
+                margin: 0;
+            }
 
-        // 更新日期
-        document.getElementById("time-year").textContent = year;
-        document.getElementById("time-month").textContent = month
-          .toString()
-          .padStart(2, "0");
-        document.getElementById("time-day").textContent = day
-          .toString()
-          .padStart(2, "0");
-      }
+            /* 页脚样式 */
+            .footer {
+                background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                color: var(--text-light);
+                padding: 3rem 2rem 2rem;
+                text-align: center;
+                margin-top: auto;
+            }
 
-      // 初始化时间并设置定时器
-      updateTime();
-      setInterval(updateTime, 1000);
-    </script>
-  </body>
+            .footer-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .footer-links {
+                display: flex;
+                justify-content: center;
+                gap: 2.5rem;
+                flex-wrap: wrap;
+            }
+
+            .footer-links a {
+                color: var(--text-light);
+                text-decoration: none;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-weight: 500;
+            }
+
+            .footer-links a:hover {
+                opacity: 0.8;
+                transform: translateY(-2px);
+            }
+
+            .copyright {
+                font-size: 0.95rem;
+                opacity: 0.85;
+                margin-top: 1rem;
+            }
+
+            /* 响应式设计 */
+            @media (max-width: 992px) {
+                .main-content {
+                    padding: 2.5rem 1.5rem;
+                }
+
+                .ai-platform {
+                    padding: 2.5rem 1.5rem;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .nav-bar {
+                    flex-direction: column;
+                    padding: 1rem;
+                    gap: 1rem;
+                }
+
+                .logo-section {
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                .nav-left {
+                    width: 100%;
+                    justify-content: center;
+                    gap: 0.5rem;
+                }
+
+                .nav-right {
+                    width: 100%;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                }
+
+                .time-display {
+                    margin: 0.5rem 0;
+                    order: -1;
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                .nav-left a {
+                    padding: 0.5rem 0.8rem;
+                    font-size: 0.95rem;
+                }
+
+                .nav-btn {
+                    padding: 0.5rem 1rem;
+                    font-size: 0.85rem;
+                }
+
+                .ai-platform h1 {
+                    font-size: 2rem;
+                }
+
+                .ai-platform p {
+                    font-size: 1.05rem;
+                }
+
+                .features-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+
+                .footer-links {
+                    gap: 1.5rem;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .nav-left {
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
+
+                .nav-left a {
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                .nav-right {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .time-display {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                    padding: 0.8rem;
+                }
+
+                .time-display .date-container {
+                    margin-left: 0;
+                }
+
+                .main-content {
+                    padding: 1.5rem 1rem;
+                }
+
+                .ai-platform {
+                    padding: 1.5rem 1rem;
+                }
+
+                .feature-card {
+                    padding: 1.5rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="nav-bar">
+            <div class="logo-section">
+                <div class="tree-icon">AI</div>
+                <div class="nav-left">
+                    <a href="train.html"><i class="fas fa-cogs"></i> 模型训练</a>
+                    <a href="predict.html"><i class="fas fa-chart-line"></i> 模型预测</a>
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <!-- 时间显示部分 -->
+                <div class="time-display">
+                    <div class="time-container">
+                        <div id="time-hour" class="text">00</div>
+                        <div class="time-temp">:</div>
+                        <div id="time-minutes" class="text">00</div>
+                        <div class="time-temp">:</div>
+                        <div id="time-seconds" class="text">00</div>
+                    </div>
+                    <div class="date-container">
+                        <div id="time-year" class="text">2023</div>
+                        <div class="time-ltemp">-</div>
+                        <div id="time-month" class="text">01</div>
+                        <div class="time-ltemp">-</div>
+                        <div id="time-day" class="text">01</div>
+                    </div>
+                </div>
+
+                <a href="#" class="nav-btn contact-btn"><i class="fas fa-envelope"></i> 联系我们</a>
+                <a href="login.html" class="nav-btn login-btn"><i class="fas fa-sign-in-alt"></i> 登录</a>
+                <a href="#" class="admin-only"><i class="fas fa-user-cog"></i> 后台用户管理</a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <!-- AI模型平台部分 -->
+            <section class="ai-platform">
+                <h1>AI模型管理平台</h1>
+                <p>
+                    欢迎使用我们的AI模型管理平台，这里提供从模型训练到预测的全流程服务。我们的平台支持多种机器学习框架，提供可视化操作界面，让AI开发变得更加简单高效。
+                </p>
+                <p>
+                    采用先进的算法和安全的用户管理系统，确保您的数据和模型安全无忧。管理员用户登录后可进入后台管理界面，进行用户权限管理、系统监控等高级操作。
+                </p>
+                <p>
+                    如果您是新用户，请<a href="register.html" class="register-link">点击这里注册</a>开始使用我们的服务。
+                </p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-brain"></i>
+                        <h3>智能模型训练</h3>
+                        <p>使用先进的算法和强大的计算资源，高效训练各种AI模型，支持多种机器学习框架。</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>可视化分析</h3>
+                        <p>通过直观的图表和仪表盘，实时监控训练进度和模型性能，轻松分析预测结果。</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>安全可靠</h3>
+                        <p>企业级安全措施保障您的数据和模型安全，完善的权限管理系统确保数据隐私。</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-info-circle"></i> 关于我们</a>
+                    <a href="#"><i class="fas fa-file-contract"></i> 服务条款</a>
+                    <a href="#"><i class="fas fa-lock"></i> 隐私政策</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> 帮助中心</a>
+                    <a href="#"><i class="fas fa-envelope"></i> 联系我们</a>
+                </div>
+                <div class="copyright">© 2026 AI模型管理平台 版权所有 | 打造智能未来的领先平台</div>
+            </div>
+        </footer>
+
+        <script>
+            if (sessionStorage.getItem("username")) {
+                alert("登录成功");
+            }
+
+            // 模拟管理员登录状态切换
+            document.querySelector(".login-btn").addEventListener("click", function (e) {
+                if (this.getAttribute("href") === "login.html") return;
+
+                e.preventDefault();
+                document.body.classList.toggle("is-admin");
+                this.innerHTML = document.body.classList.contains("is-admin")
+                    ? '<i class="fas fa-sign-out-alt"></i> 退出'
+                    : '<i class="fas fa-sign-in-alt"></i> 登录';
+
+                // 添加视觉反馈
+                if (document.body.classList.contains("is-admin")) {
+                    this.style.backgroundColor = "#ff6b6b";
+                    this.style.borderColor = "#ff6b6b";
+                    this.style.color = "#fff";
+                } else {
+                    this.style.backgroundColor = "";
+                    this.style.borderColor = "";
+                    this.style.color = "";
+                }
+            });
+
+            // 时间显示功能
+            function updateTime() {
+                const now = new Date();
+                const hours = now.getHours();
+                const minutes = now.getMinutes();
+                const seconds = now.getSeconds();
+                const year = now.getFullYear();
+                const month = now.getMonth() + 1;
+                const day = now.getDate();
+
+                // 更新时间
+                document.getElementById("time-hour").textContent = hours.toString().padStart(2, "0");
+                document.getElementById("time-minutes").textContent = minutes.toString().padStart(2, "0");
+                document.getElementById("time-seconds").textContent = seconds.toString().padStart(2, "0");
+
+                // 更新日期
+                document.getElementById("time-year").textContent = year;
+                document.getElementById("time-month").textContent = month.toString().padStart(2, "0");
+                document.getElementById("time-day").textContent = day.toString().padStart(2, "0");
+            }
+
+            // 初始化时间并设置定时器
+            updateTime();
+            setInterval(updateTime, 1000);
+
+            // 联系我们按钮功能
+            document.querySelector(".contact-btn").addEventListener("click", function (e) {
+                e.preventDefault();
+                alert(
+                    "请联系我们的支持团队: support@aimodelplatform.com\n电话: 400-123-4567\n工作时间: 周一至周五 9:00-18:00"
+                );
+            });
+
+            // 卡片悬停效果增强
+            const cards = document.querySelectorAll(".feature-card");
+            cards.forEach((card) => {
+                card.addEventListener("mouseenter", () => {
+                    card.style.transform = "translateY(-10px)";
+                    card.style.boxShadow = "0 15px 30px rgba(0, 0, 0, 0.15)";
+                });
+
+                card.addEventListener("mouseleave", () => {
+                    card.style.transform = "translateY(0)";
+                    card.style.boxShadow = "0 8px 20px rgba(0, 0, 0, 0.06)";
+                });
+            });
+        </script>
+    </body>
 </html>

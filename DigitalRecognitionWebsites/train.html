@@ -3,30 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>模型训练 - AI平台</title>
+    <title>模型训练平台 - 图片标记功能</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+      /* 全局样式 */
       :root {
         --primary-color: #006666;
         --secondary-color: #004d4d;
         --text-light: #ffffff;
+        --error-color: #dc3545;
         --border-color: #e0e0e0;
         --chart-line-color: #4caf50;
         --chart-bg-color: #f9f9f9;
         --spacing-base: 1rem;
+        --label-color: #3498db;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
 
       body {
-        margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           sans-serif;
         background-color: #f5f5f5;
         color: #333;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
       }
 
+      /* 导航栏样式 */
+      .nav-bar {
+        background-color: var(--primary-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem var(--spacing-base);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        color: var(--text-light);
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+      }
+
+      .tree-icon {
+        width: 24px;
+        height: 24px;
+        background-color: var(--text-light);
+        border-radius: 50%;
+        margin-right: 15px;
+      }
+
+      .nav-left {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .nav-left a {
+        color: var(--text-light);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: opacity 0.3s;
+        padding: 0.5rem 0;
+      }
+
+      .nav-left a:hover {
+        opacity: 0.8;
+      }
+
+      .nav-right {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .nav-btn {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+
+      .contact-btn {
+        background-color: transparent;
+        border: 1px solid var(--text-light);
+        color: var(--text-light);
+      }
+
+      .contact-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .login-btn {
+        background-color: var(--text-light);
+        border: none;
+        color: var(--primary-color);
+      }
+
+      .login-btn:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      /* 主内容区样式 */
       .container {
         max-width: 1200px;
         margin: 0 auto;
         padding: var(--spacing-base);
+        flex: 1;
       }
 
       .page-header {
@@ -60,16 +156,64 @@
         overflow-y: auto;
       }
 
+      .empty-message {
+        color: #999;
+        text-align: center;
+        padding: 2rem 0;
+        font-style: italic;
+      }
+
       .file-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0.5rem;
         border-bottom: 1px solid var(--border-color);
+        gap: 10px;
       }
 
       .file-item:last-child {
         border-bottom: none;
+      }
+
+      .file-info {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .file-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 120px;
+      }
+
+      .label-input {
+        width: 50px;
+        padding: 4px 8px;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        text-align: center;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+      }
+
+      .label-input:focus {
+        border-color: var(--label-color);
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        outline: none;
+      }
+
+      .label-input.valid {
+        background-color: rgba(46, 204, 113, 0.1);
+        border-color: #2ecc71;
+      }
+
+      .label-input.invalid {
+        background-color: rgba(231, 76, 60, 0.1);
+        border-color: #e74c3c;
       }
 
       .delete-btn {
@@ -78,6 +222,12 @@
         border: none;
         cursor: pointer;
         font-size: 0.875rem;
+        padding: 4px;
+        transition: all 0.2s;
+      }
+
+      .delete-btn:hover {
+        transform: scale(1.1);
       }
 
       .upload-section {
@@ -176,12 +326,98 @@
         font-weight: 500;
         transition: background-color 0.3s;
         margin-top: var(--spacing-base);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
       }
 
       .start-btn:hover {
         background-color: var(--secondary-color);
       }
 
+      .start-btn:disabled {
+        background-color: #95a5a6;
+        cursor: not-allowed;
+      }
+
+      .label-info {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+        padding: 8px;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        font-size: 0.85rem;
+      }
+
+      .label-example {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background-color: var(--label-color);
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+
+      .summary-card {
+        background-color: #f0f8ff;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+        border-left: 4px solid var(--primary-color);
+      }
+
+      .summary-card h3 {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+
+      /* 页脚样式 */
+      .footer {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        padding: 2rem;
+        text-align: center;
+        margin-top: auto;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: var(--text-light);
+        text-decoration: none;
+        transition: opacity 0.3s;
+      }
+
+      .footer-links a:hover {
+        opacity: 0.8;
+      }
+
+      .copyright {
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      /* 响应式设计 */
       @media (max-width: 768px) {
         .training-container {
           grid-template-columns: 1fr;
@@ -190,38 +426,90 @@
         .params-grid {
           grid-template-columns: 1fr;
         }
+
+        .nav-left {
+          gap: 1rem;
+        }
+
+        .nav-right {
+          gap: 0.75rem;
+        }
+
+        .nav-btn {
+          padding: 0.4rem 0.8rem;
+          font-size: 0.8125rem;
+        }
+
+        .file-name {
+          max-width: 100px;
+        }
       }
     </style>
   </head>
   <body>
+    <!-- 导航栏 -->
+    <nav class="nav-bar">
+      <div class="logo-section">
+        <div class="tree-icon"></div>
+        <div class="nav-left">
+          <a href="train.html"><i class="fas fa-cogs"></i> 模型训练</a>
+          <a href="predict.html"><i class="fas fa-chart-line"></i> 模型预测</a>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <a href="#" class="nav-btn contact-btn"
+          ><i class="fas fa-envelope"></i> 联系我们</a
+        >
+        <a href="login.html" class="nav-btn login-btn"
+          ><i class="fas fa-sign-in-alt"></i> 登录</a
+        >
+      </div>
+    </nav>
+
+    <!-- 主内容区 -->
     <div class="container">
-      <h1 class="page-header">模型训练</h1>
+      <h1 class="page-header">
+        <i class="fas fa-cogs"></i> 模型训练 - 图片数字识别
+      </h1>
+
+      <div class="summary-card">
+        <h3><i class="fas fa-info-circle"></i> 功能介绍</h3>
+        <p>
+          上传包含数字的图片，为每个图片输入对应的数字标签（0-9）。我们的模型将学习识别图像中的数字特征。
+        </p>
+      </div>
 
       <div class="training-container">
         <!-- 左侧文件区域 -->
         <div class="file-section">
           <div class="file-list" id="fileList">
-            <div class="file-item">
-              <span>image_001.jpg</span>
-              <button class="delete-btn">删除</button>
-            </div>
-            <div class="file-item">
-              <span>image_002.jpg</span>
-              <button class="delete-btn">删除</button>
-            </div>
-            <div class="file-item">
-              <span>image_003.jpg</span>
-              <button class="delete-btn">删除</button>
-            </div>
-            <div class="file-item">
-              <span>image_004.jpg</span>
-              <button class="delete-btn">删除</button>
+            <div class="empty-message">
+              <i class="fas fa-cloud-upload-alt fa-2x"></i>
+              <p>尚未上传图片</p>
+              <p>上传后可使用标注功能</p>
             </div>
           </div>
 
           <div class="upload-section" id="uploadArea">
-            <p>点击或拖拽文件到此处上传</p>
-            <input type="file" id="fileInput" style="display: none" multiple />
+            <p>
+              <i class="fas fa-cloud-upload-alt"></i> 点击或拖拽文件到此处上传
+            </p>
+            <input
+              type="file"
+              id="fileInput"
+              style="display: none"
+              multiple
+              accept="image/*"
+            />
+          </div>
+
+          <div class="label-info">
+            <i class="fas fa-info-circle" style="color: var(--label-color)"></i>
+            <span
+              >为每张图片输入数字标签（0-9），例如:
+              <span class="label-example">7</span></span
+            >
           </div>
         </div>
 
@@ -229,7 +517,9 @@
         <div>
           <div class="chart-container">
             <div class="chart-placeholder" id="chartPlaceholder">
-              <p>训练开始后将显示准确率变化曲线</p>
+              <p>
+                <i class="fas fa-chart-line"></i> 训练开始后将显示准确率变化曲线
+              </p>
             </div>
             <canvas id="accuracyChart" style="display: none"></canvas>
           </div>
@@ -245,10 +535,12 @@
           </div>
 
           <div class="params-section">
-            <h3>参数设置</h3>
+            <h3><i class="fas fa-sliders-h"></i> 参数设置</h3>
             <div class="params-grid">
               <div class="param-group">
-                <label class="param-label">epochs</label>
+                <label class="param-label"
+                  ><i class="fas fa-redo"></i> epochs</label
+                >
                 <input
                   type="number"
                   class="param-input"
@@ -258,7 +550,9 @@
                 />
               </div>
               <div class="param-group">
-                <label class="param-label">learning-rate</label>
+                <label class="param-label"
+                  ><i class="fas fa-tachometer-alt"></i> learning-rate</label
+                >
                 <input
                   type="number"
                   class="param-input"
@@ -269,7 +563,9 @@
                 />
               </div>
               <div class="param-group">
-                <label class="param-label">batch size</label>
+                <label class="param-label"
+                  ><i class="fas fa-layer-group"></i> batch size</label
+                >
                 <input
                   type="number"
                   class="param-input"
@@ -280,13 +576,28 @@
               </div>
             </div>
 
-            <button class="start-btn" id="startTraining">开始训练</button>
+            <button class="start-btn" id="startTraining">
+              <i class="fas fa-play"></i> 开始训练模型
+            </button>
           </div>
         </div>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 页脚 -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#"><i class="fas fa-info-circle"></i> 关于我们</a>
+          <a href="#"><i class="fas fa-file-contract"></i> 服务条款</a>
+          <a href="#"><i class="fas fa-lock"></i> 隐私政策</a>
+          <a href="#"><i class="fas fa-question-circle"></i> 帮助中心</a>
+          <a href="#"><i class="fas fa-envelope"></i> 联系我们</a>
+        </div>
+        <div class="copyright">© 2026 AI模型管理平台 版权所有</div>
+      </div>
+    </footer>
+
     <script>
       // 文件上传功能
       const uploadArea = document.getElementById("uploadArea");
@@ -322,21 +633,64 @@
         }
       });
 
+      // 验证标签输入是否为有效数字
+      function validateLabelInput(input) {
+        const value = input.value.trim();
+        if (value === "") {
+          input.classList.remove("valid", "invalid");
+          return false;
+        }
+
+        // 检查是否为0-9的数字
+        if (/^[0-9]$/.test(value)) {
+          input.classList.add("valid");
+          input.classList.remove("invalid");
+          return true;
+        } else {
+          input.classList.add("invalid");
+          input.classList.remove("valid");
+          return false;
+        }
+      }
+
       function handleFiles(files) {
+        // 移除空列表提示
+        if (fileList.querySelector(".empty-message")) {
+          fileList.innerHTML = "";
+        }
+
         for (let i = 0; i < files.length; i++) {
+          // 只接受图片文件
+          if (!files[i].type.match("image.*")) continue;
+
           const fileItem = document.createElement("div");
           fileItem.className = "file-item";
           fileItem.innerHTML = `
-                    <span>${files[i].name}</span>
-                    <button class="delete-btn">删除</button>
+                    <div class="file-info">
+                        <i class="fas fa-image"></i>
+                        <span class="file-name">${files[i].name}</span>
+                    </div>
+                    <input type="text" class="label-input" maxlength="1" placeholder="标签">
+                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
                 `;
           fileList.appendChild(fileItem);
+
+          // 添加标签输入验证
+          const labelInput = fileItem.querySelector(".label-input");
+          labelInput.addEventListener("input", () => {
+            validateLabelInput(labelInput);
+          });
 
           // 添加删除功能
           fileItem
             .querySelector(".delete-btn")
             .addEventListener("click", () => {
               fileList.removeChild(fileItem);
+              // 如果没有文件了，添加空列表提示
+              if (fileList.children.length === 0) {
+                fileList.innerHTML =
+                  '<div class="empty-message"><i class="fas fa-cloud-upload-alt fa-2x"></i><p>尚未上传图片</p><p>上传后可使用标注功能</p></div>';
+              }
             });
         }
       }
@@ -362,8 +716,32 @@
         const batchSize = parseInt(document.getElementById("batchSize").value);
 
         // 验证输入
-        if (fileList.children.length === 0) {
-          alert("请先上传训练文件");
+        if (
+          fileList.querySelector(".empty-message") ||
+          fileList.children.length === 0
+        ) {
+          alert("请先上传训练图片");
+          return;
+        }
+
+        // 检查所有标签是否有效
+        let allLabelsValid = true;
+        const labelInputs = document.querySelectorAll(".label-input");
+        const invalidFiles = [];
+
+        labelInputs.forEach((input, index) => {
+          if (!validateLabelInput(input)) {
+            allLabelsValid = false;
+            invalidFiles.push(
+              fileList.children[index].querySelector(".file-name").textContent
+            );
+          }
+        });
+
+        if (!allLabelsValid) {
+          alert(
+            `以下图片的标签无效，请输入0-9的数字：\n${invalidFiles.join("\n")}`
+          );
           return;
         }
 
@@ -421,7 +799,7 @@
 
             if (currentEpoch >= epochs) {
               clearInterval(trainingInterval);
-              startBtn.textContent = "训练完成";
+              startBtn.innerHTML = '<i class="fas fa-check"></i> 训练完成';
               startBtn.disabled = false;
               return;
             }
@@ -447,8 +825,25 @@
           }
         }, 200);
 
-        startBtn.textContent = "训练中...";
+        startBtn.innerHTML = '<i class="fas fa-sync fa-spin"></i> 训练中...';
         startBtn.disabled = true;
+      });
+
+      // 导航栏按钮交互效果
+      document.querySelectorAll(".nav-btn").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          // 添加点击效果
+          this.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            this.style.transform = "";
+          }, 200);
+
+          // 如果是联系支持按钮，阻止默认行为并显示消息
+          if (this.querySelector(".fa-envelope")) {
+            e.preventDefault();
+            alert("请联系我们的支持团队: support@aimodelplatform.com");
+          }
+        });
       });
     </script>
   </body>

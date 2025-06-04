@@ -17,8 +17,8 @@ class Service():
 
     def checkservice(httpmes:dict, respmes:dict):
         if httpmes.get("sname", None) == None:
-            Service.unknownservice()
-        if httpmes["sname"] == "register":
+            Service.unknownservice(respmes)
+        elif httpmes["sname"] == "register":
             Service.register(httpmes, respmes)
         elif httpmes["sname"] == "login":
             Service.login(httpmes, respmes)
@@ -38,7 +38,7 @@ class Service():
         username = Encryption.sha256(data["username"])
         password = Encryption.sha256(data["password"])
         phone = Encryption.sha256(data["phone"])
-        if os.path.exists(username):
+        if os.path.exists(f"../ProgramDataset/users/{username}.txt"):
             res = "Result: User already exist"
         else:
             with open(f"../ProgramDataset/users/{username}.txt", "w") as f:
@@ -52,7 +52,7 @@ class Service():
         password = Encryption.sha256(data["password"])
         if os.path.exists(f"../ProgramDataset/users/{username}.txt"):
             with open(f"../ProgramDataset/users/{username}.txt") as f:
-                ctn = f.readlines()[0]
+                ctn = f.readlines()[0][:-1]
             if ctn == password: res = "Result: OK"
             else: res = "Result: Password error"
         else: res = "Result: Username not exist"
@@ -102,5 +102,6 @@ class Service():
             })
         respmes["data"] = res.encode()
 
-    def unknownservice():
+    def unknownservice(respmes:dict):
         Debug.log("Service", "Unknown service requested")
+        respmes["data"] = "".encode()

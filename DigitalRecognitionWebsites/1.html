@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片上传与Base64编码</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #006666;
+        --secondary-color: #004d4d;
+        --text-light: #ffffff;
+        --error-color: #dc3545;
+        --success-color: #28a745;
+        --border-color: #e0e0e0;
+        --spacing-base: 1rem;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 800px;
+        width: 100%;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+      }
+
+      .header {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .header p {
+        opacity: 0.9;
+      }
+
+      .content {
+        padding: 2rem;
+      }
+
+      .upload-section {
+        border: 2px dashed var(--border-color);
+        border-radius: 8px;
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-bottom: 1.5rem;
+        background-color: #f9f9f9;
+        position: relative;
+      }
+
+      .upload-section:hover {
+        border-color: var(--primary-color);
+        background-color: rgba(0, 102, 102, 0.05);
+      }
+
+      .upload-icon {
+        font-size: 3.5rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+      }
+
+      .upload-text {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .upload-hint {
+        color: #777;
+        font-size: 0.9rem;
+      }
+
+      #fileInput {
+        display: none;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0.8rem 1.8rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s;
+        font-size: 1rem;
+        margin-top: 1rem;
+      }
+
+      .btn:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn:disabled {
+        background-color: #95a5a6;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .preview-section {
+        margin-top: 2rem;
+        display: none;
+      }
+
+      .preview-title {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .preview-container {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .image-preview {
+        width: 200px;
+        height: 200px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .image-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .image-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+      }
+
+      .base64-section {
+        margin-top: 2rem;
+        display: none;
+      }
+
+      .base64-title {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .base64-container {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1rem;
+        max-height: 200px;
+        overflow-y: auto;
+        font-family: monospace;
+        font-size: 0.85rem;
+        border: 1px solid var(--border-color);
+        word-break: break-all;
+      }
+
+      .response-section {
+        margin-top: 2rem;
+        display: none;
+      }
+
+      .response-title {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .response-box {
+        padding: 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      .success {
+        background-color: rgba(40, 167, 69, 0.1);
+        border: 1px solid var(--success-color);
+        color: var(--success-color);
+      }
+
+      .error {
+        background-color: rgba(220, 53, 69, 0.1);
+        border: 1px solid var(--error-color);
+        color: var(--error-color);
+      }
+
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .status-indicator {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+
+      .status-pending {
+        background-color: #ffc107;
+      }
+
+      .status-success {
+        background-color: #28a745;
+      }
+
+      .status-error {
+        background-color: #dc3545;
+      }
+
+      .footer {
+        margin-top: 2rem;
+        text-align: center;
+        color: #777;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 600px) {
+        .content {
+          padding: 1.5rem;
+        }
+
+        .preview-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .image-preview {
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1><i class="fas fa-cloud-upload-alt"></i> 图片上传与Base64编码</h1>
+        <p>选择本地图片，系统将自动转换为Base64并发送到服务器</p>
+      </div>
+
+      <div class="content">
+        <div class="upload-section" id="uploadArea">
+          <div class="upload-icon">
+            <i class="fas fa-cloud-upload-alt"></i>
+          </div>
+          <p class="upload-text">点击或拖拽图片到此处上传</p>
+          <p class="upload-hint">支持 JPG, PNG, GIF 格式的图片文件</p>
+          <input type="file" id="fileInput" accept="image/*" />
+          <button class="btn" id="uploadBtn" disabled>
+            <i class="fas fa-upload"></i> 上传图片
+          </button>
+        </div>
+
+        <div class="preview-section" id="previewSection">
+          <h3 class="preview-title"><i class="fas fa-image"></i> 图片预览</h3>
+          <div class="preview-container" id="previewContainer">
+            <!-- 图片预览将在这里显示 -->
+          </div>
+        </div>
+
+        <div class="base64-section" id="base64Section">
+          <h3 class="base64-title"><i class="fas fa-code"></i> Base64 编码</h3>
+          <div class="base64-container" id="base64Container">
+            <!-- Base64编码将在这里显示 -->
+          </div>
+        </div>
+
+        <div class="response-section" id="responseSection">
+          <h3 class="response-title">
+            <i class="fas fa-server"></i> 服务器响应
+          </h3>
+          <div class="response-box" id="responseBox">
+            <!-- 服务器响应将在这里显示 -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>图片上传系统 &copy; 2023 | 基于Base64编码的HTTP POST请求实现</p>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const uploadArea = document.getElementById("uploadArea");
+        const fileInput = document.getElementById("fileInput");
+        const uploadBtn = document.getElementById("uploadBtn");
+        const previewSection = document.getElementById("previewSection");
+        const previewContainer = document.getElementById("previewContainer");
+        const base64Section = document.getElementById("base64Section");
+        const base64Container = document.getElementById("base64Container");
+        const responseSection = document.getElementById("responseSection");
+        const responseBox = document.getElementById("responseBox");
+
+        let selectedFile = null;
+        let base64String = "";
+
+        // 点击上传区域触发文件选择
+        uploadArea.addEventListener("click", (e) => {
+          if (e.target !== uploadBtn) {
+            fileInput.click();
+          }
+        });
+
+        // 拖拽功能
+        uploadArea.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          uploadArea.style.borderColor = "var(--primary-color)";
+          uploadArea.style.backgroundColor = "rgba(0, 102, 102, 0.1)";
+        });
+
+        uploadArea.addEventListener("dragleave", () => {
+          uploadArea.style.borderColor = "var(--border-color)";
+          uploadArea.style.backgroundColor = "#f9f9f9";
+        });
+
+        uploadArea.addEventListener("drop", (e) => {
+          e.preventDefault();
+          uploadArea.style.borderColor = "var(--border-color)";
+          uploadArea.style.backgroundColor = "#f9f9f9";
+
+          if (e.dataTransfer.files.length > 0) {
+            handleFileSelect(e.dataTransfer.files[0]);
+          }
+        });
+
+        // 文件选择处理
+        fileInput.addEventListener("change", () => {
+          if (fileInput.files.length > 0) {
+            handleFileSelect(fileInput.files[0]);
+          }
+        });
+
+        // 处理选择的文件
+        function handleFileSelect(file) {
+          // 检查文件类型
+          if (!file.type.match("image.*")) {
+            showResponse("请选择图片文件 (JPG, PNG, GIF)", "error");
+            return;
+          }
+
+          // 检查文件大小 (限制为5MB)
+          if (file.size > 5 * 1024 * 1024) {
+            showResponse("图片大小不能超过5MB", "error");
+            return;
+          }
+
+          selectedFile = file;
+          uploadBtn.disabled = false;
+
+          // 显示预览
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            previewContainer.innerHTML = `
+                        <div class="image-preview">
+                            
+                            <div class="image-info">
+                                <div><span class="status-indicator status-pending"></span>等待上传</div>
+                                <div>${file.name} (${formatFileSize(
+              file.size
+            )})</div>
+                            </div>
+                        </div>
+                    `;
+            previewSection.style.display = "block";
+            base64Section.style.display = "none";
+            responseSection.style.display = "none";
+          };
+          reader.readAsDataURL(file);
+        }
+
+        // 上传按钮点击事件
+        uploadBtn.addEventListener("click", () => {
+          if (!selectedFile) return;
+
+          // 显示加载状态
+          uploadBtn.innerHTML = '<span class="loading"></span> 上传中...';
+          uploadBtn.disabled = true;
+
+          // 更新预览状态
+          const statusIndicator = document.querySelector(".status-indicator");
+          if (statusIndicator) {
+            statusIndicator.className = "status-indicator status-pending";
+            statusIndicator.nextSibling.textContent = "上传中...";
+          }
+
+          // 读取文件并转换为Base64
+          const reader = new FileReader();
+          reader.onload = function () {
+            // 获取Base64字符串（移除data URL前缀）
+            base64String = reader.result.split(",")[1];
+
+            // 显示Base64编码
+            base64Container.textContent =
+              base64String.substring(0, 300) + "...";
+            base64Section.style.display = "block";
+
+            // 发送POST请求
+            sendPostRequest(base64String);
+          };
+          reader.readAsDataURL(selectedFile);
+        });
+
+        // 发送POST请求
+        function sendPostRequest(base64Data) {
+          // 模拟API端点 - 在实际应用中替换为真实URL
+          const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+
+          // 创建请求数据
+          const postData = {
+            image: base64Data,
+            filename: selectedFile.name,
+            filetype: selectedFile.type,
+            timestamp: new Date().toISOString(),
+          };
+
+          // 发送请求
+          fetch(apiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(postData),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("服务器响应错误");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              // 模拟成功响应
+              const success = Math.random() > 0.2; // 80%成功率
+
+              if (success) {
+                showResponse("图片上传成功！服务器已接收Base64数据", "success");
+                // 更新预览状态
+                const statusIndicator =
+                  document.querySelector(".status-indicator");
+                if (statusIndicator) {
+                  statusIndicator.className = "status-indicator status-success";
+                  statusIndicator.nextSibling.textContent = "上传成功";
+                }
+              } else {
+                throw new Error("服务器处理图片时出错");
+              }
+            })
+            .catch((error) => {
+              showResponse(`上传失败: ${error.message}`, "error");
+              // 更新预览状态
+              const statusIndicator =
+                document.querySelector(".status-indicator");
+              if (statusIndicator) {
+                statusIndicator.className = "status-indicator status-error";
+                statusIndicator.nextSibling.textContent = "上传失败";
+              }
+            })
+            .finally(() => {
+              // 重置上传按钮
+              uploadBtn.innerHTML = '<i class="fas fa-upload"></i> 重新上传';
+              uploadBtn.disabled = false;
+            });
+        }
+
+        // 显示服务器响应
+        function showResponse(message, type) {
+          responseBox.textContent = message;
+          responseBox.className = "response-box " + type;
+          responseSection.style.display = "block";
+
+          // 滚动到响应区域
+          responseSection.scrollIntoView({ behavior: "smooth" });
+        }
+
+        // 格式化文件大小
+        function formatFileSize(bytes) {
+          if (bytes === 0) return "0 Bytes";
+          const k = 1024;
+          const sizes = ["Bytes", "KB", "MB", "GB"];
+          const i = Math.floor(Math.log(bytes) / Math.log(k));
+          return (
+            parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
+          );
+        }
+      });
+    </script>
+  </body>
+</html>

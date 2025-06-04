@@ -1,3 +1,4 @@
+from Debug import *
 from keras import optimizers
 from keras.utils import custom_object_scope
 from blocks import conv
@@ -5,6 +6,7 @@ import keras
 import random
 import os
 import numpy as np
+import tensorflow as tf
 
 
 custom_objects = {
@@ -40,22 +42,28 @@ class MyBaseModel:
     
     def train(self, data, trainopt):
         random.shuffle(data)
-        x, y, w = [], [], []
+        x, y = [], []
         for e in data:
-            x.append(e["x"]), y.append(e["y"]), w.append(e["w"])
-        x, y, w = np.array(x), np.array(y), np.array(w)
+            x.append(e["x"]), y.append(e["y"])
+        x, y = np.array(x), np.array(y)
+        split = int(len(x) * 0.7)
+        traindataset = tf.data.Dataset.from_tensor_slices((x[:split], y[:split])) \
+            .batch(trainopt["batch_size"]) \
+            .prefetch(tf.data.AUTOTUNE)
+        valdataset = tf.data.Dataset.from_tensor_slices((x[split:], y[split:])) \
+            .batch(trainopt["batch_size"]) \
+            .prefetch(tf.data.AUTOTUNE)
         for i in range(trainopt["epochs"]):
-            res = self.model.fit(
-                x=x, y=y,
-                sample_weight=w,
-                epochs=1,
-                batch_size=trainopt["batch_size"],
-                validation_split=0.3,
-                verbose=0
-            )
-            print(f"epoch {i+1}: "
-                  f"categorical_accuracy: {res.history['categorical_accuracy'][0]:.4f}  "
-                  f"val_categorical_accuracy: {res.history['val_categorical_accuracy'][0]:.4f}")
+            with CostTime("Train"):
+                res = self.model.fit(
+                    traindataset,
+                    epochs=1,
+                    validation_data=valdataset,
+                    verbose=2
+                )
+                Debug.log("Train", f"epoch {i+1}: "
+                        f"categorical_accuracy: {res.history['categorical_accuracy'][0]:.4f}  "
+                        f"val_categorical_accuracy: {res.history['val_categorical_accuracy'][0]:.4f}")
     
     def predict(self, x):
         return self.model.predict(x)
