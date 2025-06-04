@@ -65,3 +65,93 @@
 [23:44:10] (SocketServer) Send to ('127.0.0.1', 64528): --bytes--, len: 1621
 [23:44:10] (SocketServer) Send to ('127.0.0.1', 64529): --bytes--, len: 743
 [23:44:15] (SocketServer) New connection accepted: ('127.0.0.1', 64531)
+[23:48:00] (SocketServer) New connection accepted: ('127.0.0.1', 64715)
+[23:48:00] (SocketServer) Receive: GET / HTTP/1.1
+[23:48:00] (SocketServer) New connection accepted: ('127.0.0.1', 64716)
+[23:48:00] (SocketServer) Send to ('127.0.0.1', 64715): --bytes--, len: 3481
+[23:48:00] (SocketServer) Receive: GET /loader.js HTTP/1.1
+[23:48:00] (SocketServer) Send to ('127.0.0.1', 64716): --bytes--, len: 703
+[23:48:00] (SocketServer) New connection accepted: ('127.0.0.1', 64720)
+[23:48:00] (SocketServer) Receive: GET /whitebg.css HTTP/1.1
+[23:48:00] (SocketServer) Send to ('127.0.0.1', 64720): --bytes--, len: 9939
+[23:48:00] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[23:48:00] (SocketServer) New connection accepted: ('127.0.0.1', 64721)
+[23:48:00] (SocketServer) New connection accepted: ('127.0.0.1', 64722)
+[23:48:00] (SocketServer) Receive: GET /header.html HTTP/1.1
+[23:48:00] (SocketServer) New connection accepted: ('127.0.0.1', 64723)
+[23:48:00] (SocketServer) Receive: GET /footer.html HTTP/1.1
+[23:48:00] (SocketServer) Send to ('127.0.0.1', 64721): --bytes--, len: 3253
+[23:48:00] (SocketServer) Send to ('127.0.0.1', 64722): --bytes--, len: 1621
+[23:48:00] (SocketServer) Send to ('127.0.0.1', 64723): --bytes--, len: 743
+[23:48:02] (SocketServer) Receive: GET / HTTP/1.1
+[23:48:02] (SocketServer) New connection accepted: ('127.0.0.1', 64727)
+[23:48:02] (SocketServer) New connection accepted: ('127.0.0.1', 64728)
+[23:48:02] (SocketServer) Send to ('127.0.0.1', 64727): --bytes--, len: 3481
+[23:48:02] (SocketServer) Receive: GET /loader.js HTTP/1.1
+[23:48:02] (SocketServer) Send to ('127.0.0.1', 64728): --bytes--, len: 703
+[23:48:02] (SocketServer) New connection accepted: ('127.0.0.1', 64732)
+[23:48:02] (SocketServer) Receive: GET /whitebg.css HTTP/1.1
+[23:48:02] (SocketServer) Send to ('127.0.0.1', 64732): --bytes--, len: 9939
+[23:48:02] (SocketServer) New connection accepted: ('127.0.0.1', 64733)
+[23:48:02] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[23:48:02] (SocketServer) Receive: GET /header.html HTTP/1.1
+[23:48:02] (SocketServer) New connection accepted: ('127.0.0.1', 64734)
+[23:48:02] (SocketServer) Receive: GET /footer.html HTTP/1.1
+[23:48:02] (SocketServer) New connection accepted: ('127.0.0.1', 64735)
+[23:48:02] (SocketServer) Send to ('127.0.0.1', 64733): --bytes--, len: 3253
+[23:48:02] (SocketServer) Send to ('127.0.0.1', 64734): --bytes--, len: 1621
+[23:48:02] (SocketServer) Send to ('127.0.0.1', 64735): --bytes--, len: 743
+[23:48:03] (SocketServer) Receive: GET /train.html HTTP/1.1
+[23:48:03] (SocketServer) New connection accepted: ('127.0.0.1', 64739)
+[23:48:03] (SocketServer) New connection accepted: ('127.0.0.1', 64740)
+[23:48:03] (SocketServer) Send to ('127.0.0.1', 64739): --bytes--, len: 22722
+[23:48:03] (SocketServer) Receive: GET /loader.js HTTP/1.1
+[23:48:03] (SocketServer) Send to ('127.0.0.1', 64740): --bytes--, len: 703
+[23:48:03] (SocketServer) New connection accepted: ('127.0.0.1', 64744)
+[23:48:03] (SocketServer) Receive: GET /whitebg.css HTTP/1.1
+[23:48:03] (SocketServer) Send to ('127.0.0.1', 64744): --bytes--, len: 9939
+[23:48:03] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[23:48:03] (SocketServer) New connection accepted: ('127.0.0.1', 64745)
+[23:48:03] (SocketServer) Receive: GET /header.html HTTP/1.1
+[23:48:03] (SocketServer) New connection accepted: ('127.0.0.1', 64746)
+[23:48:03] (SocketServer) New connection accepted: ('127.0.0.1', 64747)
+[23:48:03] (SocketServer) Receive: GET /footer.html HTTP/1.1
+[23:48:03] (SocketServer) Send to ('127.0.0.1', 64745): --bytes--, len: 3253
+[23:48:03] (SocketServer) Send to ('127.0.0.1', 64746): --bytes--, len: 1621
+[23:48:04] (SocketServer) Send to ('127.0.0.1', 64747): --bytes--, len: 743
+[23:48:07] (SocketServer) Receive: GET /predict.html HTTP/1.1
+[23:48:07] (SocketServer) New connection accepted: ('127.0.0.1', 64752)
+[23:48:07] (SocketServer) New connection accepted: ('127.0.0.1', 64753)
+[23:48:07] (SocketServer) Send to ('127.0.0.1', 64752): --bytes--, len: 13633
+[23:48:07] (SocketServer) Receive: GET /loader.js HTTP/1.1
+[23:48:07] (SocketServer) Send to ('127.0.0.1', 64753): --bytes--, len: 703
+[23:48:07] (SocketServer) New connection accepted: ('127.0.0.1', 64757)
+[23:48:07] (SocketServer) Receive: GET /whitebg.css HTTP/1.1
+[23:48:08] (SocketServer) Send to ('127.0.0.1', 64757): --bytes--, len: 9939
+[23:48:08] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[23:48:08] (SocketServer) New connection accepted: ('127.0.0.1', 64758)
+[23:48:08] (SocketServer) Receive: GET /header.html HTTP/1.1
+[23:48:08] (SocketServer) New connection accepted: ('127.0.0.1', 64759)
+[23:48:08] (SocketServer) New connection accepted: ('127.0.0.1', 64760)
+[23:48:08] (SocketServer) Receive: GET /footer.html HTTP/1.1
+[23:48:08] (SocketServer) Send to ('127.0.0.1', 64758): --bytes--, len: 3253
+[23:48:08] (SocketServer) Send to ('127.0.0.1', 64759): --bytes--, len: 1621
+[23:48:08] (SocketServer) Send to ('127.0.0.1', 64760): --bytes--, len: 743
+[23:48:10] (SocketServer) New connection accepted: ('127.0.0.1', 64762)
+[23:48:12] (SocketServer) Receive: GET /login.html HTTP/1.1
+[23:48:12] (SocketServer) Send to ('127.0.0.1', 64762): --bytes--, len: 4187
+[23:48:12] (SocketServer) New connection accepted: ('127.0.0.1', 64765)
+[23:48:12] (SocketServer) Receive: GET /greenbg.css HTTP/1.1
+[23:48:12] (SocketServer) New connection accepted: ('127.0.0.1', 64766)
+[23:48:12] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[23:48:12] (SocketServer) Send to ('127.0.0.1', 64765): --bytes--, len: 3212
+[23:48:12] (SocketServer) Send to ('127.0.0.1', 64766): --bytes--, len: 3253
+[23:48:14] (SocketServer) Receive: GET /register.html HTTP/1.1
+[23:48:14] (SocketServer) New connection accepted: ('127.0.0.1', 64770)
+[23:48:14] (SocketServer) Send to ('127.0.0.1', 64770): --bytes--, len: 9539
+[23:48:14] (SocketServer) New connection accepted: ('127.0.0.1', 64771)
+[23:48:14] (SocketServer) Receive: GET /greenbg.css HTTP/1.1
+[23:48:14] (SocketServer) Receive: GET /lib.js HTTP/1.1
+[23:48:14] (SocketServer) Send to ('127.0.0.1', 64771): --bytes--, len: 3212
+[23:48:14] (SocketServer) New connection accepted: ('127.0.0.1', 64772)
+[23:48:14] (SocketServer) Send to ('127.0.0.1', 64772): --bytes--, len: 3253
