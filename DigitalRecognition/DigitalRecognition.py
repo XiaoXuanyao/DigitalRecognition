@@ -1,5 +1,4 @@
 
-import time
 import os
 import threading
 
@@ -32,6 +31,3 @@ def serverfunc():
 
 serverthread = threading.Thread(target=serverfunc, args=[])
 serverthread.start()
-
-while True:
-    time.sleep(1)

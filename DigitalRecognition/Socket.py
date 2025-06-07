@@ -28,6 +28,7 @@ class Socket():
                 mes = b""
                 while True:
                     buff = soc.recv(1024 * 32)
+                    if buff == b'': break
                     mes += buff
                     if b"\r\n" in mes: break
                 headers, middle, body = mes.partition(b"\r\n\r\n")
@@ -36,7 +37,9 @@ class Socket():
                     if line.lower().startswith("content-length:"):
                         clength = int(line.split(":")[1].strip())
                 while len(body) < clength:
-                    body += soc.recv(1024 * 32)
+                    if buff == b'': break
+                    buff = soc.recv(1024 * 32)
+                    body += buff
                 
                 if len(mes) == 0:
                     self.close(soc, dsthost)
