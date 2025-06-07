@@ -40,7 +40,7 @@ class MyBaseModel:
         with custom_object_scope(custom_objects):
             self.model = keras.models.load_model(f"runs/models/{name}.h5")
     
-    def train(self, data, trainopt):
+    def train(self, data, trainopt:dict):
         random.shuffle(data)
         x, y = [], []
         for e in data:
@@ -53,17 +53,14 @@ class MyBaseModel:
         valdataset = tf.data.Dataset.from_tensor_slices((x[split:], y[split:])) \
             .batch(trainopt["batch_size"]) \
             .prefetch(tf.data.AUTOTUNE)
-        for i in range(trainopt["epochs"]):
-            with CostTime("Train"):
-                res = self.model.fit(
-                    traindataset,
-                    epochs=1,
-                    validation_data=valdataset,
-                    verbose=2
+        with CostTime("Train"):
+            self.model.fit(
+                traindataset,
+                epochs=trainopt["epochs"],
+                validation_data=valdataset,
+                verbose=0,
+                callbacks=trainopt.get("callbacks", None)
                 )
-                Debug.log("Train", f"epoch {i+1}: "
-                        f"categorical_accuracy: {res.history['categorical_accuracy'][0]:.4f}  "
-                        f"val_categorical_accuracy: {res.history['val_categorical_accuracy'][0]:.4f}")
     
     def predict(self, x):
         return self.model.predict(x)

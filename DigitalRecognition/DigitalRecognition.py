@@ -1,5 +1,6 @@
 
 import os
+import shutil
 import threading
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
@@ -14,6 +15,8 @@ from Service import Service
 
 Debug.log("Main", "Server start.")
 os.makedirs("../ProgramDataset/users", exist_ok=True)
+os.makedirs("../ProgramDataset/tmp", exist_ok=True)
+shutil.rmtree("../ProgramDataset/tmp")
 
 model = DRModel()
 try:
@@ -31,3 +34,6 @@ def serverfunc():
 
 serverthread = threading.Thread(target=serverfunc, args=[])
 serverthread.start()
+
+while True:
+    time.sleep(1)

@@ -22,6 +22,7 @@
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
                 padding: var(--spacing-base);
                 min-height: 600px;
+                margin: 1rem 0rem;
             }
 
             .section {
@@ -85,10 +86,12 @@
             }
 
             .result-placeholder {
+                width: 100%;
+                height: 97%;
                 color: #999;
-                text-align: center;
-                margin-top: 20%;
-                margin-bottom: 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .result-item {
@@ -215,9 +218,11 @@
                     <div class="section">
                         <div class="prediction-result" id="predictionResult">
                             <div class="result-placeholder">
-                                <p><i class="fas fa-chart-bar fa-2x"></i></p>
-                                <p>预测结果将显示在这里</p>
-                                <p>请先上传图像并点击"开始预测"</p>
+                                <div>
+                                    <p><i class="fas fa-chart-bar fa-2x"></i></p>
+                                    <p>预测结果将显示在这里</p>
+                                    <p>请先上传图像并点击"开始预测"</p>
+                                </div>
                             </div>
                             <div id="resultContent" style="display: none"></div>
                         </div>
@@ -246,8 +251,8 @@
                 if (e.target.files.length > 0) {
                     const file = e.target.files[0];
                     const fileName = file.name;
+
                     const reader = new FileReader();
-                    
                     reader.onload = function(event) {
                         // 显示上传的图片
                         previewImage.src = event.target.result;
@@ -261,8 +266,12 @@
 
                         const content = event.target.result;
                         requireService("uploadimg/test", {
-                            filename: fileName,
-                            imgdata: content.split(',')[1]
+                            data: [
+                                {
+                                    filename: fileName,
+                                    imgdata: content.split(',')[1]
+                                }
+                            ]
                         }, function(respMes) {
                             if (respMes == "Result: OK") {
                                 window.fileName = fileName;
@@ -270,9 +279,8 @@
                                 predictBtn.disabled = false;
                                 console.log("OK");
                             }
-                        })
+                        });
                     };
-                    
                     reader.readAsDataURL(file);
                 }
             });

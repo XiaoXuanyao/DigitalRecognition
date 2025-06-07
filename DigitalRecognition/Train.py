@@ -4,7 +4,8 @@ import threading
 import cv2
 import numpy as np
 from queue import Queue
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, wait
+from keras import callbacks
 
 from DRModel import DRModel
 from Debug import *
@@ -17,9 +18,8 @@ class LoadDataset():
         self.path = path
         Debug.log("DataLoader", f"Load dataset initialized, dataset path: {path}")
 
-    def read(self):
+    def read(self, workers=6):
         dataque = Queue()
-        data = []
         def loadfunc(filename):
             label = [0] * 10
             label[int(filename.split(".")[0].split("_")[-1])] = 1
@@ -34,23 +34,77 @@ class LoadDataset():
                 "w": 1
                 })
         with CostTime("DataLoader"):
-            with ThreadPoolExecutor(max_workers=4) as executor:
-                for filename in os.listdir(self.path):
-                    executor.submit(loadfunc, filename)
-                    Debug.log("DataLoader", f"Read files {filename}", type=1, end="\b\r")
-        while not dataque.empty():
-            data.append(dataque.get())
-            Debug.log("DataLoader", f"processing... ({len(data)})", type=1, end="\b\r")
+            executor = ThreadPoolExecutor(max_workers=workers)
+            for filename in os.listdir(self.path):
+                executor.submit(loadfunc, filename)
+                Debug.log("DataLoader", f"Read file {filename}", type=1, end="\r")
+            executor.shutdown(wait=True)
         Debug.log("DataLoader", "Load finished.")
-        return data
+        return list(dataque.queue)
+
+
+
+class MyLoggingCallback(callbacks.Callback):
+    def set_model(self, model):
+        self.model = model
+
+    def on_train_begin(self, logs=None):
+        self.current_epoch = 0
+        TrainModel.cEpoch = 0
+        TrainModel.maxEpoch = self.params['epochs']
+        TrainModel.maxBatch = self.params["steps"]
+
+    def on_epoch_begin(self, epoch, logs=None):
+        self.current_epoch = epoch
+        TrainModel.cEpoch = epoch + 1
+        Debug.log("Train", f"=== Epoch {epoch + 1} ===")
+
+    def on_train_batch_end(self, batch, logs=None):
+        TrainModel.cBatch = batch
+        Debug.log("Train", f"[Epoch {self.current_epoch + 1}/{self.params['epochs']}] {batch / TrainModel.maxBatch * 100:.2f} %", end="\r")
+
+    def on_epoch_end(self, epoch, logs=None):
+        loss = logs.get('loss')
+        acc = logs.get('categorical_accuracy')
+        valloss = logs.get('val_loss')
+        valacc = logs.get('val_categorical_accuracy')
+        TrainModel.cLoss.append(loss)
+        TrainModel.cAcc.append(acc)
+        TrainModel.cvalLoss.append(valloss)
+        TrainModel.cvalAcc.append(valacc)
+        print("")
+        Debug.log("Train", f"loss: {loss:.4f}, acc: {acc:.4f}, val_loss: {valloss:.4f}, val_acc: {valacc:.4f}", end="\n")
 
 
 
 class TrainModel():
 
+    isTraining = False
+    
+    cEpoch = 0
+    maxEpoch = 0
+    cBatch = 0
+    maxBatch = 0
+    cLoss = []
+    cAcc = []
+    cvalLoss = []
+    cvalAcc = []
+
     def train(model:DRModel, datapath:str, args:dict):
+        TrainModel.isTraining = True       
+        TrainModel.cEpoch = 0
+        TrainModel.maxEpoch = 0
+        TrainModel.cBatch = 0
+        TrainModel.maxBatch = 0
+        TrainModel.cLoss = []
+        TrainModel.cAcc = []
+        TrainModel.cvalLoss = []
+        TrainModel.cvalAcc = []
+        args["callbacks"] = [MyLoggingCallback()]
         data = LoadDataset(datapath).read()
         Debug.log("Train", "Start training.")
         model.train(data, args)
         model.savemodel()
-        Debug.log("Train", "Start finished.")
+        Debug.log("Train", "Training finished.")
+        time.sleep(5)
+        TrainModel.isTraining = False

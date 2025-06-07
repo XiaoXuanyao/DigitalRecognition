@@ -18,12 +18,14 @@
                 border-radius: 8px;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
                 padding: var(--spacing-base);
+                margin: 2rem 0rem;
             }
 
             .file-section {
                 display: flex;
                 flex-direction: column;
                 gap: var(--spacing-base);
+                margin: 1rem;
             }
 
             .file-list {
@@ -35,10 +37,13 @@
             }
 
             .empty-message {
+                width: 100%;
+                height: 100%;
                 color: #999;
-                text-align: center;
-                padding: 2rem 0;
                 font-style: italic;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .file-item {
@@ -115,6 +120,7 @@
                 text-align: center;
                 cursor: pointer;
                 transition: all 0.3s;
+                margin: 1rem 0rem;
             }
 
             .upload-section:hover {
@@ -126,6 +132,7 @@
                 border: 1px solid var(--border-color);
                 border-radius: 4px;
                 padding: var(--spacing-base);
+                margin: 1rem;
                 background-color: var(--chart-bg-color);
                 height: 250px;
                 position: relative;
@@ -141,7 +148,7 @@
             }
 
             .progress-section {
-                margin-top: var(--spacing-base);
+                margin: 1rem;
             }
 
             .progress-info {
@@ -166,7 +173,7 @@
             }
 
             .params-section {
-                margin-top: var(--spacing-base);
+                margin: 3rem 1rem 1rem 1rem;
                 border-top: 1px solid var(--border-color);
                 padding-top: var(--spacing-base);
             }
@@ -175,6 +182,7 @@
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 gap: var(--spacing-base);
+                margin: 1rem 0rem;
             }
 
             .param-group {
@@ -223,12 +231,11 @@
             .label-info {
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 gap: 8px;
-                margin-top: 10px;
                 padding: 8px;
                 background-color: #f8f9fa;
                 border-radius: 4px;
-                font-size: 0.85rem;
             }
 
             .label-example {
@@ -246,14 +253,14 @@
             .summary-card {
                 background-color: #f0f8ff;
                 border-radius: 8px;
-                padding: 15px;
-                margin-top: 20px;
+                padding: 1rem;
+                margin: 1rem 0rem;
                 border-left: 4px solid var(--primary-color);
             }
 
             .summary-card h3 {
                 color: var(--primary-color);
-                margin-bottom: 10px;
+                margin: 10px;
             }
 
             /* 响应式设计 */
@@ -290,9 +297,21 @@
                     <div class="file-section">
                         <div class="file-list" id="fileList">
                             <div class="empty-message">
-                                <i class="fas fa-cloud-upload-alt fa-2x"></i>
-                                <p>尚未上传图片</p>
-                                <p>上传后可使用标注功能</p>
+                                <div id="empty-file-list">
+                                    <i class="fas fa-cloud-upload-alt fa-2x"></i>
+                                    <p>尚未上传图片</p>
+                                    <p>上传后可使用标注功能</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="upload-info">
+                                <span>进度: <span id="uploadPercent">0</span>%</span>
+                                <span>剩余: <span id="uploadCount">0</span></span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="uploadFill"></div>
                             </div>
                         </div>
 
@@ -303,7 +322,7 @@
 
                         <div class="label-info">
                             <i class="fas fa-info-circle" style="color: var(--label-color)"></i>
-                            <span>为每张图片输入数字标签（0-9），例如: <span class="label-example">7</span></span>
+                            <span>为每张图片输入数字标签 (0~9)</span>
                         </div>
                     </div>
 
@@ -365,8 +384,13 @@
             const uploadArea = document.getElementById("uploadArea");
             const fileInput = document.getElementById("fileInput");
             const fileList = document.getElementById("fileList");
+            const emptyFileList = document.getElementById("empty-file-list");
+            const uploadCount = document.getElementById("uploadCount");
+            const uploadPercent = document.getElementById("uploadPercent");
+            const uploadFill = document.getElementById("uploadFill");
 
             uploadArea.addEventListener("click", () => fileInput.click());
+            emptyFileList.addEventListener("click", () => fileInput.click());
 
             uploadArea.addEventListener("dragover", (e) => {
                 e.preventDefault();
@@ -415,26 +439,65 @@
                 }
             }
 
+            function checkNoFile() {
+                if (fileList.children.length === 0) {
+                    fileList.innerHTML = `
+                        <div class="empty-message">
+                            <div id="empty-file-list">
+                                <i class="fas fa-cloud-upload-alt fa-2x"></i>
+                                <p>尚未上传图片</p>
+                                <p>上传后可使用标注功能</p><
+                            /div>
+                        </div>'
+                    `;
+                }
+            }
+
+            function updateUploadProcessBar(filesCount, uploadedCount) {
+                progress = uploadedCount / filesCount * 100;
+                uploadFill.style.width = `${progress}%`;
+                uploadPercent.textContent = progress.toFixed(1);
+                uploadCount.textContent = filesCount - uploadedCount;
+            }
+
             function handleFiles(files) {
+                filesCount = files.length;
+                uploadedCount = 0;
                 // 移除空列表提示
                 if (fileList.querySelector(".empty-message")) {
                     fileList.innerHTML = "";
                 }
 
+                notImageFiles = "";
+                imgData = []
                 for (let i = 0; i < files.length; i++) {
-                    // 只接受图片文件
-                    if (!files[i].type.match("image.*")) continue;
+                    // 校验图像格式
+                    if (!files[i].type.match("image.*")) {
+                        uploadedCount++;
+                        updateUploadProcessBar(filesCount, uploadedCount);
+                        notImageFiles += files[i].name + "\n";
+                        continue;
+                    }
+                    
+                    // 设置默认标签
+                    defaultLabel = "";
+                    labelArr = files[i].name.split('_');
+                    if (labelArr.length > 0 && labelArr[labelArr.length - 1].length > 0)
+                        defaultLabel = labelArr[labelArr.length - 1].substring(0, 1);
+                    defaultLabel = defaultLabel.match("[0-9]") ? defaultLabel : "";
 
+                    // 添加到列表
                     const fileItem = document.createElement("div");
                     fileItem.className = "file-item";
+                    fileItem.id = files[i].name;
                     fileItem.innerHTML = `
-                    <div class="file-info">
-                        <i class="fas fa-image"></i>
-                        <span class="file-name">${files[i].name}</span>
-                    </div>
-                    <input type="text" class="label-input" maxlength="1" placeholder="标签">
-                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
-                `;
+                        <div class="file-info">
+                            <i class="fas fa-image"></i>
+                            <span class="file-name">${files[i].name}</span>
+                        </div>
+                        <input type="text" class="label-input" maxlength="1" placeholder="标签" value="${defaultLabel}" />
+                        <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                    `;
                     fileList.appendChild(fileItem);
 
                     // 添加标签输入验证
@@ -446,20 +509,54 @@
                     // 添加删除功能
                     fileItem.querySelector(".delete-btn").addEventListener("click", () => {
                         fileList.removeChild(fileItem);
-                        // 如果没有文件了，添加空列表提示
-                        if (fileList.children.length === 0) {
-                            fileList.innerHTML =
-                                '<div class="empty-message"><i class="fas fa-cloud-upload-alt fa-2x"></i><p>尚未上传图片</p><p>上传后可使用标注功能</p></div>';
-                        }
+                        checkNoFile();
                     });
+
+                    // 读取图像
+                    const reader = new FileReader();
+                    const fileName = files[i].name;
+                    reader.onload = function(event) {
+                        const content = event.target.result;
+                        imgData.push({
+                            filename: fileName,
+                            imgdata: content.split(',')[1]
+                        });
+                        if (imgData.length == files.length)
+                            uploadImage();
+                    }
+                    reader.readAsDataURL(files[i]);
                 }
+
+                // 上传图像
+                function uploadImage() {
+                    let onceCnt = 200;
+                    for (let i = 0; i < imgData.length; i += onceCnt) {
+                        buff = []
+                        let cnt = Math.min(onceCnt, imgData.length - i)
+                        for (let j = 0; j < cnt; j++)
+                            buff.push(imgData[i + j]);
+                        requireService("uploadimg/train", {
+                            "data": structuredClone(buff)
+                        }, function(respMes) {
+                            res = JSON.parse(respMes);
+                            if (res.Result == "OK") {
+                                uploadedCount += res.Cnt;
+                                updateUploadProcessBar(filesCount, uploadedCount);
+                            }
+                        });
+                    }
+                }
+
+                checkNoFile();
+                if (notImageFiles != "")
+                    alert("以下文件不是图像文件，已自动过滤：\n" + notImageFiles);
             }
 
             // 初始化图表
             const chartCtx = document.getElementById("accuracyChart").getContext("2d");
             let accuracyChart;
 
-            // 训练模拟功能
+            // 训练功能
             const startBtn = document.getElementById("startTraining");
             const progressFill = document.getElementById("progressFill");
             const progressPercent = document.getElementById("progressPercent");
@@ -494,85 +591,123 @@
                     return;
                 }
 
-                // 隐藏占位符，显示图表
-                chartPlaceholder.style.display = "none";
-                document.getElementById("accuracyChart").style.display = "block";
+                // 发送训练请求
+                requireService("train", {
+                    epochs: epochs,
+                    learningRate: learningRate,
+                    batchSize: batchSize
+                }, function(respMes) {
+                    if (respMes == "Result: OK") {
+                        trainProcess();
+                    }
+                    else {
+                        alert("服务器存在另一个训练进程，训练无法开始。")
+                    }
+                });
 
-                // 初始化图表
-                if (accuracyChart) {
-                    accuracyChart.destroy();
-                }
+                function trainProcess() {
+                    // 隐藏占位符，显示图表
+                    chartPlaceholder.style.display = "none";
+                    document.getElementById("accuracyChart").style.display = "block";
 
-                accuracyChart = new Chart(chartCtx, {
-                    type: "line",
-                    data: {
-                        labels: Array.from({ length: epochs }, (_, i) => i + 1),
-                        datasets: [
-                            {
-                                label: "准确率",
-                                data: [],
-                                borderColor: "var(--chart-line-color)",
-                                backgroundColor: "rgba(76, 175, 80, 0.1)",
-                                tension: 0.1,
-                                fill: true,
-                            },
-                        ],
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                max: 1,
-                                ticks: {
-                                    callback: function (value) {
-                                        return (value * 100).toFixed(0) + "%";
+                    // 初始化图表
+                    if (accuracyChart) {
+                        accuracyChart.destroy();
+                    }
+
+                    accuracyChart = new Chart(chartCtx, {
+                        type: "line",
+                        data: {
+                            labels: Array.from({ length: 20 }, (_, i) => i * 5),
+                            datasets: [
+                                {
+                                    label: "准确率",
+                                    data: [],
+                                    borderColor: "var(--chart-line-color)",
+                                    backgroundColor: "rgba(76, 175, 80, 0.1)",
+                                    tension: 0.1,
+                                    fill: true,
+                                },
+                            ],
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 1,
+                                    ticks: {
+                                        callback: function (value) {
+                                            return (value * 100).toFixed(0) + "%";
+                                        },
                                     },
                                 },
                             },
                         },
-                    },
-                });
+                    });
 
-                // 模拟训练过程
-                let currentEpoch = 0;
-                const totalBatches = Math.ceil(fileList.children.length / batchSize);
-                let progress = 0;
+                    let cEpoch = 0;
+                    let maxEpoch = 0;
+                    let cBatch = 0;
+                    let maxBatch = 0;
+                    let cLoss = 0;
+                    let cAcc = 0;
+                    let cvalLoss = 0;
+                    let cvalAcc = 0;
+                    // 训练过程
+                    const trainingInterval = setInterval(() => {
+                        // 更新epoch
+                        requireService("getstatu/train", {
+                        }, function(respMes) {
+                            let mes = JSON.parse(respMes);
+                            console.log(mes);
+                            if (mes.result == "OK") {
+                                let data = mes.data;
+                                cEpoch = data.cEpoch;
+                                maxEpoch = data.maxEpoch;
+                                cBatch = data.cBatch;
+                                maxBatch = data.maxBatch;
+                                cLoss = data.cLoss;
+                                cAcc = data.cAcc;
+                                cvalLoss = data.cvalLoss;
+                                cvalAcc = data.cvalAcc;
+                            }
+                            else if (mes.result == "Training not started") {
+                                finishTraining();
+                                return;
+                            }
+                            else if (mes.result == "No such statu") {
+                                finishTraining();
+                                return;
+                            }
+                        });
 
-                const trainingInterval = setInterval(() => {
-                    // 更新epoch
-                    if (progress >= 100) {
-                        currentEpoch++;
-                        progress = 0;
+                        // 更新进度
+                        let progress = cBatch / maxBatch * 100;
 
-                        if (currentEpoch >= epochs) {
-                            clearInterval(trainingInterval);
-                            startBtn.innerHTML = '<i class="fas fa-check"></i> 训练完成';
-                            startBtn.disabled = false;
-                            return;
+                        // 更新UI
+                        progressFill.style.width = `${progress}%`;
+                        progressPercent.textContent = progress.toFixed(1);
+                        batchCount.textContent = maxBatch;
+
+                        // 准确率变化
+                        accData = []
+                        for (let j = 0; j < cAcc.length; j += Math.max(1, Math.ceil(maxEpoch / 20))) {
+                            accData.push(cAcc[j]);
                         }
-                    }
-
-                    // 更新进度
-                    progress += 100 / totalBatches;
-                    if (progress > 100) progress = 100;
-
-                    // 更新UI
-                    progressFill.style.width = `${progress}%`;
-                    progressPercent.textContent = progress.toFixed(1);
-                    batchCount.textContent = totalBatches;
-
-                    // 模拟准确率变化
-                    if (progress >= 100) {
-                        const accuracy = 0.1 + (currentEpoch / epochs) * 0.8 + (Math.random() * 0.1 - 0.05);
-                        accuracyChart.data.datasets[0].data.push(Math.min(1, accuracy));
+                        accuracyChart.data.datasets[0].data = accData;
                         accuracyChart.update();
-                    }
-                }, 200);
+                    }, 200);
 
-                startBtn.innerHTML = '<i class="fas fa-sync fa-spin"></i> 训练中...';
-                startBtn.disabled = true;
+                    function finishTraining() {
+                        startBtn.innerHTML = '<i class="fas fa-play"></i> 开始训练模型';
+                        startBtn.disabled = false;
+                    }
+
+                    startBtn.innerHTML = '<i class="fas fa-sync fa-spin"></i> 训练中...';
+                    startBtn.disabled = true;
+                }
             });
         </script>
     </body>
