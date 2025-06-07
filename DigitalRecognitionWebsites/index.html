@@ -2,7 +2,6 @@
 <html lang="zh-CN">
     <head>
         <meta charset="UTF-8" />
-        <script src="loader.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>AI模型管理平台</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -12,7 +11,7 @@
         <div id="pageHeader"></div>
         <main class="main-content">
             <!-- AI模型平台部分 -->
-            <section class="ai-platform">
+            <section class="container">
                 <h1>AI模型管理平台</h1>
                 <p>
                     欢迎使用我们的AI模型管理平台，这里提供从模型训练到预测的全流程服务。我们的平台支持多种机器学习框架，提供可视化操作界面，让AI开发变得更加简单高效。
@@ -46,6 +45,7 @@
         <div id="pageFooter"></div>
 
         <script src="lib.js"></script>
+        <script src="loader.js"></script>
         <script>
             if (sessionStorage.getItem("username")) {
                 // alert("登录成功");

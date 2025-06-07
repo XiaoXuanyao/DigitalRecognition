@@ -22,8 +22,9 @@ async function sha256(message) {
     return hashHex;
 }
 
-// 初始化时间并设置定时器
 function onHeadLoad() {
+    document.body.style.display = "inline";
+    // 初始化时间并设置定时器
     updateTime();
     setInterval(updateTime, 1000);
     

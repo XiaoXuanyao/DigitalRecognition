@@ -23,6 +23,7 @@ body {
     flex-direction: column;
     color: #333;
     line-height: 1.6;
+    display: none;
 }
 
 /* 导航栏样式 */
@@ -201,7 +202,7 @@ body {
 }
 
 /* AI模型平台部分 */
-.ai-platform {
+.container {
     background: linear-gradient(135deg, #ffffff 0%, #f8fbfd 100%);
     border-radius: 16px;
     padding: 3rem;
@@ -212,7 +213,7 @@ body {
     overflow: hidden;
 }
 
-.ai-platform::before {
+.container::before {
     content: "";
     position: absolute;
     top: 0;
@@ -222,7 +223,7 @@ body {
     background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
 }
 
-.ai-platform h1 {
+.container h1 {
     color: var(--primary-color);
     margin-bottom: 1.8rem;
     font-size: 2.5rem;
@@ -230,7 +231,7 @@ body {
     display: inline-block;
 }
 
-.ai-platform h1::after {
+.container h1::after {
     content: "";
     position: absolute;
     bottom: -10px;
@@ -242,7 +243,7 @@ body {
     border-radius: 2px;
 }
 
-.ai-platform p {
+.container p {
     color: #555;
     line-height: 1.8;
     font-size: 1.15rem;
@@ -341,7 +342,7 @@ body {
 
 /* 页脚样式 */
 .footer {
-    background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 99%);
     color: var(--text-light);
     padding: 3rem 2rem 2rem;
     text-align: center;
@@ -390,7 +391,7 @@ body {
         padding: 2.5rem 1.5rem;
     }
 
-    .ai-platform {
+    .container {
         padding: 2.5rem 1.5rem;
     }
 }
@@ -436,11 +437,11 @@ body {
         font-size: 0.85rem;
     }
 
-    .ai-platform h1 {
+    .container h1 {
         font-size: 2rem;
     }
 
-    .ai-platform p {
+    .container p {
         font-size: 1.05rem;
     }
 
@@ -471,6 +472,11 @@ body {
         align-items: center;
     }
 
+    .nav-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8125rem;
+    }
+
     .time-display {
         flex-direction: column;
         gap: 0.5rem;
@@ -485,7 +491,7 @@ body {
         padding: 1.5rem 1rem;
     }
 
-    .ai-platform {
+    .container {
         padding: 1.5rem 1rem;
     }
 
