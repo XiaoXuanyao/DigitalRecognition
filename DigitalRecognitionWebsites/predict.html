@@ -30,6 +30,7 @@
                 background-color: #fafafa;
                 position: relative;
                 overflow: hidden;
+                min-height: 320px;
             }
 
             .image-preview img {
@@ -72,11 +73,12 @@
                 padding: var(--spacing-base);
                 background-color: var(--result-bg);
                 overflow-y: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .result-placeholder {
-                width: 100%;
-                height: 97%;
                 color: #999;
                 display: flex;
                 justify-content: center;
@@ -216,6 +218,7 @@
         </main>
         <div id="pageFooter"></div>
 
+        <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/build/sha256.min.js"></script>
         <script src="lib.js"></script>
         <script src="loader.js"></script>
         <script>
@@ -255,7 +258,8 @@
                                 }
                             ]
                         }, function(respMes) {
-                            if (respMes == "Result: OK") {
+                            res = JSON.parse(respMes);
+                            if (res.Result == "OK") {
                                 window.fileName = fileName;
                                 // 启用预测按钮
                                 predictBtn.disabled = false;
