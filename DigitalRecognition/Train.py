@@ -56,7 +56,6 @@ class MyLoggingCallback(callbacks.Callback):
 
     def on_epoch_begin(self, epoch, logs=None):
         self.current_epoch = epoch
-        TrainModel.cEpoch = epoch + 1
         Debug.log("Train", f"=== Epoch {epoch + 1} ===")
 
     def on_train_batch_end(self, batch, logs=None):
@@ -72,6 +71,7 @@ class MyLoggingCallback(callbacks.Callback):
         TrainModel.cAcc.append(acc)
         TrainModel.cvalLoss.append(valloss)
         TrainModel.cvalAcc.append(valacc)
+        TrainModel.cEpoch = epoch + 1
         print("")
         Debug.log("Train", f"loss: {loss:.4f}, acc: {acc:.4f}, val_loss: {valloss:.4f}, val_acc: {valacc:.4f}", end="\n")
 
@@ -80,6 +80,7 @@ class MyLoggingCallback(callbacks.Callback):
 class TrainModel():
 
     isTraining = False
+    statu = "Free"
     
     cEpoch = 0
     maxEpoch = 0
@@ -100,11 +101,14 @@ class TrainModel():
         TrainModel.cAcc = []
         TrainModel.cvalLoss = []
         TrainModel.cvalAcc = []
+        TrainModel.statu = "ReadDataset"
         args["callbacks"] = [MyLoggingCallback()]
         data = LoadDataset(datapath).read()
+        TrainModel.statu = "Training"
         Debug.log("Train", "Start training.")
         model.train(data, args)
         model.savemodel()
         Debug.log("Train", "Training finished.")
         time.sleep(5)
+        TrainModel.statu = "Free"
         TrainModel.isTraining = False

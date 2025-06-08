@@ -127,29 +127,6 @@ body {
     transform: translateY(-2px);
 }
 
-.admin-only {
-    display: none;
-    color: var(--text-light);
-    font-size: 0.9rem;
-    text-decoration: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 30px;
-    transition: all 0.3s;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.admin-only:hover {
-    background-color: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
-}
-
-.is-admin .admin-only {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
 /* 时间显示部分 */
 .time-display {
     color: var(--text-light);
@@ -203,11 +180,15 @@ body {
 
 /* AI模型平台部分 */
 .container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     background: linear-gradient(135deg, #ffffff 0%, #f8fbfd 100%);
     border-radius: 16px;
     padding: 3rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     text-align: center;
+    align-items: center;
     color: #333;
     position: relative;
     overflow: hidden;
@@ -267,8 +248,9 @@ body {
 }
 
 .features-grid {
+    width: 85%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-top: 3rem;
 }
@@ -276,7 +258,7 @@ body {
 .feature-card {
     background: #ffffff;
     border-radius: 12px;
-    padding: 2rem;
+    padding: 1.5rem;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
     text-align: center;
     transition: all 0.4s ease;
@@ -383,6 +365,99 @@ body {
     font-size: 0.95rem;
     opacity: 0.85;
     margin-top: 1rem;
+}
+
+/* 功能组件样式 */
+
+.summary-card {
+    background-color: #f0f8ff;
+    width: 100%;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.summary-card h3 {
+    color: var(--primary-color);
+    margin: 10px;
+}
+
+.normal-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    margin-top: var(--spacing-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.normal-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.nromal-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.warning-btn {
+    background-color: #d75858;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    margin-top: var(--spacing-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.warning-btn:hover {
+    background-color: #b84848;
+}
+
+.warning-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.input {
+    padding: 4px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.input:focus {
+    border-color: var(--label-color);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+.input.valid {
+    background-color: rgba(46, 204, 113, 0.1);
+    border-color: #2ecc71;
+}
+
+.input.invalid {
+    background-color: rgba(231, 76, 60, 0.1);
+    border-color: #e74c3c;
 }
 
 /* 响应式设计 */

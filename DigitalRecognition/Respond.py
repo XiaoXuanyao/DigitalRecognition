@@ -73,7 +73,7 @@ class Respond():
             return "../DigitalRecognitionWebsites/index.html"
         elif path == "/favicon.ico":
             return "../DigitalRecognitionWebsites/favicon.png"
-        elif path[1:] in os.listdir("../DigitalRecognitionWebsites"):
+        elif path[1:] in os.listdir("../DigitalRecognitionWebsites") and path[1:] != "admin.html":
             return f"../DigitalRecognitionWebsites/{path}"
         Debug.log("Respond", f"Resources could not found: {path}")
         if path[-4:] == "html":

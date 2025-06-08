@@ -54,15 +54,15 @@ class Socket():
         recv_thread.start()
 
     def send(self, soc:socket, mes:str, log:bool=False, dsthost:str="Unknown"):
-        try:
-            soc.send(mes.encode())
-            if log: Debug.log(self.name, f"Send to {dsthost}: {mes}")
-        except:
-            pass
+        soc.send(mes.encode())
+        if log: Debug.log(self.name, f"Send to {dsthost}: {mes}")
 
     def sendb(self, soc:socket, mes:bytes, log:bool=False, dsthost:str="Unknown"):
-        soc.send(mes)
-        if log: Debug.log(self.name, f"Send to {dsthost}: --bytes--, len: {len(mes)}")
+        try:
+            soc.send(mes)
+            if log: Debug.log(self.name, f"Send to {dsthost}: --bytes--, len: {len(mes)}")
+        except:
+            pass
     
     def close(self, soc:socket, dsthost="UnKnown"):
         soc.close()

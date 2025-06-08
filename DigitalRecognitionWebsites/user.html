@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AI模型管理平台</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="whitebg.css" />
+        <style>
+            .opt-area {
+                width: 35%;
+            }
+            
+            .input-block {
+                display: flex;
+            }
+            .input-block input {
+                width: 175%;
+                margin-top: var(--spacing-base);
+                margin-right: var(--spacing-base);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="pageHeader"></div>
+        <main class="main-content">
+            <!-- 用户部分 -->
+            <section class="container">
+                <h1>用户中心</h1>
+                <div class="summary-card">
+                    <h3><i class="fas fa-info-circle"></i> 欢迎，<b id="userName">User</b>。</h3>
+                    <p>在这里可以进行对您的用户进行管理。</p>
+                </div>
+                <div class="opt-area">
+                    <button class="normal-btn" id="modifyUsernameBtn"><i class="fas fa-sign-in-alt"></i> 修改用户名</button>
+                    <form class="input-block" id="modifyUsername" style="display:none;">
+                        <input class="input" id="newUsername" type="text" placeholder="请输入新用户名" required/>
+                        <button class="normal-btn" id="fiModUsername">完成修改</button>
+                    </form>
+                    <button class="normal-btn" id="userMngBtn" style="display:none;"><i class="fas fa-sign-in-alt"></i> 用户管理</button>
+                    <button class="warning-btn" id="signOutBtn"><i class="fas fa-sign-in-alt"></i> 退出登录</button>
+                    <button class="warning-btn" id="delUsernameBtn"><i class="fas fa-trash"></i> 注销账户</button>
+                    <form class="input-block" id="deleteUsername" style="display:none;">
+                        <input class="input" id="delConfirm" type="text" placeholder="请输入“确认注销”" required/>
+                        <button class="warning-btn" id="fiDelUsername">确认注销</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+        <div id="pageFooter"></div>
+
+        <script src="lib.js"></script>
+        <script src="loader.js"></script>
+        <script>
+            const userName = document.getElementById("userName");
+            userName.innerText = sessionStorage.getItem("usernameText") || "User";
+            const modifyUsernameBtn = document.getElementById("modifyUsernameBtn");
+            const modifyUsername = document.getElementById("modifyUsername");
+            const newUsername = document.getElementById("newUsername");
+            const fiModUsername = document.getElementById("fiModUsername");
+            const userMngBtn = document.getElementById("userMngBtn");
+            const signOutBtn = document.getElementById("signOutBtn");
+            const delUsernameBtn = document.getElementById("delUsernameBtn");
+            const deleteUsername = document.getElementById("deleteUsername");
+            const delConfirm = document.getElementById("delConfirm");
+            const fiDelUsername = document.getElementById("fiDelUsername");
+
+            requireService("checkadmin", {
+                "username": sessionStorage.getItem("username")
+            }, function(respMes) {
+                if (respMes == "Result: OK") {
+                    userMngBtn.style.display = "flex";
+                }
+            });
+
+            modifyUsernameBtn.addEventListener("click", () => {
+                modifyUsernameBtn.style.display = "none";
+                modifyUsername.style.display = "flex";
+                newUsername.focus();
+            });
+
+            newUsername.addEventListener("blur", () => {
+                counter = setTimeout(() => {
+                    if (document.activeElement === newUsername) return;
+                    modifyUsernameBtn.style.display = "flex";
+                    modifyUsername.style.display = "none";
+                }, 200);
+            });
+
+            modifyUsername.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const username = sessionStorage.getItem("username");
+                const newusername = await sha256(newUsername.value.trim());
+                requireService("modifyusername", {
+                    "username": username,
+                    "newusername": newusername
+                }, function(respMes) {
+                    if (respMes == "Result: OK") {
+                        document.getElementById("userName").innerText = newusername;
+                        modifyUsernameBtn.style.display = "flex";
+                        modifyUsername.style.display = "none";
+                        sessionStorage.setItem("username", newusername);
+                        sessionStorage.setItem("usernameText", newUsername.value.trim());
+                        alert("用户名修改成功！");
+                    }
+                    else if (respMes == "Result: Username exists") {
+                        alert("用户名已存在");
+                    }
+                    else if (respMes == "Result: User not exist") {
+                        alert("当前用户不存在");
+                    }
+                    else {
+                        alert("服务器异常");
+                    }
+                });
+            });
+
+            userMngBtn.addEventListener("click", () => {
+                requireService("getadminpage", {
+                    "username": sessionStorage.getItem("username")
+                }, function(respMes) {
+                    document.open();
+                    document.write(respMes);
+                    document.close();
+                });
+            });
+
+            signOutBtn.addEventListener("click", () => {
+                sessionStorage.removeItem("username");
+                sessionStorage.removeItem("usernameText");
+                window.location.href = "../";
+            });
+
+            delUsernameBtn.addEventListener("click", () => {
+                delUsernameBtn.style.display = "none";
+                document.getElementById("deleteUsername").style.display = "flex";
+                delConfirm.focus();
+            });
+
+            delConfirm.addEventListener("blur", () => {
+                counter = setTimeout(() => {
+                    if (document.activeElement === delConfirm) return;
+                    delUsernameBtn.style.display = "flex";
+                    document.getElementById("deleteUsername").style.display = "none";
+                }, 200);
+            });
+
+            delConfirm.addEventListener("input", () => {
+                if (delConfirm.value.trim() === "确认注销") {
+                    fiDelUsername.disabled = false;
+                    delConfirm.className = "input valid";
+                } else {
+                    fiDelUsername.disabled = true;
+                    delConfirm.className = "input invalid";
+                }
+            });
+
+            deleteUsername.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                if (delConfirm.value.trim() !== "确认注销") {
+                    return;
+                }
+                const username = sessionStorage.getItem("username");
+                requireService("removeuser", {
+                    "username": username
+                }, function(respMes) {
+                    if (respMes == "Result: OK") {
+                        alert("账户注销成功！");
+                        sessionStorage.removeItem("username");
+                        sessionStorage.removeItem("usernameText");
+                        window.location.href = "../";
+                    }
+                    else if (respMes == "Result: User not exist") {
+                        alert("当前用户不存在");
+                    }
+                    else {
+                        alert("服务器异常");
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

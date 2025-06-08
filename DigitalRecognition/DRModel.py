@@ -1,5 +1,5 @@
 
-from keras import layers
+from keras import layers, losses, metrics, optimizers
 from blocks import model, conv
 
 from Debug import *
@@ -8,7 +8,7 @@ from Debug import *
 
 class DRModel(model.MyBaseModel):
 
-    def __init__(self, name:str="DRModel_default"):
+    def __init__(self, name:str="DRModel_default", learning_rate=0.0001):
         self.name = name
         inpt = layers.Input(shape=(28, 28))
         # x = layers.Reshape([28 * 28])(inpt)
@@ -22,7 +22,8 @@ class DRModel(model.MyBaseModel):
         x = layers.Flatten(data_format="channels_first")(x)
         x = layers.Dense(units=10, activation="softmax")(x)
         super().__init__(inpt, x, {
-            "loss": "categorical_crossentropy",
-            "metrics": ["categorical_accuracy"]
+            "optimizer":  optimizers.Adam(learning_rate=learning_rate),
+            "loss": losses.categorical_crossentropy,
+            "metrics": [metrics.categorical_accuracy],
         })
         Debug.log("DRModel", f"New model initialized, model name: {self.name}")

@@ -21,7 +21,7 @@ class MyBaseModel:
     def __init__(self, inpt, x, initopt):
         self.model = keras.Model(inputs=inpt, outputs=x)
         self.model.compile(
-            optimizers.Adam(learning_rate=0.0001),
+            optimizer=initopt["optimizer"],
             loss=initopt["loss"],
             metrics=initopt["metrics"],
             weighted_metrics=[]
@@ -56,7 +56,7 @@ class MyBaseModel:
         with CostTime("Train"):
             self.model.fit(
                 traindataset,
-                epochs=trainopt["epochs"],
+                epochs=trainopt.get("epochs", 100),
                 validation_data=valdataset,
                 verbose=0,
                 callbacks=trainopt.get("callbacks", None)

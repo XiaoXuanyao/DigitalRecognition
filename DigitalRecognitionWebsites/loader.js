@@ -1,4 +1,5 @@
-if (!sessionStorage.getItem("pageHeader")) {
+useCache = false
+if (!sessionStorage.getItem("pageHeader") || !useCache) {
     const xhr1 = new XMLHttpRequest();
     xhr1.open("GET", "header.html", true);
     xhr1.onreadystatechange = function () {
@@ -16,7 +17,7 @@ else {
     onHeadLoad();
 }
 
-if (!sessionStorage.getItem("pageFooter")) {
+if (!sessionStorage.getItem("pageFooter") || !useCache) {
     const xhr2 = new XMLHttpRequest();
     xhr2.open("GET", "footer.html", true);
     xhr2.onreadystatechange = function () {

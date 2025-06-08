@@ -24,6 +24,11 @@ async function sha256(message) {
 
 function onHeadLoad() {
     document.body.style.display = "inline";
+    if (sessionStorage.getItem("username")) {
+        const signinBtn = document.getElementById("signinBtn");
+        signinBtn.innerHTML = `<i class="fas fa-user"></i> 用户`;
+        signinBtn.href = "user.html"
+    }
     // 初始化时间并设置定时器
     updateTime();
     setInterval(updateTime, 1000);
@@ -34,29 +39,6 @@ function onHeadLoad() {
         alert(
             "请联系我们的支持团队: support@aimodelplatform.com\n电话: 400-123-4567\n工作时间: 周一至周五 9:00-18:00"
         );
-    });
-
-    // 模拟管理员登录状态切换
-    document.querySelector(".login-btn").addEventListener("click", function (e) {
-        if (this.getAttribute("href") === "login.html") return;
-
-        e.preventDefault();
-        document.body.classList.toggle("is-admin");
-        this.innerHTML = document.body.classList.contains("is-admin")
-            ? '<i class="fas fa-sign-out-alt"></i> 退出'
-            : '<i class="fas fa-sign-in-alt"></i> 登录';
-
-        // 添加视觉反馈
-        if (document.body.classList.contains("is-admin")) {
-            this.style.backgroundColor = "#ff6b6b";
-            this.style.borderColor = "#ff6b6b";
-            this.style.color = "#fff";
-        } else {
-            this.style.backgroundColor = "";
-            this.style.borderColor = "";
-            this.style.color = "";
-        }
-
     });
 }
 
