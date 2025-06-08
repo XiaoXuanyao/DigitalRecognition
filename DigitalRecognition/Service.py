@@ -57,16 +57,19 @@ class Service():
                 res["lastlogin"] = lines[0].strip()
                 res["visitcnt"] = int(lines[1].strip())
                 res["trylogincnt"] = int(lines[2].strip())
+                res["usernametext"] = lines[3].strip()
+                res["id"] = username
         return res
     
-    def writeusermes(username:str, usermes:dict):
+    def writeusermes(usermes:dict):
         if not os.path.exists("../ProgramDataset/usersmes"):
             os.makedirs("../ProgramDataset/usersmes")
-        with open(f"../ProgramDataset/usersmes/{username}.txt", "w") as f:
+        with open(f"../ProgramDataset/usersmes/{usermes['id']}.txt", "w") as f:
             f.writelines([
                 usermes["lastlogin"] + "\n",
                 str(usermes["visitcnt"]) + "\n",
-                str(usermes["trylogincnt"]) + "\n"
+                str(usermes["trylogincnt"]) + "\n",
+                usermes["usernametext"] + "\n"
             ])
 
     def register(httpmes:str, respmes:dict):
@@ -82,9 +85,11 @@ class Service():
             usermes = {
                 "lastlogin": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
                 "visitcnt": 0,
-                "trylogincnt": 0
+                "trylogincnt": 0,
+                "usernametext": data.get("usernametext", username),
+                "id": username
                 }
-            Service.writeusermes(username, usermes)
+            Service.writeusermes(usermes)
             res = "Result: OK"
         respmes["data"] = res.encode()
     
@@ -93,10 +98,13 @@ class Service():
         username = Encryption.sha256(data["username"])
         newusername = Encryption.sha256(data["newusername"])
         src = f"../ProgramDataset/users/{username}.txt"
+        messrc = f"../ProgramDataset/usersmes/{username}.txt"
         dst = f"../ProgramDataset/users/{newusername}.txt"
+        mesdst = f"../ProgramDataset/usersmes/{newusername}.txt"
         if os.path.exists(src):
             if not os.path.exists(dst):
                 shutil.move(src, dst)
+                shutil.move(messrc, mesdst)
                 res = "Result: OK"
             else:
                 res = "Result: Username exists"
@@ -219,7 +227,7 @@ class Service():
 
     def checkadmin(httpmes:dict, respmes:dict):
         data = json.loads(httpmes["data"])
-        username = Encryption.sha256(data["username"])
+        username = Encryption.sha256(data.get("username", ""))
         os.makedirs("../ProgramDataset", exist_ok=True)
         if os.path.exists("../ProgramDataset/admin.txt"):
             with open("../ProgramDataset/admin.txt") as f:
@@ -251,7 +259,9 @@ class Service():
         else:
             data = [ ]
             for username in os.listdir("../ProgramDataset/users"):
-                data.append(Service.readusermes(username[:-4]))
+                usermes:dict = Service.readusermes(username[:-4])
+                usermes.pop("id")
+                data.append(usermes)
             res = {
                 "Result": "OK",
                 "Data": data

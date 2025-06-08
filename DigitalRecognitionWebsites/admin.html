@@ -6,6 +6,20 @@
         <title>AI模型管理平台</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="whitebg.css" />
+        <style>
+            .opt-area {
+                width: 35%;
+            }
+            
+            .input-block {
+                display: flex;
+            }
+            .input-block input {
+                width: 175%;
+                margin-top: var(--spacing-base);
+                margin-right: var(--spacing-base);
+            }
+        </style>
     </head>
     <body>
         <div id="pageHeader"></div>
@@ -14,8 +28,16 @@
             <section class="container">
                 <h1>管理员界面</h1>
                 <div class="summary-card">
-                    <h3><i class="fas fa-info-circle"></i> 欢迎，<b id="adminName">Admin</b>。</h3>
+                    <h3><i class="fas fa-info-circle"></i> 欢迎，<b id="userName">Admin</b>。</h3>
                     <p>在这里可以进行对模型和用户的管理。</p>
+                </div>
+
+                <div class="opt-area">
+                    <button class="normal-btn" id="listUsersBtn"><i class="fas fa-users"></i> 列出所有用户</button>
+                </div>
+
+                <div class="second-container" id="container">
+                    <p>点击上面按钮以查询用户信息</p>
                 </div>
             </section>
         </main>
@@ -24,6 +46,71 @@
         <script src="lib.js"></script>
         <script src="loader.js"></script>
         <script>
+            const adminName = document.getElementById("userName");
+            adminName.innerText = localStorage.getItem("userName") || "Admin";
+            const listUsersBtn = document.getElementById("listUsersBtn");
+            const container = document.getElementById("container");
+
+            listUsersBtn.addEventListener("click", () => {
+                requireService("getusermes", {
+                    username: sessionStorage.getItem("username"),
+                }, function (respMes) {
+                    mes = JSON.parse(respMes);
+                    if (mes.Result === "OK") {
+                        table = `
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>用户名</th>
+                                        <th>上次登录时间</th>
+                                        <th>登录次数</th>
+                                        <th>登录失败尝试次数</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        `;
+                        mes.Data.forEach(ele => {
+                            table += `
+                                    <tr>
+                                        <td>${ele.usernametext}</td>
+                                        <td>${ele.lastlogin}</td>
+                                        <td>${ele.visitcnt}</td>
+                                        <td>${ele.trylogincnt}</td>
+                                        <td><button class="delete-btn" data-id="${ele.usernametext}">
+                                            <i class="fas fa-trash"></i>
+                                        </button></td>
+                                    </tr>
+                            `;
+                        });
+                        table += `
+                                </tbody>
+                            </table>
+                        `;
+                        container.innerHTML = table;
+
+                        container.querySelectorAll('.delete-btn').forEach(btn => {
+                            btn.addEventListener('click', async function() {
+                                const username = this.getAttribute('data-id');
+                                if (confirm('确定要删除该用户吗？')) {
+                                    requireService("removeuser", {
+                                        username: await sha256(username),
+                                    }, function(resp) {
+                                        if (resp === "Result: OK") {
+                                            alert("删除成功！");
+                                            listUsersBtn.click(); // 重新加载用户列表
+                                        } else {
+                                            alert("删除失败");
+                                        }
+                                    });
+                                }
+                            });
+                        });
+
+
+                    }
+                });
+            });
         </script>
     </body>
 </html>

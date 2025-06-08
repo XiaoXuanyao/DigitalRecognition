@@ -144,12 +144,14 @@
                             username: username,
                             password: password,
                             phone: phone,
+                            usernametext: document.getElementById("username").value.trim(),
                         },
                         function (respMes) {
                             console.log(respMes);
                             if (respMes == "Result: OK") {
                                 sessionStorage.setItem("username", username);
                                 sessionStorage.setItem("logintTime", Date.now());
+                                sessionStorage.setItem("usernameText", document.getElementById("username").value.trim());
                                 location.href = "index.html";
                             }
                             else if (respMes == "Result: User already exist"){

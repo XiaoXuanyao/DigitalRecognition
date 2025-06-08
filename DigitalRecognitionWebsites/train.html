@@ -9,18 +9,6 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
             /* 主内容区样式 */
-
-            .training-container {
-                display: grid;
-                grid-template-columns: 1fr 2fr;
-                gap: var(--spacing-base);
-                background-color: white;
-                border-radius: 8px;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-                padding: var(--spacing-base);
-                margin: 2rem 0rem;
-            }
-
             .file-section {
                 display: flex;
                 flex-direction: column;
@@ -71,20 +59,6 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 max-width: 120px;
-            }
-
-            .delete-btn {
-                color: #dc3545;
-                background: none;
-                border: none;
-                cursor: pointer;
-                font-size: 0.875rem;
-                padding: 4px;
-                transition: all 0.2s;
-            }
-
-            .delete-btn:hover {
-                transform: scale(1.1);
             }
 
             .upload-section {
@@ -200,10 +174,6 @@
 
             /* 响应式设计 */
             @media (max-width: 768px) {
-                .training-container {
-                    grid-template-columns: 1fr;
-                }
-
                 .params-grid {
                     grid-template-columns: 1fr;
                 }
@@ -227,7 +197,7 @@
                     <p>上传包含数字的图片，为每个图片输入对应的数字标签（0-9）。我们的模型将学习识别图像中的数字特征。</p>
                 </div>
 
-                <div class="training-container">
+                <div class="second-container">
                     <!-- 左侧文件区域 -->
                     <div class="file-section">
                         <div class="file-list" id="fileList">

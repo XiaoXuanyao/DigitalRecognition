@@ -234,6 +234,19 @@ body {
     margin-right: auto;
 }
 
+.second-container {
+    width: 100%;
+    display: flex;
+    gap: var(--spacing-base);
+    align-items: stretch;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: var(--spacing-base);
+    margin: 2rem 0rem;
+    text-align: center;
+}
+
 .register-link {
     color: var(--primary-color);
     font-weight: 700;
@@ -391,6 +404,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
+    font-size: 1rem;
     transition: background-color 0.3s;
     margin-top: var(--spacing-base);
     display: flex;
@@ -417,6 +431,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
+    font-size: 1rem;
     transition: background-color 0.3s;
     margin-top: var(--spacing-base);
     display: flex;
@@ -433,6 +448,20 @@ body {
 .warning-btn:disabled {
     background-color: #95a5a6;
     cursor: not-allowed;
+}
+
+.delete-btn {
+    color: #b84848;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px;
+    transition: all 0.2s;
+}
+
+.delete-btn:hover {
+    transform: scale(1.1);
 }
 
 .input {
@@ -472,6 +501,11 @@ body {
 }
 
 @media (max-width: 768px) {
+    
+    .second-container {
+        grid-template-columns: 1fr;
+    }
+
     .nav-bar {
         flex-direction: column;
         padding: 1rem;
@@ -572,5 +606,83 @@ body {
 
     .feature-card {
         padding: 1.5rem;
+    }
+}
+
+/* 表格样式 */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    margin: 1.5rem 0;
+    font-size: 1rem;
+}
+
+.table th, .table td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+}
+
+.table th {
+    background: var(--primary-color);
+    color: var(--text-light);
+    font-weight: 600;
+    border-bottom: 2px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+}
+
+.table tr {
+    transition: background 0.2s;
+}
+
+.table tr:nth-child(even) {
+    background: #fafbfc;
+}
+
+.table tr:hover {
+    background: #f0f4f8;
+}
+
+.table td {
+    border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    color: var(--text-dark);
+}
+
+.table td:last-child, .table th:last-child {
+    border-right: none;
+}
+
+.table th:first-child, .table td:first-child {
+    border-left: none;
+}
+
+@media (max-width: 768px) {
+    .table, .table thead, .table tbody, .table th, .table td, .table tr {
+        display: block;
+    }
+    .table th {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    .table td {
+        position: relative;
+        padding-left: 50%;
+        border: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    .table td:before {
+        position: absolute;
+        top: 0;
+        left: 1rem;
+        width: 45%;
+        white-space: nowrap;
+        color: #888;
+        font-weight: bold;
+        content: attr(data-label);
     }
 }
