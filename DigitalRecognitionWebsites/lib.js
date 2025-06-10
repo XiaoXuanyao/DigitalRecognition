@@ -1,7 +1,7 @@
 function requireService(sname, mes, respFunc) {
     // 创建 XMLHttpRequest 对象
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://hlchen200628.qicp.net/?" + sname, true);
+    xhr.open("POST", "http://localhost:25565/?" + sname, true);
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.setRequestHeader("sname", sname);
     let mesStr = JSON.stringify(mes);

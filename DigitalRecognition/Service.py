@@ -126,7 +126,7 @@ class Service():
             else:
                 res = "Result: Password error"
                 usermes["trylogincnt"] += 1
-            Service.writeusermes(username, usermes)
+            Service.writeusermes(usermes)
         else: res = "Result: Username not exist"
         respmes["data"] = res.encode()
     
@@ -135,6 +135,7 @@ class Service():
         username = Encryption.sha256(data["username"])
         if os.path.exists(f"../ProgramDataset/users/{username}.txt"):
             os.remove(f"../ProgramDataset/users/{username}.txt")
+            os.remove(f"../ProgramDataset/usersmes/{username}.txt")
             res = "Result: OK"
         else: res = "Result: User not exist"
         respmes["data"] = res.encode()
